@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=5]
 [ext_resource path="res://src/test/draggable_rigid.gd" type="Script" id=6]
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 242.464
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -44,11 +47,18 @@ collision_mask = 3
 polygon = PoolVector2Array( -7, -15, -25, 5, -19, 51, -21, 103, -57, 113, -61, 160, -15, 176, 43, 172, 26, 108, 26, 52, 41, 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+position = Vector2( 1.14426, 1.64034 )
 polygon = PoolVector2Array( -7, -14, -25, 5, -19, 49, -21, 102, -56, 112, -62, 163, -12, 177, 42, 172, 26, 107, 28, 53, 42, 0 )
 
 [node name="Mortar" type="Sprite" parent="."]
 position = Vector2( 1799, 558 )
 texture = ExtResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Mortar"]
+collision_mask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mortar/StaticBody2D"]
+shape = SubResource( 3 )
 
 [node name="Pestle" type="Sprite" parent="."]
 position = Vector2( 1898, 479 )
@@ -64,7 +74,7 @@ collision_layer = 3
 collision_mask = 4099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1219.5, -465 )
+position = Vector2( 1220, -444 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -73,7 +83,7 @@ collision_layer = 3
 collision_mask = 4099
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2( 1829, 613 )
+position = Vector2( 1829, 603 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
