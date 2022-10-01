@@ -6,6 +6,8 @@ var held = false
 var mouse_offset
 var click_order = 0
 var old_collision_layer
+var last_global_position = Vector2(0,0)
+var last_global_mouse_pos = Vector2(0,0)
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -15,6 +17,8 @@ func _input_event(viewport, event, shape_idx):
 			
 func _physics_process(delta):
 	if held:
+		last_global_position = global_position
+		last_global_mouse_pos = get_global_mouse_position() - mouse_offset
 		global_position = lerp(global_position, get_global_mouse_position() - mouse_offset, 25 * delta)
 #		global_transform.origin = get_global_mouse_position()
 #		var direction = (get_global_mouse_position() - self.global_position).normalized()
@@ -39,7 +43,10 @@ func pickup():
 
 func drop(impulse=Vector2.ZERO):
 	if held:
-		impulse = Input.get_last_mouse_speed() * .5
+		
+		impulse = last_global_position.direction_to(last_global_mouse_pos) * 10 * last_global_position.distance_to(last_global_mouse_pos)
+		print(impulse, Input.get_last_mouse_speed())
+#		impulse = Input.get_last_mouse_speed() * .5
 		mode = RigidBody2D.MODE_RIGID
 		apply_central_impulse(impulse)
 		held = false
