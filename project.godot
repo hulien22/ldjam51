@@ -8,15 +8,38 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Sprite",
+"class": "Recipe",
+"language": "GDScript",
+"path": "res://src/test/recipe.gd"
+}, {
+"base": "Node2D",
+"class": "RecipeGenerator",
+"language": "GDScript",
+"path": "res://generate_recipes.gd"
+} ]
+_global_script_class_icons={
+"Recipe": "",
+"RecipeGenerator": ""
+}
+
 [application]
 
 config/name="ldjam51"
-run/main_scene="res://src/test/test.tscn"
+run/main_scene="res://src/test/game.tscn"
 config/icon="res://src/art/icon.png"
 
 [autoload]
 
 Click="*res://click.gd"
+RECIPEGENERATOR="*res://generate_recipes.gd"
+
+[display]
+
+window/size/width=1902
+window/size/height=1080
+window/size/resizable=false
 
 [gui]
 
