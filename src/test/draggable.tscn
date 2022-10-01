@@ -21,10 +21,4 @@ script = ExtResource( 3 )
 position = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( 1, 2 )
-shape = SubResource( 1 )
-
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
