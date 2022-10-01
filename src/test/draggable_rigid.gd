@@ -5,7 +5,8 @@ class_name DraggableBody2D
 # To inherit from this class, create new rigidbody2d and attach a script.
 # When the popup appears, choose to inherit from this gdscript.
 
-export var collision_layer_on_click = 1 << 12 # layer 13, mask 13 will collide with this
+export var regular_collision_layer = 1
+export var movement_collision_layer = 1 << 12 # layer 13, mask 13 will collide with this
 export var throw_force_multiplier = 1
 export var movement_multiplier = 25
 
@@ -29,18 +30,26 @@ func _physics_process(delta):
 		global_position = lerp(global_position, last_global_mouse_pos, movement_multiplier * delta)
 		
 #		TODO add some rotation while grabbing too?
+#		var last_force = last_global_position.distance_to(last_global_mouse_pos) / last_delta / 50 * throw_force_multiplier
+#		angular_velocity += mouse_offset.angle_to(global_position - last_global_position) * mouse_offset.length_squared() * 0.0001 * last_force * 0.001
 #		angular_velocity = get_local_mouse_position().x * 0.125 - get_local_mouse_position().y * 0.125
 #		angular_velocity = get_local_mouse_position().x * 0.01 - get_local_mouse_position().y * 0.01
+	elif collision_layer != regular_collision_layer and linear_velocity.length_squared() < 1000000:
+		collision_layer = regular_collision_layer
+	elif collision_layer != movement_collision_layer and linear_velocity.length_squared() >= 1000000:
+		collision_layer = movement_collision_layer
+
 
 func pickup():
 	if held:
 		return
 	held = true
 	old_collision_layer = collision_layer
-	collision_layer = collision_layer_on_click
+	collision_layer = movement_collision_layer
 	var global_mouse_loc = get_global_mouse_position()
 	mouse_offset = global_mouse_loc - global_position
 	raise()
+	angular_velocity = rand_range(-.1,.1)
 
 func drop(impulse=Vector2.ZERO):
 	if held:
@@ -51,7 +60,7 @@ func drop(impulse=Vector2.ZERO):
 		apply_central_impulse(impulse)
 #		calculation based on a pseudo-dot product of distance last moved, and mouse offset from center of obj
 		angular_velocity += mouse_offset.angle_to(global_position - last_global_position) * mouse_offset.length_squared() * 0.0001 * last_force * 0.01
-		collision_layer = old_collision_layer
+#		collision_layer = old_collision_layer
 		held = false
 
 func get_click_order():

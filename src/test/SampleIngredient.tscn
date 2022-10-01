@@ -5,8 +5,10 @@
 [node name="SampleIngredient" type="RigidBody2D"]
 modulate = Color( 0.00784314, 0.976471, 0.796078, 1 )
 z_index = 1
-collision_mask = 4096
+collision_layer = 3
+collision_mask = 4098
 script = ExtResource( 1 )
+regular_collision_layer = 3
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 scale = Vector2( 5, 5 )
