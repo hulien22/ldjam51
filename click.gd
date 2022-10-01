@@ -21,7 +21,6 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1: # Left mouse click
 		# The last 'true' enables Area2D intersections, previous four values are all defaults
 		var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
-		print(shapes)
 		shapes.sort_custom(MyCustomSorter, "sort_ascending")
 		
 		for shape in shapes:
@@ -40,7 +39,7 @@ func _input(event):
 	elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
 		if selected_obj and selected_obj.has_method("drop"):
 			selected_obj.drop()
+			selected_obj = null
 
 func set_cur_click_order(co):
 	cur_click_order = co
-

@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "DraggableBody2D",
+"language": "GDScript",
+"path": "res://src/test/draggable_rigid.gd"
+} ]
+_global_script_class_icons={
+"DraggableBody2D": ""
+}
+
 [application]
 
 config/name="ldjam51"
@@ -16,6 +26,10 @@ config/icon="res://src/art/icon.png"
 [autoload]
 
 Click="*res://click.gd"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [gui]
 

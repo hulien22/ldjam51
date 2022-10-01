@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/art/mortar.png" type="Texture" id=3]
 [ext_resource path="res://src/art/pestle.png" type="Texture" id=4]
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=5]
+[ext_resource path="res://src/test/draggable_rigid.gd" type="Script" id=6]
+[ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1436.5, 582 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 614.5, 1648 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,16 +23,16 @@ texture = ExtResource( 5 )
 
 [node name="draggable_rigid4" parent="." instance=ExtResource( 2 )]
 modulate = Color( 1, 0.152941, 0.152941, 1 )
-position = Vector2( 743, 202 )
+position = Vector2( 1181, 598 )
 
 [node name="draggable_rigid2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 138, 126 )
+position = Vector2( 576, 522 )
 
 [node name="draggable_rigid5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 276, 252 )
+position = Vector2( 714, 648 )
 
 [node name="draggable_rigid3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 250, 101 )
+position = Vector2( 688, 497 )
 
 [node name="RigidBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 461, 218 )
@@ -45,3 +53,52 @@ texture = ExtResource( 3 )
 [node name="Pestle" type="Sprite" parent="."]
 position = Vector2( 1898, 479 )
 texture = ExtResource( 4 )
+
+[node name="draggable_rigid6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 576, 575 )
+script = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 8, -12 )
+collision_layer = 3
+collision_mask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1219.5, -465 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( -578, 1050 )
+collision_layer = 3
+collision_mask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( 1829, 613 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+collision_mask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2( -624.5, 593 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2( 3240, -27 )
+collision_mask = 4099
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2( -110, 608 )
+shape = SubResource( 2 )
+
+[node name="SampleIngredient" parent="." instance=ExtResource( 7 )]
+position = Vector2( 303, 880 )
+collision_layer = 3
+collision_mask = 4098
+
+[node name="SampleIngredient2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 557, 899 )
+collision_layer = 3
+collision_mask = 4098
+mass = 3.0
+can_sleep = false
