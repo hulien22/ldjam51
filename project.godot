@@ -13,7 +13,8 @@ _global_script_classes=[ {
 "class": "DraggableBody2D",
 "language": "GDScript",
 "path": "res://src/test/draggable_rigid.gd"
-}, {"base": "Sprite",
+}, {
+"base": "Sprite",
 "class": "Recipe",
 "language": "GDScript",
 "path": "res://src/test/recipe.gd"
@@ -25,7 +26,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "DraggableBody2D": "",
-_global_script_class_icons={
 "Recipe": "",
 "RecipeGenerator": ""
 }
@@ -41,15 +41,15 @@ config/icon="res://src/art/icon.png"
 Click="*res://click.gd"
 RECIPEGENERATOR="*res://generate_recipes.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1902
 window/size/height=1080
 window/size/resizable=false
-
-[debug]
-
-settings/fps/force_fps=60
 
 [gui]
 
