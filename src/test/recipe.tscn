@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/art/receipe_paper.png" type="Texture" id=1]
+[ext_resource path="res://src/fonts/recipe_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/art/icon.png" type="Texture" id=3]
+[ext_resource path="res://src/test/recipe.gd" type="Script" id=4]
+
+[node name="Recipe" type="Sprite"]
+script = ExtResource( 4 )
+
+[node name="ReceipePaper" type="Sprite" parent="."]
+position = Vector2( 14, 10 )
+scale = Vector2( 0.226155, 0.2135 )
+z_index = 1
+texture = ExtResource( 1 )
+
+[node name="Icon" type="Sprite" parent="ReceipePaper"]
+position = Vector2( -221.087, -173.302 )
+scale = Vector2( 1.96906, 1.976 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="Icon2" type="Sprite" parent="ReceipePaper"]
+position = Vector2( -17.687, -163.934 )
+scale = Vector2( 1.96906, 1.976 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="Icon3" type="Sprite" parent="ReceipePaper"]
+position = Vector2( 137.074, -173.302 )
+scale = Vector2( 1.96906, 1.976 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="ReceipePaper"]
+margin_left = -261.0
+margin_top = -379.0
+margin_right = 261.0
+margin_bottom = -271.0
+custom_fonts/font = ExtResource( 2 )
+text = "Health potion"
+percent_visible = -0.25
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+margin_right = 106.0
+margin_bottom = 120.0
