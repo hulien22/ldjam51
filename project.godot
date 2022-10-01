@@ -8,9 +8,26 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Object",
+"class": "Operation",
+"language": "GDScript",
+"path": "res://src/pkg/table_elements/Operation.gd"
+}, {
+"base": "Object",
+"class": "Potion",
+"language": "GDScript",
+"path": "res://src/pkg/table_elements/Potion.gd"
+} ]
+_global_script_class_icons={
+"Operation": "",
+"Potion": ""
+}
+
 [application]
 
 config/name="ldjam51"
+run/main_scene="res://src/test/test.tscn"
 config/icon="res://src/art/icon.png"
 
 [autoload]
