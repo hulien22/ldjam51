@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/test/test2.gd" type="Script" id=1]
+[ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="draggable_rigid" parent="." instance=ExtResource( 2 )]
+position = Vector2( 76, 51 )
+
+[node name="draggable_rigid2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 138, 126 )
+
+[node name="draggable_rigid3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 250, 101 )
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 461, 218 )
+rotation = 0.60909
+collision_layer = 3
+collision_mask = 3
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+polygon = PoolVector2Array( -7, -15, -25, 5, -19, 51, -21, 103, -57, 113, -61, 160, -15, 176, 43, 172, 26, 108, 26, 52, 41, 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PoolVector2Array( -7, -14, -25, 5, -19, 49, -21, 102, -56, 112, -62, 163, -12, 177, 42, 172, 26, 107, 28, 53, 42, 0 )

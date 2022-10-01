@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/test/draggable.gd" type="Script" id=1]
 [ext_resource path="res://src/art/icon.png" type="Texture" id=2]
 [ext_resource path="res://src/test/Area2D.gd" type="Script" id=3]
+[ext_resource path="res://src/test/RigidBody2D.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -22,6 +23,7 @@ position = Vector2( 1, 2 )
 shape = SubResource( 1 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2( 1, 2 )
