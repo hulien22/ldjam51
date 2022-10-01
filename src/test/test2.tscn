@@ -106,3 +106,6 @@ position = Vector2( 303, 880 )
 position = Vector2( 557, 899 )
 mass = 3.0
 can_sleep = false
+
+[node name="MyLine" type="Line2D" parent="."]
+z_index = 4

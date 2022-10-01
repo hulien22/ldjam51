@@ -43,3 +43,10 @@ func _input(event):
 
 func set_cur_click_order(co):
 	cur_click_order = co
+
+func _notification(event):
+	match event:
+		NOTIFICATION_WM_MOUSE_EXIT:
+			if selected_obj and selected_obj.has_method("drop"):
+				selected_obj.drop()
+				selected_obj = null
