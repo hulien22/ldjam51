@@ -16,6 +16,7 @@ class MyCustomSorter:
 			return true
 		return false
 
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1: # Left mouse click
 		# The last 'true' enables Area2D intersections, previous four values are all defaults
@@ -37,7 +38,7 @@ func _input(event):
 			if !click_all and !ignore_unclickable:
 				break # Thus stops on the first shape
 	elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
-		if selected_obj.has_method("drop"):
+		if selected_obj and selected_obj.has_method("drop"):
 			selected_obj.drop()
 
 func set_cur_click_order(co):

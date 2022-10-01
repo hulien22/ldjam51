@@ -5,6 +5,7 @@ signal clicked
 var held = false
 var mouse_offset
 var click_order = 0
+var old_collision_layer
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -22,21 +23,27 @@ func _physics_process(delta):
 		angular_velocity = get_local_mouse_position().x * 0.125 - get_local_mouse_position().y * 0.125
 	else:
 		pass
-		
+
+#func _integrate_forces(state):
+##	global_position = lerp(global_position, get_global_mouse_position() - mouse_offset, 25 * delta)
 
 func pickup():
 	if held:
 		return
 	mode = RigidBody2D.MODE_RIGID
 	held = true
+	old_collision_layer = collision_layer
+	collision_layer = 1 << 12 # layer 13, mask 13 will collide with this
+	print(collision_layer, old_collision_layer)
 	raise()
 
 func drop(impulse=Vector2.ZERO):
 	if held:
-		impulse = Input.get_last_mouse_speed()
+		impulse = Input.get_last_mouse_speed() * .5
 		mode = RigidBody2D.MODE_RIGID
 		apply_central_impulse(impulse)
 		held = false
+		collision_layer = old_collision_layer
 
 func get_click_order():
 	return click_order
