@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/test/Potion.gd" type="Script" id=1]
+[ext_resource path="res://src/art/filleable_potion_TOP.png" type="Texture" id=2]
+[ext_resource path="res://src/art/filleable_potion_BOTTOM.png" type="Texture" id=3]
+[ext_resource path="res://src/art/potion_WHITE_VERSION.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 174.849
+height = 32.2368
+
+[node name="Potion" type="RigidBody2D"]
+z_index = 5
+collision_layer = 5
+collision_mask = 4100
+can_sleep = false
+script = ExtResource( 1 )
+regular_collision_layer = 7
+movement_collision_layer = 4100
+
+[node name="FilleablePotionBottom" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+
+[node name="PotionFilling" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="FilleablePotionTop" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.60239
+shape = SubResource( 1 )

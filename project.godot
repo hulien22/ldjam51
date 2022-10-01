@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "RecipeGenerator",
 "language": "GDScript",
 "path": "res://generate_recipes.gd"
+}, {
+"base": "DraggableBody2D",
+"class": "Station",
+"language": "GDScript",
+"path": "res://src/test/station.gd"
 } ]
 _global_script_class_icons={
 "DraggableBody2D": "",
 "Recipe": "",
-"RecipeGenerator": ""
+"RecipeGenerator": "",
+"Station": ""
 }
 
 [application]
@@ -40,6 +46,10 @@ config/icon="res://src/art/icon.png"
 
 Click="*res://click.gd"
 RECIPEGENERATOR="*res://generate_recipes.gd"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 
@@ -62,6 +72,8 @@ LEFT_CLICK={
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/default_gravity_vector=Vector2( 0, 0 )
+2d/default_linear_damp=3.0
 
 [rendering]
 

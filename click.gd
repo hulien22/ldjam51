@@ -22,7 +22,7 @@ func _input(event):
 		# The last 'true' enables Area2D intersections, previous four values are all defaults
 		var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
 		shapes.sort_custom(MyCustomSorter, "sort_ascending")
-		
+
 		for shape in shapes:
 			if shape["collider"].has_method("pickup"):
 				cur_click_order += 1

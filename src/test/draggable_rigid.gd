@@ -9,6 +9,7 @@ export var regular_collision_layer = 1
 export var movement_collision_layer = 1 << 12 # layer 13, mask 13 will collide with this
 export var throw_force_multiplier = 1
 export var movement_multiplier = 25
+export var rescale_factor:float = 1.0
 
 var held = false
 var mouse_offset:Vector2
@@ -24,6 +25,8 @@ var first_released = false
 func _ready():
 	# stay awake for better collision detection
 	can_sleep = false
+	for child in get_children():
+		child.scale *= rescale_factor
 
 func _physics_process(delta):
 	if held:
