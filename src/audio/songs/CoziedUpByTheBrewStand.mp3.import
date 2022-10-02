@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CoziedUpByTheBrewStand.mp3-99846e3e15b344e17334048e862f3999.mp3str"
+
+[deps]
+
+source_file="res://src/audio/songs/CoziedUpByTheBrewStand.mp3"
+dest_files=[ "res://.import/CoziedUpByTheBrewStand.mp3-99846e3e15b344e17334048e862f3999.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
