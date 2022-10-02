@@ -12,14 +12,14 @@ func _ready():
 	#for i in arr:
 	#	print(RECIPEGENERATOR.op.keys()[i])
 	#print(RECIPEGENERATOR.generate_recipes(4,3,3))
-	print(RECIPEGENERATOR.op)
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,3,2))
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,1,1))
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,0,0))
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,6,9))
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,4,2))
-	print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,10,10))
-	#get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
+	#print(RECIPEGENERATOR.op)
+	print(RECIPEGENERATOR.generate_recipe_template())
+	var potion_recipes= RECIPEGENERATOR.generate_recipe_template()
+	#print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,3,2))
+	var potions = potion_recipes.keys():
+		sleep(10s)
+		potion_recipes[portion]
+	get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
 	#get_node("Recipe").set_potion(GLOBAL.potions_recipes[GLOBAL.potions.HEALTH])
 	
 	pass # Replace with function body.
