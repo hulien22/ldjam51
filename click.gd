@@ -12,6 +12,10 @@ class MyCustomSorter:
 			return false
 		if not b["collider"].has_method("get_click_order"):
 			return true
+		if a["collider"].z_index > b["collider"].z_index:
+			return true
+		if a["collider"].z_index < b["collider"].z_index:
+			return false
 		if a["collider"].get_click_order() > b["collider"].get_click_order():
 			return true
 		return false
