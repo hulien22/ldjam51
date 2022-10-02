@@ -1,5 +1,7 @@
 extends "res://src/test/draggable_rigid.gd"
 
+export var type:int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	Want to be above papers
@@ -9,4 +11,4 @@ func _ready():
 	movement_collision_layer = 4096
 
 func get_type():
-	return RECIPEGENERATOR.op.MUSHROOM
+	return type
