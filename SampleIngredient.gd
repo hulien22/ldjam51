@@ -9,4 +9,4 @@ func _ready():
 	movement_collision_layer = 4096
 
 func get_type():
-	return RECIPEGENERATOR.op.LEAF
+	return RECIPEGENERATOR.op.PLANT
