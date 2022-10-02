@@ -1,10 +1,10 @@
 extends Area2D
 
 var item_to_spawn = null
+export(String) var scene_path_to_spawn:String = ""
 
-func _init():
-#	preload item_to_spawn here
-	pass
+func _ready():
+	item_to_spawn = load(scene_path_to_spawn)
 
 #hacky, so that click picks up on us
 func pickup():

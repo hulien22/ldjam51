@@ -1,6 +1,6 @@
 extends "res://src/test/draggable_rigid.gd"
 
-export var type:int = 0
+export(RECIPEGENERATOR.op) var type:int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
