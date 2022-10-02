@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
 [ext_resource path="res://src/test/MushroomSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/test/topdowncloud.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -144,3 +145,7 @@ position = Vector2( 979, 500 )
 position = Vector2( 202, 171 )
 rotation = 0.268632
 scale = Vector2( 0.3411, 0.309948 )
+
+[node name="Cloud" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1318, 502 )
+z_index = 25
