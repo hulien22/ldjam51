@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=1]
 [ext_resource path="res://src/test/recipe.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/art/table_BETTER.png" type="Texture" id=4]
 [ext_resource path="res://src/test/mortar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/spawners/MushroomSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/spawners/CrystalSpawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/spawners/LizardSpawner.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -35,3 +37,15 @@ position = Vector2( 449, 491 )
 
 [node name="MushroomSpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 483, 1122 )
+
+[node name="CrystalSpawner" parent="." instance=ExtResource( 7 )]
+position = Vector2( 686, 197 )
+scale = Vector2( 0.303549, 0.301894 )
+
+[node name="LizardSpawner" parent="." instance=ExtResource( 8 )]
+position = Vector2( 523, 178 )
+scale = Vector2( 0.338147, 0.254912 )
+
+[node name="MushroomSpawner2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 114, 526 )
+scale = Vector2( 0.215174, 0.171506 )
