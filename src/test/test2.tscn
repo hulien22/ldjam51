@@ -141,6 +141,6 @@ scale = Vector2( 1.00213, 1.00174 )
 position = Vector2( 979, 500 )
 
 [node name="MushroomSpawner" parent="." instance=ExtResource( 10 )]
-position = Vector2( 194, 32 )
+position = Vector2( 202, 171 )
 rotation = 0.268632
 scale = Vector2( 0.3411, 0.309948 )

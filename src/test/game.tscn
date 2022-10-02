@@ -6,12 +6,11 @@
 [ext_resource path="res://src/art/table_BETTER.png" type="Texture" id=4]
 
 [node name="Game" type="Node2D"]
-scale = Vector2( 0.762013, 0.762013 )
 script = ExtResource( 3 )
 
 [node name="TableBetter" type="Sprite" parent="."]
-position = Vector2( 1259.82, 707.729 )
-scale = Vector2( 1, 1 )
+position = Vector2( 962.742, 540.614 )
+scale = Vector2( 0.764129, 0.764129 )
 texture = ExtResource( 4 )
 
 [node name="TableV1InProgress" type="Sprite" parent="."]
