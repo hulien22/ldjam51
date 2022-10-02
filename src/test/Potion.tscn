@@ -6,7 +6,7 @@
 [ext_resource path="res://src/art/potion_WHITE_VERSION.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 174.849
+radius = 80.8332
 height = 32.2368
 
 [sub_resource type="Curve" id=2]
@@ -26,7 +26,7 @@ angular_velocity = 114.05
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 50.0
+scale = 25.0
 scale_random = 0.38
 scale_curve = SubResource( 3 )
 
@@ -40,23 +40,24 @@ regular_collision_layer = 7
 movement_collision_layer = 4100
 
 [node name="FilleablePotionBottom" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="PotionFilling" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="FilleablePotionTop" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.60239
 shape = SubResource( 1 )
 
 [node name="WaterFillingParticles2D" type="Particles2D" parent="."]
 modulate = Color( 0.0352941, 0.862745, 1, 0.196078 )
 emitting = false
-amount = 20
-lifetime = 2.0
+amount = 10
 explosiveness = 0.13
 process_material = SubResource( 4 )
