@@ -9,7 +9,7 @@
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
-[ext_resource path="res://src/test/MushroomSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/spawners/MushroomSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/test/topdowncloud.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
