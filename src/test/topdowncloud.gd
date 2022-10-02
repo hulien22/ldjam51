@@ -16,6 +16,7 @@ func _on_MouseArea2D_mouse_exited():
 	$AnimationPlayer.stop(false)
 	$AnimationPlayer.play_backwards("CloudTransparent")
 
+
 func _on_Area2D_body_entered(body):
 	if body.has_method("is_empty_bottle") and body.is_empty_bottle():
 		var timer = Timer.new()
@@ -39,6 +40,7 @@ func on_timer_complete(body):
 	if body.can_add_item(add_water_obj):
 		body.add_item(add_water_obj)
 		body.filling_with_water_stop()
+
 
 export (float) var horizontal_margin = 300.0
 export (float) var horizontal_speed = 50.0

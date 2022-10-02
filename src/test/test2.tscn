@@ -98,9 +98,12 @@ z_index = 4
 
 [node name="Potion" parent="." instance=ExtResource( 8 )]
 position = Vector2( 971, 887 )
+scale = Vector2( 1.00213, 1.00174 )
+rescale_factor = 0.5
 
 [node name="Potion2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 239, 626 )
+rescale_factor = 0.5
 
 [node name="Mortar2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1897, 353 )
