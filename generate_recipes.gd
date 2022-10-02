@@ -127,10 +127,10 @@ func random_ops_ingreds(ingred: Array, op_arr:Array, max_ingred: int, max_op: in
 		#chose to add ingred 0 or op_arr 1 if either full
 		if cur_ingred == max_ingred && cur_op<max_op:
 			ingred_op_choice=1
-		elif cur_op == max_op && cur_ingred<max_op:
+		elif cur_op == max_op && cur_ingred<max_ingred:
 			ingred_op_choice=0
 		else:
-			ingred_op_choice = (rng.randi() % 1)
+			ingred_op_choice = (rng.randi() % 2)
 			
 		if ingred_op_choice == 0 && cur_ingred<max_ingred:
 			merged_arr.append(ingred[rng.randi() % ingred.size()])
