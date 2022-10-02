@@ -9,19 +9,20 @@ scene_path_to_spawn = "res://src/ingredients/Plant.tscn"
 
 [node name="Plant" type="Sprite" parent="."]
 position = Vector2( -110, -32 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Plant2" type="Sprite" parent="."]
 position = Vector2( -123, -47 )
 rotation = 3.23584
-scale = Vector2( 0.793, -1.097 )
+scale = Vector2( 0.25, -0.25 )
 texture = ExtResource( 2 )
 
 [node name="Plant3" type="Sprite" parent="."]
-position = Vector2( -25, 30 )
+position = Vector2( -94, -32 )
 rotation = 0.513127
-scale = Vector2( 0.831495, 0.898615 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -342, -559, -335, -486, -275, -403, -228, -289, -161, -209, -215, -116, -268, -132, -242, -12, -265, 442, -185, 542, -88, 499, 76, 91, 89, -55, 292, -122, 272, -209, 212, -219, 146, -166, 116, -389, 66, -413, 52, -476, 116, -533, 116, -623, 46, -543, -41, -506, -108, -403, -178, -483, -221, -476 )
+polygon = PoolVector2Array( -78, -176, -168, -166, -176, -131, -162, 87, -102, 104, -50, -54, -1, -71, -9, -99, -55, -179 )

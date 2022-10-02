@@ -9,13 +9,14 @@ scene_path_to_spawn = "res://src/ingredients/Lizard.tscn"
 
 [node name="Lizard" type="Sprite" parent="."]
 position = Vector2( -110, -32 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Lizard2" type="Sprite" parent="."]
-position = Vector2( -170, 140 )
+position = Vector2( -113, 13 )
 rotation = 2.92343
-scale = Vector2( 0.793, -1.097 )
+scale = Vector2( 0.25, -0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -45, -471, -249, -413, -285, -316, -436, -446, -501, -385, -460, -324, -420, -340, -359, -246, -473, -39, -513, 210, -477, 357, -399, 353, -411, 528, -379, 634, -289, 662, -261, 581, -257, 495, -106, 499, 37, 422, 163, 511, 224, 471, 306, 300, 240, 202, 139, 181, 106, 63, 49, -30, 49, -299 )
+polygon = PoolVector2Array( -92, -142, -146, -128, -195, -135, -209, -119, -201, -105, -212, 53, -190, 131, -156, 135, -143, 99, 0, 90, 0, 49, -28, -15, -51, -38, -37, -95 )

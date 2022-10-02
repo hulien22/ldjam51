@@ -8,14 +8,15 @@ script = ExtResource( 1 )
 scene_path_to_spawn = "res://src/ingredients/Crystal.tscn"
 
 [node name="Crystal" type="Sprite" parent="."]
-position = Vector2( -110, -32 )
+position = Vector2( -27, 3 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Crystal2" type="Sprite" parent="."]
-position = Vector2( 77, -14 )
-rotation = -0.366519
-scale = Vector2( 0.793, -1.097 )
+position = Vector2( 29, 16 )
+rotation = -1.29678
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -390, 203, -377, 298, -313, 348, -155, 308, 9, 155, 210, 274, 332, 314, 424, 282, 356, 102, 139, -117, 168, -241, 157, -403, 46, -400, -62, -334, -136, -355, -223, -336, -252, -273, -218, -167, -186, -130 )
+polygon = PoolVector2Array( -42, -72, -97, 65, -90, 91, 101, 102, 108, 50, 44, -18, 39, -91 )
