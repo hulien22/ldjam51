@@ -55,6 +55,7 @@ shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 modulate = Color( 0.0352941, 0.862745, 1, 0.196078 )
+emitting = false
 amount = 20
 lifetime = 2.0
 explosiveness = 0.13
