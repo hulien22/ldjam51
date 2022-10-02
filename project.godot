@@ -46,6 +46,7 @@ config/icon="res://src/art/icon.png"
 
 Click="*res://click.gd"
 RECIPEGENERATOR="*res://generate_recipes.gd"
+Music="*res://src/audio/MusicAutoload.tscn"
 
 [debug]
 
