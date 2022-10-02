@@ -3,13 +3,13 @@
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/test/mortar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/test/Mushroom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ingredients/Mushroom.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=5]
 [ext_resource path="res://src/art/rain_cloud_inProgress.png" type="Texture" id=6]
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
-[ext_resource path="res://src/test/MushroomSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/spawners/MushroomSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/test/topdowncloud.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -118,7 +118,7 @@ rescale_factor = 0.5
 liquid_color = Color( 0.00392157, 0.776471, 0.796078, 1 )
 
 [node name="Potion2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 247, 592 )
+position = Vector2( 239, 626 )
 rescale_factor = 0.5
 
 [node name="Mortar2" parent="." instance=ExtResource( 3 )]
