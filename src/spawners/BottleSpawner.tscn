@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/spawners/ItemSpawner.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 211, 69 )
+
+[node name="BottleSpawner" type="Area2D"]
+script = ExtResource( 1 )
+scene_path_to_spawn = "res://src/test/Potion.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
