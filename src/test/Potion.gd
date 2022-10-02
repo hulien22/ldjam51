@@ -1,19 +1,65 @@
 extends "res://src/test/draggable_rigid.gd"
 
+var current_recipe: Array = []
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-export var liquid_color:Color = Color8(0,0,0,0)
+func _init(cur_recipe:Array = []):
+	current_recipe = cur_recipe
+#	current_recipe.push_back(RECIPEGENERATOR.op.WATER)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PotionFilling.modulate = liquid_color
+	update_sprite()
 
-func set_color(new_color:Color):
-	liquid_color = new_color
-	$PotionFilling.modulate = liquid_color
+func get_type():
+	match current_recipe:
+		[]: return RECIPEGENERATOR.op.EMPTY_BOTTLE
+		[RECIPEGENERATOR.op.WATER]: return RECIPEGENERATOR.op.WATER_BOTTLE
+		_: return RECIPEGENERATOR.op.POTION
 
-#TODO add more things in the potion too? eyes tail leaves?
+func is_empty_bottle():
+	return current_recipe.empty()
 
+func get_current_recipe():
+	return current_recipe
+
+func can_add_item(new_item):
+	print(new_item, new_item.get_type())
+	if not new_item.has_method("get_type"):
+		return false
+	if current_recipe.empty():
+		return new_item.get_type() == RECIPEGENERATOR.op.WATER
+	match new_item.get_type():
+		RECIPEGENERATOR.op.MUSHROOM: return true
+		RECIPEGENERATOR.op.GROUND_MUSHROOM: return true
+		_: return false
+
+func add_item(new_item):
+	current_recipe.push_back(new_item.get_type())
+	update_sprite()
+
+func get_first_ingredient():
+	match current_recipe:
+		[]: return RECIPEGENERATOR.op.EMPTY_BOTTLE
+		[RECIPEGENERATOR.op.WATER]: return RECIPEGENERATOR.op.WATER
+		_: return current_recipe[1]
+
+func update_sprite():
+	#color based on first ingredient mostly, then other things will just affect slightly
+	var f_ing = get_first_ingredient()
+	match f_ing:
+		RECIPEGENERATOR.op.EMPTY_BOTTLE:
+			$PotionFilling.modulate = Color8(0,0,0,0)
+		RECIPEGENERATOR.op.WATER:
+			$PotionFilling.modulate = Color('01c6cb')
+		RECIPEGENERATOR.op.MUSHROOM:
+			$PotionFilling.modulate = Color('daec03')
+	# TODO play poof effect
+	# TODO change alpha
+#	TODO other stuffs
+	#TODO add raw things in potion floating around
+
+func filling_with_water_start():
+	$WaterFillingParticles2D.emitting = true
+	
+func filling_with_water_stop():
+	$WaterFillingParticles2D.emitting = false

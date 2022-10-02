@@ -2,17 +2,18 @@ extends Node2D
 
 class_name RecipeGenerator
 
-enum op {WATER, 
-HEAT_SHORT, HEAT_MED, HEAT_LONG, SHAKE,
-LEAF, HERB, THISTLE, FLOWER, MUSHROOM,
-GROUND_LEAF, GROUND_HERB, GROUND_THISTLE, GROUND_FLOWER, GROUND_MUSHROOM}
+enum op {WATER = 0,
+HEAT_SHORT=1, HEAT_MED, HEAT_LONG, SHAKE,
+PLANT=10, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
+GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM,
+EMPTY_BOTTLE=100, WATER_BOTTLE, POTION}
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
 SHRINK, SHINE, LOVE, SWIFT, FIRE}
 
 enum mode {EASY, MED, HARD}
 
-var ingredients= op.values().slice(op.LEAF, op.keys().size()-1)
+var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
 var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
 
 #long heat for complex 

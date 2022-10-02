@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ingredients/Ingredient.gd" type="Script" id=1]
+[ext_resource path="res://src/art/crystal_MUSH.png" type="Texture" id=2]
+
+[node name="GroundCrystal" type="RigidBody2D"]
+z_index = 1
+collision_layer = 3
+collision_mask = 4098
+script = ExtResource( 1 )
+type = 22
+
+[node name="CrystalMush" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -115, -230, -188, -178, -210, -123, -241, -132, -250, -83, -352, -40, -345, 68, -305, 84, -327, 188, -281, 216, -185, 176, -182, 201, -105, 185, -10, 225, 67, 201, 199, 194, 224, 139, 316, 145, 353, 117, 276, 68, 273, 7, 240, -24, 236, -70, 141, -64, 169, -107, 98, -123, 86, -138, 6, -101, -10, -113, -41, -80, -75, -116, -62, -175 )

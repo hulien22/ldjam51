@@ -1,6 +1,13 @@
 extends "res://src/test/station.gd"
 
-var ground_mushroom_scene = preload("res://src/test/GroundMushroom.tscn")
+var ground_mushroom_scene = preload("res://src/ingredients/GroundMushroom.tscn")
+var ground_crystal_scene = preload("res://src/ingredients/GroundCrystal.tscn")
+var ground_lizard_scene = preload("res://src/ingredients/GroundLizard.tscn")
+var ground_plant_scene = preload("res://src/ingredients/GroundPlant.tscn")
+var ground_eyeball_scene = preload("res://src/ingredients/GroundEyeball.tscn")
+
+var ground_scenes = [ground_plant_scene, ground_lizard_scene,
+ground_crystal_scene, ground_eyeball_scene, ground_mushroom_scene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,47 +21,31 @@ func can_add_item(new_item):
 	if has_item or not new_item.has_method("get_type"):
 		return false
 	match new_item.get_type():
-		RECIPEGENERATOR.op.FLOWER: return true
-		RECIPEGENERATOR.op.THISTLE: return true
-		RECIPEGENERATOR.op.LEAF: return true
+		RECIPEGENERATOR.op.EYEBALL: return true
+		RECIPEGENERATOR.op.CRYSTAL: return true
+		RECIPEGENERATOR.op.PLANT: return true
 		RECIPEGENERATOR.op.MUSHROOM: return true
-		RECIPEGENERATOR.op.HERB: return true
+		RECIPEGENERATOR.op.LIZARD: return true
 		_: return false
 
 func add_item(new_item):
 	item = new_item.get_type()
 	has_item = true
-	match new_item.get_type():
-		RECIPEGENERATOR.op.FLOWER:pass
-		RECIPEGENERATOR.op.THISTLE: pass
-		RECIPEGENERATOR.op.LEAF: pass
-		RECIPEGENERATOR.op.MUSHROOM: 
-			$Mortar/IngredientSprite.frame = 1
-		RECIPEGENERATOR.op.HERB: pass
-		_: pass
+	# Set the sprite sheet to the correct frame.
+	# The order is based off the RECIPEGENERATOR.op enum
+	$Mortar/IngredientSprite.frame = new_item.get_type()-9
 	start_wait($Timer)
 
 func process_item():
-	match item:
-		RECIPEGENERATOR.op.FLOWER:pass
-		RECIPEGENERATOR.op.THISTLE: pass
-		RECIPEGENERATOR.op.LEAF: pass
-		RECIPEGENERATOR.op.MUSHROOM: 
-			item = RECIPEGENERATOR.op.GROUND_MUSHROOM
-		RECIPEGENERATOR.op.HERB: pass
-		_: pass
-	$Mortar/IngredientSprite.frame += 1
+	# The ground version is 10 ahead in the enum
+	item += 10
+	# The ground version is 10 frames ahead
+	$Mortar/IngredientSprite.frame += 10
 	complete = true
 
 func get_spawn_obj():
-	var instance
-	match item:
-		RECIPEGENERATOR.op.GROUND_FLOWER:pass
-		RECIPEGENERATOR.op.GROUND_THISTLE: pass
-		RECIPEGENERATOR.op.GROUND_LEAF: pass
-		RECIPEGENERATOR.op.GROUND_MUSHROOM: 
-			instance = ground_mushroom_scene.instance()
-		RECIPEGENERATOR.op.GROUND_HERB: pass
+	# The index in ground_scenes is the RECIPEGENERATOR.op enum value - 20
+	var instance = ground_scenes[item-20].instance()
 	item = null
 	has_item = false
 	complete = false

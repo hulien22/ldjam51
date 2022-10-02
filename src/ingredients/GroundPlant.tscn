@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ingredients/Ingredient.gd" type="Script" id=1]
+[ext_resource path="res://src/art/plant_MUSH.png" type="Texture" id=2]
+
+[node name="GroundPlant" type="RigidBody2D"]
+z_index = 1
+collision_layer = 3
+collision_mask = 4098
+script = ExtResource( 1 )
+type = 24
+
+[node name="PlantMush" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 54, -222, -40, -202, -91, -152, -111, -91, -191, -140, -195, -6, -314, 12, -310, 56, -260, 107, -179, 139, -194, 188, -145, 208, -109, 223, -76, 220, -47, 193, 22, 181, 37, 151, 108, 193, 131, 172, 173, 161, 168, 101, 236, 137, 247, 101, 277, 102, 278, 83, 307, 71, 313, 39, 274, 10, 291, -18, 235, -29, 138, 9, 125, 0, 128, -35, 96, -45, 140, -139, 60, -128, 49, -146, 27, -157 )

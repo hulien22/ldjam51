@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ingredients/Ingredient.gd" type="Script" id=1]
+[ext_resource path="res://src/art/lizard_MUSH.png" type="Texture" id=2]
+
+[node name="GroundLizard" type="RigidBody2D"]
+z_index = 1
+collision_layer = 3
+collision_mask = 4098
+script = ExtResource( 1 )
+type = 21
+
+[node name="LizardMush" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -150, -174, -198, -134, -237, -60, -310, -44, -296, 35, -296, 65, -249, 110, -176, 139, 19, 172, 122, 163, 191, 134, 192, 107, 291, 47, 283, 12, 312, -63, 297, -74, 250, -59, 233, -36, 200, -66, 79, -104, -10, -91, -73, -127, -90, -124 )
