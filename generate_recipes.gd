@@ -4,15 +4,15 @@ class_name RecipeGenerator
 
 enum op {WATER, 
 HEAT_SHORT, HEAT_MED, HEAT_LONG, COOL, SHAKE,
-LEAF, HERB, THISTLE, FLOWER, MUSHROOM,
-GROUND_LEAF, GROUND_HERB, GROUND_THISTLE, GROUND_FLOWER, GROUND_MUSHROOM}
+PLANT, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
+GROUND_PLANT, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM}
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, WATER,
 SUPER_SONIC, JOE_TOES, JIM, JOM, TOM}
 
 enum mode {EASY, MED, HARD}
 
-var ingredients= op.values().slice(op.LEAF, op.keys().size()-1)
+var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
 var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
 #long heat for complex 
 # ordered in easy to hard potions?
