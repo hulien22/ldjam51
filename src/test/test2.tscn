@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
+[ext_resource path="res://src/test/MushroomSpawner.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -138,3 +139,8 @@ scale = Vector2( 1.00213, 1.00174 )
 
 [node name="Mushroom2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 979, 500 )
+
+[node name="MushroomSpawner" parent="." instance=ExtResource( 10 )]
+position = Vector2( 194, 32 )
+rotation = 0.268632
+scale = Vector2( 0.3411, 0.309948 )

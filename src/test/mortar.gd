@@ -57,6 +57,7 @@ func get_spawn_obj():
 		RECIPEGENERATOR.op.GROUND_HERB: pass
 	item = null
 	has_item = false
+	complete = false
 	$Mortar/IngredientSprite.frame = 0
 	return {"spawn_obj": instance, "parent": get_parent()}
 

@@ -53,7 +53,7 @@ visible = false
 rotation = 1.60239
 shape = SubResource( 1 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="WaterFillingParticles2D" type="Particles2D" parent="."]
 modulate = Color( 0.0352941, 0.862745, 1, 0.196078 )
 emitting = false
 amount = 20

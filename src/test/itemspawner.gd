@@ -1,13 +1,22 @@
-extends Node2D
-
-export var item_path:String = ""
+extends Area2D
 
 var item_to_spawn = null
 
-func _ready():
-	item_to_spawn = load(item_to_spawn)
+func _init():
+#	preload item_to_spawn here
+	pass
 
-func on_click():
-	# return new item to spawn?
-	return item_to_spawn
+#hacky, so that click picks up on us
+func pickup():
+	pass
 
+func can_spawn():
+	return true
+
+func get_spawn_obj():
+	var instance = item_to_spawn.instance()
+	instance = modify_instance(instance)
+	return {"spawn_obj": instance, "parent": get_parent()}
+
+func modify_instance(instance):
+	return instance
