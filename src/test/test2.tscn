@@ -129,9 +129,9 @@ mass = 30.0
 movement_multiplier = 0.5
 rescale_factor = 0.5
 
-[node name="YSort" type="YSort" parent="."]
-position = Vector2( 1897, 353 )
+[node name="Mushroom" parent="." instance=ExtResource( 4 )]
+position = Vector2( 899.001, 303 )
 scale = Vector2( 1.00213, 1.00174 )
 
-[node name="Mushroom" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( -995.878, -49.9131 )
+[node name="Mushroom2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 979, 500 )

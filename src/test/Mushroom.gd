@@ -5,6 +5,8 @@ func _ready():
 #	Want to be above papers
 # 	TODO export these values to constants somewhere
 	z_index = 1
+	regular_collision_layer = 3
+	movement_collision_layer = 4096
 
 func get_type():
 	return RECIPEGENERATOR.op.MUSHROOM

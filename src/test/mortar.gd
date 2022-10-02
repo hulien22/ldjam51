@@ -1,5 +1,7 @@
 extends "res://src/test/station.gd"
 
+var ground_mushroom_scene = preload("res://src/test/GroundMushroom.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	mode = RigidBody2D.MODE_STATIC
@@ -43,6 +45,20 @@ func process_item():
 		_: pass
 	$Mortar/IngredientSprite.frame += 1
 	complete = true
+
+func get_spawn_obj():
+	var instance
+	match item:
+		RECIPEGENERATOR.op.GROUND_FLOWER:pass
+		RECIPEGENERATOR.op.GROUND_THISTLE: pass
+		RECIPEGENERATOR.op.GROUND_LEAF: pass
+		RECIPEGENERATOR.op.GROUND_MUSHROOM: 
+			instance = ground_mushroom_scene.instance()
+		RECIPEGENERATOR.op.GROUND_HERB: pass
+	item = null
+	has_item = false
+	$Mortar/IngredientSprite.frame = 0
+	return {"spawn_obj": instance, "parent": get_parent()}
 
 func animate_obj_start():
 	$Mortar/Particles2D.emitting = true
