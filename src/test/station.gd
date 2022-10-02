@@ -32,6 +32,13 @@ func start_wait(timer):
 func can_pickup():
 	return not has_item
 
+func can_spawn():
+	return is_complete()
+
+# return object to spawn and reset
+func get_spawn_obj():
+	return {}
+
 func animate_obj_start():
 	pass
 

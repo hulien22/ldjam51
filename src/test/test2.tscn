@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/art/rain_cloud_inProgress.png" type="Texture" id=6]
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -100,6 +101,7 @@ position = Vector2( 1521, 265 )
 scale = Vector2( 0.3411, 0.309948 )
 z_index = 25
 texture = ExtResource( 6 )
+script = ExtResource( 9 )
 
 [node name="Polygon2D" type="Polygon2D" parent="RainCloudInProgress"]
 position = Vector2( -140.722, 442.01 )
@@ -129,9 +131,9 @@ mass = 30.0
 movement_multiplier = 0.5
 rescale_factor = 0.5
 
-[node name="YSort" type="YSort" parent="."]
-position = Vector2( 1897, 353 )
+[node name="Mushroom" parent="." instance=ExtResource( 4 )]
+position = Vector2( 899.001, 303 )
 scale = Vector2( 1.00213, 1.00174 )
 
-[node name="Mushroom" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( -995.878, -49.9131 )
+[node name="Mushroom2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 979, 500 )
