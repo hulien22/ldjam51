@@ -7,4 +7,4 @@ func _ready():
 	z_index = 1
 
 func get_type():
-	return RECIPEGENERATOR.op.LEAF
+	return RECIPEGENERATOR.op.MUSHROOM

@@ -1,16 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/art/mortar.png" type="Texture" id=3]
-[ext_resource path="res://src/art/pestle.png" type="Texture" id=4]
+[ext_resource path="res://src/test/mortar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/test/Mushroom.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=5]
 [ext_resource path="res://src/art/rain_cloud_inProgress.png" type="Texture" id=6]
 [ext_resource path="res://src/test/SampleIngredient.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 242.464
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -50,20 +47,6 @@ polygon = PoolVector2Array( -7, -15, -25, 5, -19, 51, -21, 103, -57, 113, -61, 1
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
 position = Vector2( 1.14426, 1.64034 )
 polygon = PoolVector2Array( -7, -14, -25, 5, -19, 49, -21, 102, -56, 112, -62, 163, -12, 177, 42, 172, 26, 107, 28, 53, 42, 0 )
-
-[node name="Mortar" type="Sprite" parent="."]
-position = Vector2( 1799, 558 )
-texture = ExtResource( 3 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Mortar"]
-collision_mask = 4099
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mortar/StaticBody2D"]
-shape = SubResource( 3 )
-
-[node name="Pestle" type="Sprite" parent="."]
-position = Vector2( 1898, 479 )
-texture = ExtResource( 4 )
 
 [node name="draggable_rigid6" parent="." instance=ExtResource( 2 )]
 position = Vector2( 576, 575 )
@@ -125,9 +108,30 @@ polygon = PoolVector2Array( 17.5903, -87.1115, -117.268, -64.5271, -181.765, -19
 
 [node name="Potion" parent="." instance=ExtResource( 8 )]
 position = Vector2( 969, 881 )
+scale = Vector2( 1.00213, 1.00174 )
 rescale_factor = 0.5
-liquid_color = Color( 0.0313726, 0.176471, 0.972549, 1 )
+liquid_color = Color( 0.00392157, 0.776471, 0.796078, 1 )
 
 [node name="Potion2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 247, 592 )
 rescale_factor = 0.5
+
+[node name="Mortar2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1897, 353 )
+scale = Vector2( 1.00213, 1.00174 )
+movement_multiplier = 0.5
+rescale_factor = 0.5
+
+[node name="Mortar" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1633, 753 )
+scale = Vector2( 1.00213, 1.00174 )
+mass = 30.0
+movement_multiplier = 0.5
+rescale_factor = 0.5
+
+[node name="YSort" type="YSort" parent="."]
+position = Vector2( 1897, 353 )
+scale = Vector2( 1.00213, 1.00174 )
+
+[node name="Mushroom" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -995.878, -49.9131 )

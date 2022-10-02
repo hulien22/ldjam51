@@ -25,6 +25,8 @@ func _input(event):
 
 		for shape in shapes:
 			if shape["collider"].has_method("pickup"):
+				if shape["collider"].has_method("can_pickup") and not shape["collider"].can_pickup():
+					continue
 				cur_click_order += 1
 #				print_debug(cur_click_order)
 				shape["collider"].set_click_order(cur_click_order)
@@ -38,7 +40,17 @@ func _input(event):
 				break # Thus stops on the first shape
 	elif event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.pressed:
 		if selected_obj and selected_obj.has_method("drop"):
+#			Check for stations
+			var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
+			shapes.sort_custom(MyCustomSorter, "sort_ascending")
+			print(shapes)
 			selected_obj.drop()
+			for shape in shapes:
+				if shape["collider"].has_method("can_add_item"):
+					if shape["collider"].can_add_item(selected_obj):
+						shape["collider"].add_item(selected_obj)
+						selected_obj.queue_free()
+						break
 			selected_obj = null
 
 func set_cur_click_order(co):
