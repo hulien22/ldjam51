@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/objects/Potion.gd" type="Script" id=1]
+[ext_resource path="res://src/art/filleable_potion_TOP.png" type="Texture" id=2]
+[ext_resource path="res://src/art/filleable_potion_BOTTOM.png" type="Texture" id=3]
+[ext_resource path="res://src/art/potion_WHITE_VERSION.png" type="Texture" id=4]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 43.8517
+height = 8.43824
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0909091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.52
+angular_velocity = 114.05
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 25.0
+scale_random = 0.38
+scale_curve = SubResource( 3 )
+
+[node name="Potion" type="RigidBody2D"]
+z_index = 5
+collision_layer = 5
+collision_mask = 4100
+can_sleep = false
+script = ExtResource( 1 )
+regular_collision_layer = 7
+movement_collision_layer = 4100
+
+[node name="FilleablePotionBottom" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+
+[node name="PotionFilling" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="FilleablePotionTop" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.60239
+shape = SubResource( 1 )
+
+[node name="WaterFillingParticles2D" type="Particles2D" parent="."]
+modulate = Color( 0.0352941, 0.862745, 1, 0.196078 )
+scale = Vector2( 0.5, 0.5 )
+emitting = false
+amount = 10
+explosiveness = 0.13
+process_material = SubResource( 4 )

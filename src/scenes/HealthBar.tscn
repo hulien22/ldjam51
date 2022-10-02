@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scenes/HealthBar.gd" type="Script" id=1]
+[ext_resource path="res://src/art/crystal_MUSH.png" type="Texture" id=2]
+
+
+[node name="HealthBar" type="Node2D"]
+script = ExtResource( 1 )
+image = ExtResource( 2 )
+health_max = 5
+horizontal_spacing = 200
+image_scale = Vector2( 0.2, 0.2 )

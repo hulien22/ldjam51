@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "DraggableBody2D",
 "language": "GDScript",
-"path": "res://src/test/draggable_rigid.gd"
+"path": "res://src/objects/draggable_rigid.gd"
 }, {
-"base": "Sprite",
+"base": "RigidBody2D",
 "class": "Recipe",
 "language": "GDScript",
-"path": "res://src/test/recipe.gd"
+"path": "res://src/objects/recipe.gd"
 }, {
 "base": "Node2D",
 "class": "RecipeGenerator",
@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "DraggableBody2D",
 "class": "Station",
 "language": "GDScript",
-"path": "res://src/test/station.gd"
+"path": "res://src/objects/station.gd"
 } ]
 _global_script_class_icons={
 "DraggableBody2D": "",
@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ldjam51"
-run/main_scene="res://src/test/test2.tscn"
+run/main_scene="res://src/scenes/game.tscn"
 config/icon="res://src/art/icon.png"
 
 [autoload]

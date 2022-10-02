@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ingredients/Ingredient.gd" type="Script" id=1]
+[ext_resource path="res://src/art/eyeball_MUSH.png" type="Texture" id=2]
+
+[node name="GroundEyeball" type="RigidBody2D"]
+z_index = 1
+collision_layer = 3
+collision_mask = 4098
+script = ExtResource( 1 )
+type = 23
+
+[node name="EyeballMush" type="Sprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -28, -43, -37, -41, -50, -31, -55, -13, -63, -7, -69, -6, -80, 4, -79, 19, -69, 28, -58, 38, -32, 41, -18, 39, 4, 43, 37, 40, 48, 34, 48, 27, 71, 19, 75, 12, 81, 1, 76, -8, 67, -11, 62, -10, 57, -16, 50, -16, 41, -12, 31, -14, 21, -12, 16, -16, 4, -14, -11, -37, -20, -42 )

@@ -1,6 +1,8 @@
 extends "res://src/objects/draggable_rigid.gd"
+class_name Recipe
 
-export(RECIPEGENERATOR.op) var type:int = 0
+var recipe = []
+var potion = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,5 +12,8 @@ func _ready():
 	regular_collision_layer = 3
 	movement_collision_layer = 4096
 
-func get_type():
-	return type
+func set_recipe(recipe_seq: Array):
+	recipe = recipe_seq
+
+func set_potion(potion_name: String):
+	potion = potion_name

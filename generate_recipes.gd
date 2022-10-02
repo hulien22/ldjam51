@@ -3,17 +3,19 @@ extends Node2D
 class_name RecipeGenerator
 
 enum op {WATER = 0,
-HEAT_SHORT=1, HEAT_MED, HEAT_LONG, COOL, SHAKE,
+HEAT_SHORT=1, HEAT_MED, HEAT_LONG, SHAKE,
 PLANT=10, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
-GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM}
+GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM,
+EMPTY_BOTTLE=100, WATER_BOTTLE, POTION}
 
-enum potions {HEALTH, SPEED, INVISIBLE, POWER, WATER,
-SUPER_SONIC, JOE_TOES, JIM, JOM, TOM}
+enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
+SHRINK, SHINE, LOVE, SWIFT, FIRE}
 
 enum mode {EASY, MED, HARD}
 
 var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
 var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
+
 #long heat for complex 
 # ordered in easy to hard potions?
 var potions_recipes = {}
@@ -23,8 +25,29 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	pass # Replace with function body.
 
+#generates recipe with hardcoded recipes
+#returns dict of RECIPEGENERATOR.potions as keys and RECIPEGENERATOR.op as values
+func generate_recipe_template():
+	#easy
+	potions_recipes[potions.HEALTH]= [op.WATER,rnd_ingred(),op.HEAT_MED,op.SHAKE]
+	potions_recipes[potions.SPEED]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT]
+	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred()]
+	#medium
+	potions_recipes[potions.POWER]= potions_recipes[potions.HEALTH] + [op.HEAT_MED,rnd_ingred(),op.SHAKE]
+	potions_recipes[potions.DANCE]= [op.WATER,rnd_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
+	potions_recipes[potions.SHRINK]= potions_recipes[potions.SPEED] + [op.SHAKE,rnd_ingred()]
+	#hard
+	potions_recipes[potions.SHINE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
+	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ingred()]
+	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
+	#final
+	potions_recipes[potions.FIRE]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
+	
+	return potions_recipes
+
 # generate num_easy+num_med+num_hard recipes
-func generate_recipes(num_easy, num_med, num_hard):
+#returns dict of RECIPEGENERATOR.potions as keys and RECIPEGENERATOR.op as values
+func generate_recipes_random(num_easy, num_med, num_hard):
 	
 	if (num_easy+num_med+num_hard) > potions.size():
 		print("warning: total num easy, med, hard potions is greater than actual potion")
@@ -34,69 +57,42 @@ func generate_recipes(num_easy, num_med, num_hard):
 	rand_potions.shuffle()
 	
 	var recipe_len =0
-	
-	
 	var hard_base_ingred = []
 	
 	for potion in rand_potions:
 		#generate recipe for each potion
 		#make op list, remove water,
 		var recipe = []
+		var op_ingred_arr= []
 		#generate length (based on mode)
 		if dif==mode.EASY:
 			
 			#base
 			recipe = [op.WATER]
+			op_ingred_arr = random_ops_ingreds(rng.randi_range(1,2),rng.randi_range(0,1))
 			
-			#get either one or two random ingredients
-			var rand_ingreds= get_random_array(rng.randi_range(1,2),ingredients)
-			recipe.append_array(rand_ingreds)
-			# add ground to easy
-			
-			#get 1 or 0 operations
-			var rand_ops= get_random_array(rng.randi_range(0,1),operations)
-			recipe.append_array(rand_ops)
 			
 		elif dif==mode.MED:
-			#base (can be water or previous 
-			var bases = [op.WATER]
-			bases.append_array([potions_recipes.keys().slice(0,num_easy-1)])
-			
-			recipe = get_random_array(1,bases)
+			#base
+			var bases= [potions_recipes.keys().slice(0,num_easy-1)]
+			#chose a base
+			var base = bases[rng.randi() % bases.size()]
+			#add to recipe
+			recipe = potions_recipes[base]
 			#now mix up order of ingredients and operations
-			var recipe_suffix= []
-			#random ingredients
-			var rand_ingred = get_random_array(rng.randi_range(2,3),ingredients)
-			recipe_suffix.append_array(rand_ingred)
-			
-			#operations
-			var rand_op = get_random_array(rng.randi_range(1,2),operations)
-			recipe_suffix.append_array(rand_op)
-			
-			recipe_suffix.shuffle()
-			
-			recipe.append_array(recipe_suffix)
+			op_ingred_arr = random_ops_ingreds(rng.randi_range(2,3),rng.randi_range(1,2))
 			
 		else:
 			#base (can be water or previous 
-			var bases = [op.WATER]
-			bases.append_array([potions_recipes.keys().slice(0,num_easy+num_med-1)])
-			
-			recipe = get_random_array(1,bases)
+			var bases= [potions_recipes.keys().slice(0,num_easy+num_med-1)]
+			#chose a base
+			var base = bases[rng.randi() % bases.size()]
+			#add to recipe
+			recipe = potions_recipes[base]
 			#now mix up order of ingredients and operations
-			var recipe_suffix= []
-			#random ingredients
-			var rand_ingred = get_random_array(rng.randi_range(2,3),ingredients)
-			recipe_suffix.append_array(rand_ingred)
-			
-			#operations
-			var rand_op = get_random_array(rng.randi_range(2,3),operations)
-			recipe_suffix.append_array(rand_op)
-			
-			recipe_suffix.shuffle()
-			
-			recipe.append_array(recipe_suffix)
-			
+			op_ingred_arr = random_ops_ingreds(rng.randi_range(3,4),rng.randi_range(2,3))
+		
+		recipe.append_array(op_ingred_arr)
 		potions_recipes[potion] = recipe
 		#change mode
 		if potions_recipes.keys().size() == num_easy:
@@ -114,9 +110,12 @@ func get_random_array(num: int,arr: Array):
 	for i in range(num):
 		rand_ingreds.append(arr[rng.randi() % arr.size()])
 	return rand_ingreds
+	
+func rnd_ingred():
+	return ingredients[rng.randi() % ingredients.size()]
 
 #randomly merge ingredients with no negiboring ops being the same
-func random_ops_ingreds(ingred: Array, op_arr:Array, max_ingred: int, max_op: int):
+func random_ops_ingreds(max_ingred: int, max_op: int):
 	var merged_arr = []
 	var cur_ingred = 0
 	var cur_op = 0
@@ -133,7 +132,7 @@ func random_ops_ingreds(ingred: Array, op_arr:Array, max_ingred: int, max_op: in
 			ingred_op_choice = (rng.randi() % 2)
 			
 		if ingred_op_choice == 0 && cur_ingred<max_ingred:
-			merged_arr.append(ingred[rng.randi() % ingred.size()])
+			merged_arr.append(ingredients[rng.randi() % ingredients.size()])
 			cur_ingred+=1
 		elif ingred_op_choice == 1 && cur_op<max_op:
 			#check if prevoius item is not the same operation
@@ -145,7 +144,7 @@ func random_ops_ingreds(ingred: Array, op_arr:Array, max_ingred: int, max_op: in
 			
 			#keep random gen until finding valid op
 			while !valid_op:
-				new_op = op_arr[rng.randi() % op_arr.size()]
+				new_op = operations[rng.randi() % operations.size()]
 				
 				#retry if both heat items
 				if heat_ops.has(last_item) && heat_ops.has(new_op):
