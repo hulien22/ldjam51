@@ -1,0 +1,14 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float ShowGreen = 0;
+uniform float ShowFlipped = 0;
+
+void fragment() {
+	vec2 uv = vec2(mix(UV.x, 1.0-UV.x, ShowFlipped*(sin(TIME)/2.0+0.5)), UV.y);
+	vec3 color = texture(TEXTURE, uv).xyz;
+	color += color*vec3(-0.5 * ShowGreen, 3.0 * ShowGreen, -0.5 * ShowGreen);
+	COLOR.xyz = color;
+}"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/test/test2.gd" type="Script" id=1]
 [ext_resource path="res://src/test/draggable_rigid.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/test/RainCloud.gd" type="Script" id=9]
 [ext_resource path="res://src/test/MushroomSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/test/HealthBar.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/test/PostProcessingController.gd" type="Script" id=12]
+[ext_resource path="res://src/test/viewport_material.tres" type="Material" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1436.5, 582 )
@@ -20,127 +23,146 @@ extents = Vector2( 614.5, 1648 )
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="TableV1InProgress" type="Sprite" parent="."]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+material = ExtResource( 13 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 1
+script = ExtResource( 12 )
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 1920, 1080 )
+handle_input_locally = false
+render_target_update_mode = 3
+physics_object_picking = true
+gui_disable_input = true
+
+[node name="TableV1InProgress" type="Sprite" parent="ViewportContainer/Viewport"]
 position = Vector2( 1242, 701 )
 texture = ExtResource( 5 )
 
-[node name="draggable_rigid4" parent="." instance=ExtResource( 2 )]
+[node name="draggable_rigid2" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+position = Vector2( 576, 522 )
+
+[node name="draggable_rigid5" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+position = Vector2( 714, 648 )
+
+[node name="draggable_rigid3" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
+position = Vector2( 688, 497 )
+
+[node name="draggable_rigid4" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 modulate = Color( 1, 0.152941, 0.152941, 1 )
 position = Vector2( 1203, 611 )
 
-[node name="draggable_rigid2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 576, 522 )
-
-[node name="draggable_rigid5" parent="." instance=ExtResource( 2 )]
-position = Vector2( 714, 648 )
-
-[node name="draggable_rigid3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 688, 497 )
-
-[node name="RigidBody2D" type="StaticBody2D" parent="."]
+[node name="RigidBody2D" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 461, 218 )
 rotation = 0.60909
 collision_layer = 3
 collision_mask = 3
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+[node name="Polygon2D" type="Polygon2D" parent="ViewportContainer/Viewport/RigidBody2D"]
 polygon = PoolVector2Array( -7, -15, -25, 5, -19, 51, -21, 103, -57, 113, -61, 160, -15, 176, 43, 172, 26, 108, 26, 52, 41, 2 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ViewportContainer/Viewport/RigidBody2D"]
 position = Vector2( 1.14426, 1.64034 )
 polygon = PoolVector2Array( -7, -14, -25, 5, -19, 49, -21, 102, -56, 112, -62, 163, -12, 177, 42, 172, 26, 107, 28, 53, 42, 0 )
 
-[node name="draggable_rigid6" parent="." instance=ExtResource( 2 )]
+[node name="draggable_rigid6" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
 position = Vector2( 576, 575 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 8, -12 )
 collision_layer = 3
 collision_mask = 4099
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/StaticBody2D"]
 position = Vector2( 1220, -444 )
 shape = SubResource( 1 )
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2( -578, 1050 )
 collision_layer = 3
 collision_mask = 4099
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/StaticBody2D2"]
 position = Vector2( 1829, 603 )
 shape = SubResource( 1 )
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 collision_mask = 4099
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/StaticBody2D3"]
 position = Vector2( -624.5, 593 )
 shape = SubResource( 2 )
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="StaticBody2D4" type="StaticBody2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 3240, -27 )
 collision_mask = 4099
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ViewportContainer/Viewport/StaticBody2D4"]
 position = Vector2( -110, 608 )
 shape = SubResource( 2 )
 
-[node name="SampleIngredient" parent="." instance=ExtResource( 7 )]
+[node name="SampleIngredient" parent="ViewportContainer/Viewport" instance=ExtResource( 7 )]
 position = Vector2( 303, 880 )
 
-[node name="SampleIngredient2" parent="." instance=ExtResource( 7 )]
+[node name="SampleIngredient2" parent="ViewportContainer/Viewport" instance=ExtResource( 7 )]
 position = Vector2( 557, 899 )
 mass = 3.0
 can_sleep = false
 
-[node name="MyLine" type="Line2D" parent="."]
+[node name="MyLine" type="Line2D" parent="ViewportContainer/Viewport"]
 z_index = 4
 
-[node name="RainCloudInProgress" type="Sprite" parent="."]
+[node name="RainCloudInProgress" type="Sprite" parent="ViewportContainer/Viewport"]
 position = Vector2( 1521, 265 )
 scale = Vector2( 0.3411, 0.309948 )
 z_index = 25
 texture = ExtResource( 6 )
 script = ExtResource( 9 )
 
-[node name="Polygon2D" type="Polygon2D" parent="RainCloudInProgress"]
+[node name="Polygon2D" type="Polygon2D" parent="ViewportContainer/Viewport/RainCloudInProgress"]
 position = Vector2( -140.722, 442.01 )
 z_as_relative = false
 color = Color( 0.00392157, 0.00392157, 0.00392157, 0.376471 )
 polygon = PoolVector2Array( 17.5903, -87.1115, -117.268, -64.5271, -181.765, -19.3582, -190.56, 70.9797, -123.131, 119.375, 43.9756, 135.507, 214.014, 129.054, 290.238, 106.47, 316.623, 58.0743, 301.965, -3.05176e-05, 263.853, -38.7162, 181.765, -61.3007, 82.0874, -77.4325 )
 
-[node name="Potion" parent="." instance=ExtResource( 8 )]
+[node name="Potion" parent="ViewportContainer/Viewport" instance=ExtResource( 8 )]
 position = Vector2( 969, 881 )
 scale = Vector2( 1.00213, 1.00174 )
 rescale_factor = 0.5
 liquid_color = Color( 0.00392157, 0.776471, 0.796078, 1 )
 
-[node name="Potion2" parent="." instance=ExtResource( 8 )]
+[node name="Potion2" parent="ViewportContainer/Viewport" instance=ExtResource( 8 )]
 position = Vector2( 247, 592 )
 rescale_factor = 0.5
 
-[node name="Mortar2" parent="." instance=ExtResource( 3 )]
+[node name="Mortar2" parent="ViewportContainer/Viewport" instance=ExtResource( 3 )]
 position = Vector2( 1897, 353 )
 scale = Vector2( 1.00213, 1.00174 )
 movement_multiplier = 0.5
 rescale_factor = 0.5
 
-[node name="Mortar" parent="." instance=ExtResource( 3 )]
+[node name="Mortar" parent="ViewportContainer/Viewport" instance=ExtResource( 3 )]
 position = Vector2( 1633, 753 )
 scale = Vector2( 1.00213, 1.00174 )
 mass = 30.0
 movement_multiplier = 0.5
 rescale_factor = 0.5
 
-[node name="Mushroom" parent="." instance=ExtResource( 4 )]
+[node name="Mushroom" parent="ViewportContainer/Viewport" instance=ExtResource( 4 )]
 position = Vector2( 899.001, 303 )
 scale = Vector2( 1.00213, 1.00174 )
 
-[node name="Mushroom2" parent="." instance=ExtResource( 4 )]
+[node name="Mushroom2" parent="ViewportContainer/Viewport" instance=ExtResource( 4 )]
 position = Vector2( 979, 500 )
 
-[node name="MushroomSpawner" parent="." instance=ExtResource( 10 )]
+[node name="MushroomSpawner" parent="ViewportContainer/Viewport" instance=ExtResource( 10 )]
 position = Vector2( 202, 171 )
 rotation = 0.268632
 scale = Vector2( 0.3411, 0.309948 )
+
+[node name="HealthBar" parent="ViewportContainer/Viewport" instance=ExtResource( 11 )]
+position = Vector2( 50, 50 )

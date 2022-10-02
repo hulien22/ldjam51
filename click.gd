@@ -21,12 +21,15 @@ class MyCustomSorter:
 		return false
 
 func _input(event):
+	print(event)
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1: # Left mouse click
+		print("here" + str(get_global_mouse_position()))
 		# The last 'true' enables Area2D intersections, previous four values are all defaults
 		var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
 		shapes.sort_custom(MyCustomSorter, "sort_ascending")
-
+		print(get_world_2d().direct_space_state)
 		for shape in shapes:
+			print(shape)
 			if shape["collider"].has_method("pickup"):
 				if shape["collider"].has_method("can_pickup") and shape["collider"].can_pickup():
 					cur_click_order += 1
