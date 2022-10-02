@@ -63,9 +63,11 @@ func get_spawn_obj():
 
 func animate_obj_start():
 	$Mortar/Particles2D.emitting = true
+	$Mortar/Pestle/Particles2D.emitting = true
 	$Mortar/AnimationPlayer.play("Pestle")
 
 func animate_obj_stop():
 	$Mortar/Particles2D.emitting = false
+	$Mortar/Pestle/Particles2D.emitting = false
 	$Mortar/AnimationPlayer.stop(true)
 
