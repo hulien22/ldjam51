@@ -45,8 +45,10 @@ func process_item():
 	complete = true
 
 func animate_obj_start():
+	$Mortar/Particles2D.emitting = true
 	$Mortar/AnimationPlayer.play("Pestle")
 
 func animate_obj_stop():
+	$Mortar/Particles2D.emitting = false
 	$Mortar/AnimationPlayer.stop(true)
 

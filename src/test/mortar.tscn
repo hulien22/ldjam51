@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/test/mortar.gd" type="Script" id=1]
 [ext_resource path="res://src/art/mortar.png" type="Texture" id=2]
@@ -13,6 +13,20 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.52
+angular_velocity = 114.05
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 100.0
+scale_random = 0.38
 
 [sub_resource type="Animation" id=5]
 resource_name = "Pestle"
@@ -47,6 +61,13 @@ position = Vector2( -6.08731, 11.125 )
 rotation = -0.575949
 scale = Vector2( 0.370954, 0.370954 )
 frames = SubResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="Mortar"]
+modulate = Color( 0.627451, 0.556863, 0.556863, 0.364706 )
+amount = 20
+lifetime = 2.0
+explosiveness = 0.13
+process_material = SubResource( 6 )
 
 [node name="Pestle" type="Sprite" parent="Mortar"]
 position = Vector2( 139, -142 )
