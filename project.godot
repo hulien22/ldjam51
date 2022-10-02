@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/test/draggable_rigid.gd"
 }, {
-"base": "RigidBody2D",
+"base": "Sprite",
 "class": "Recipe",
 "language": "GDScript",
 "path": "res://src/test/recipe.gd"

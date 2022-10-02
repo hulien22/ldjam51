@@ -16,10 +16,10 @@ func _ready():
 	print(RECIPEGENERATOR.generate_recipe_template())
 	var potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	#print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,3,2))
-	var potions = potion_recipes.keys():
-		sleep(10s)
-		potion_recipes[portion]
-	get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
+	#var potions = potion_recipes.keys()
+		#sleep(10s)
+		#potion_recipes[portion]
+	#get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
 	#get_node("Recipe").set_potion(GLOBAL.potions_recipes[GLOBAL.potions.HEALTH])
 	
 	pass # Replace with function body.

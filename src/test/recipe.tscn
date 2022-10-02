@@ -6,11 +6,6 @@
 [node name="Recipe" type="RigidBody2D"]
 script = ExtResource( 4 )
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-visible = false
-margin_right = 106.0
-margin_bottom = 120.0
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 
