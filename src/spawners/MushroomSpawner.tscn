@@ -9,19 +9,20 @@ scene_path_to_spawn = "res://src/ingredients/Mushroom.tscn"
 
 [node name="Shroom" type="Sprite" parent="."]
 position = Vector2( -110, -32 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Shroom2" type="Sprite" parent="."]
-position = Vector2( 154, 18 )
+position = Vector2( -45, -12 )
 rotation = -2.50638
-scale = Vector2( 0.793, -1.097 )
+scale = Vector2( 0.25, -0.25 )
 texture = ExtResource( 2 )
 
 [node name="Shroom3" type="Sprite" parent="."]
-position = Vector2( -197, 263 )
+position = Vector2( -114, 29 )
 rotation = -1.09481
-scale = Vector2( 0.831495, 0.898615 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -397, -317, -475, 477, 3, 491, 133, 200, 427, 185, 436, -317 )
+polygon = PoolVector2Array( -132, -103, -166, -86, -190, -47, -187, 56, -163, 92, -140, 97, -60, 87, 30, 23, 33, -22, 6, -66, -33, -90, -81, -105 )

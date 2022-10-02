@@ -8,26 +8,28 @@ script = ExtResource( 1 )
 scene_path_to_spawn = "res://src/ingredients/Eyeball.tscn"
 
 [node name="Eyeball" type="Sprite" parent="."]
-position = Vector2( -110, -32 )
+position = Vector2( -33, 29 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Eyeball2" type="Sprite" parent="."]
-position = Vector2( 98, 26 )
+position = Vector2( 33, 35 )
 rotation = -2.9723
-scale = Vector2( 0.793, -1.097 )
+scale = Vector2( 0.25, -0.25 )
 texture = ExtResource( 2 )
 
 [node name="Eyeball3" type="Sprite" parent="."]
-position = Vector2( -125, 154 )
+position = Vector2( -36, 78 )
 rotation = -1.24093
-scale = Vector2( 0.831495, 0.898615 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="Eyeball4" type="Sprite" parent="."]
-position = Vector2( 37, 172 )
-rotation = -2.50492
-scale = Vector2( 0.741535, 0.753749 )
+position = Vector2( 13, 86 )
+rotation = -2.81522
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -296, -227, -308, 288, -2, 329, 123, 313, 292, -18, 188, -203 )
+position = Vector2( 14, 9 )
+polygon = PoolVector2Array( -87, -29, -105, 104, 28, 133, 75, 7, 52, -23 )
