@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=1]
 [ext_resource path="res://src/test/recipe.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/spawners/MushroomSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/spawners/CrystalSpawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/spawners/LizardSpawner.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/test/Potion.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/spawners/BottleSpawner.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -49,3 +51,9 @@ scale = Vector2( 0.338147, 0.254912 )
 [node name="MushroomSpawner2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 114, 526 )
 scale = Vector2( 0.215174, 0.171506 )
+
+[node name="Potion" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1267, 934 )
+
+[node name="BottleSpawner" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1215, 908 )
