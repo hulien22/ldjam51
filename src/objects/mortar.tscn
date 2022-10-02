@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://src/test/mortar.gd" type="Script" id=1]
+[ext_resource path="res://src/objects/mortar.gd" type="Script" id=1]
 [ext_resource path="res://src/art/mortar.png" type="Texture" id=2]
 [ext_resource path="res://src/art/pestle.png" type="Texture" id=3]
 [ext_resource path="res://src/art/shroom.png" type="Texture" id=4]
@@ -81,7 +81,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 240.352
+radius = 84.214
 
 [node name="Mortar" type="RigidBody2D"]
 collision_mask = 4097
@@ -89,6 +89,7 @@ mode = 1
 script = ExtResource( 1 )
 
 [node name="Mortar" type="Sprite" parent="."]
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 2 )
 
 [node name="IngredientSprite" type="AnimatedSprite" parent="Mortar"]

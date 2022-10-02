@@ -1,4 +1,4 @@
-extends "res://src/test/draggable_rigid.gd"
+extends "res://src/objects/draggable_rigid.gd"
 
 export(RECIPEGENERATOR.op) var type:int = 0
 

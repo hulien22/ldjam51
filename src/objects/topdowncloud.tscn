@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://src/test/topdowncloud.gd" type="Script" id=1]
-[ext_resource path="res://src/art/cloud-top-down.png" type="Texture" id=2]
-[ext_resource path="res://src/art/rain-drop-side.png" type="Texture" id=3]
+[ext_resource path="res://src/objects/topdowncloud.gd" type="Script" id=1]
+[ext_resource path="res://src/art/rain-drop-side.png" type="Texture" id=2]
+[ext_resource path="res://src/art/cloud-top-down.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.443137, 0.67451, 0.666667, 1, 0.347786, 0.494629, 0.482132, 0.541176 )
@@ -73,10 +73,10 @@ amount = 100
 speed_scale = 0.5
 visibility_rect = Rect2( 39, 52, 321, 204 )
 process_material = SubResource( 7 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="Cloud-top-down" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/CloudTransparent = SubResource( 8 )
