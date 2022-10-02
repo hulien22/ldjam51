@@ -2,9 +2,10 @@ extends Node2D
 
 class_name RecipeGenerator
 
-enum op {WATER, HEAT, COOL, SHAKE,
- LEAF, HERB, THISTLE, FLOWER, MUSHROOM,
- GROUND_LEAF, GROUND_HERB, GROUND_THISTLE, GROUND_FLOWER, GROUND_MUSHROOM}
+enum op {WATER, 
+HEAT_SHORT, HEAT_MED, HEAT_LONG, COOL, SHAKE,
+LEAF, HERB, THISTLE, FLOWER, MUSHROOM,
+GROUND_LEAF, GROUND_HERB, GROUND_THISTLE, GROUND_FLOWER, GROUND_MUSHROOM}
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, WATER,
 SUPER_SONIC, JOE_TOES, JIM, JOM, TOM}
@@ -12,8 +13,8 @@ SUPER_SONIC, JOE_TOES, JIM, JOM, TOM}
 enum mode {EASY, MED, HARD}
 
 var ingredients= op.values().slice(op.LEAF, op.keys().size()-1)
-var operations= op.values().slice(op.HEAT, op.SHAKE)
-
+var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
+#long heat for complex 
 # ordered in easy to hard potions?
 var potions_recipes = {}
 var rng = RandomNumberGenerator.new()
@@ -50,6 +51,7 @@ func generate_recipes(num_easy, num_med, num_hard):
 			#get either one or two random ingredients
 			var rand_ingreds= get_random_array(rng.randi_range(1,2),ingredients)
 			recipe.append_array(rand_ingreds)
+			# add ground to easy
 			
 			#get 1 or 0 operations
 			var rand_ops= get_random_array(rng.randi_range(0,1),operations)
@@ -84,7 +86,7 @@ func generate_recipes(num_easy, num_med, num_hard):
 			#now mix up order of ingredients and operations
 			var recipe_suffix= []
 			#random ingredients
-			var rand_ingred = get_random_array(rng.randi_range(3,4),ingredients)
+			var rand_ingred = get_random_array(rng.randi_range(2,3),ingredients)
 			recipe_suffix.append_array(rand_ingred)
 			
 			#operations
@@ -112,5 +114,51 @@ func get_random_array(num: int,arr: Array):
 	for i in range(num):
 		rand_ingreds.append(arr[rng.randi() % arr.size()])
 	return rand_ingreds
+
+#randomly merge ingredients with no negiboring ops being the same
+func random_ops_ingreds(ingred: Array, op_arr:Array, max_ingred: int, max_op: int):
+	var merged_arr = []
+	var cur_ingred = 0
+	var cur_op = 0
+	var ingred_op_choice = 0
+	#rng.randomize()
+	
+	for i in range(max_ingred+max_op):
+		#chose to add ingred 0 or op_arr 1 if either full
+		if cur_ingred == max_ingred && cur_op<max_op:
+			ingred_op_choice=1
+		elif cur_op == max_op && cur_ingred<max_op:
+			ingred_op_choice=0
+		else:
+			ingred_op_choice = (rng.randi() % 1)
+			
+		if ingred_op_choice == 0 && cur_ingred<max_ingred:
+			merged_arr.append(ingred[rng.randi() % ingred.size()])
+			cur_ingred+=1
+		elif ingred_op_choice == 1 && cur_op<max_op:
+			#check if prevoius item is not the same operation
+			# cant have two heats in a row\
+			var last_item = merged_arr.back()
+			var heat_ops = [op.HEAT_LONG, op.HEAT_MED, op.HEAT_SHORT]
+			var new_op =null
+			var valid_op= false
+			
+			#keep random gen until finding valid op
+			while !valid_op:
+				new_op = op_arr[rng.randi() % op_arr.size()]
+				
+				#retry if both heat items
+				if heat_ops.has(last_item) && heat_ops.has(new_op):
+					continue
+				elif last_item != new_op:
+					valid_op=true
+				
+			merged_arr.append(new_op)
+			cur_op+=1
+		
+	
+	return merged_arr
+	
+	
 	
 	
