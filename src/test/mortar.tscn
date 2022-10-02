@@ -64,6 +64,7 @@ frames = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="Mortar"]
 modulate = Color( 0.627451, 0.556863, 0.556863, 0.364706 )
+emitting = false
 amount = 20
 lifetime = 2.0
 explosiveness = 0.13
