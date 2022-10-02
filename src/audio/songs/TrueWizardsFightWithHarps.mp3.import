@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TrueWizardsFightWithHarps.mp3-cea781745db967c9e8b3318c314aaee6.mp3str"
+
+[deps]
+
+source_file="res://src/audio/songs/TrueWizardsFightWithHarps.mp3"
+dest_files=[ "res://.import/TrueWizardsFightWithHarps.mp3-cea781745db967c9e8b3318c314aaee6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

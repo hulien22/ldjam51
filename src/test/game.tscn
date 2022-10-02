@@ -1,13 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=1]
 [ext_resource path="res://src/test/recipe.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/test/game.gd" type="Script" id=3]
+[ext_resource path="res://src/art/table_BETTER.png" type="Texture" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="TableBetter" type="Sprite" parent="."]
+position = Vector2( 962.742, 540.614 )
+scale = Vector2( 0.764129, 0.764129 )
+texture = ExtResource( 4 )
+
 [node name="TableV1InProgress" type="Sprite" parent="."]
+visible = false
 position = Vector2( 956.25, 540.25 )
 scale = Vector2( 0.754863, 0.757586 )
 texture = ExtResource( 1 )

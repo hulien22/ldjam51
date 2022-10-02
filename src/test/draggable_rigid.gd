@@ -8,7 +8,11 @@ class_name DraggableBody2D
 export var regular_collision_layer = 1
 export var movement_collision_layer = 1 << 12 # layer 13, mask 13 will collide with this
 export var throw_force_multiplier = 1
-export var movement_multiplier = 25
+export var movement_multiplier:float = 25.0
+export var rescale_factor:float = 1.0
+export var movement_mode = RigidBody2D.MODE_RIGID
+export var regular_mode = RigidBody2D.MODE_RIGID
+export var allow_rotation:bool = true
 
 var held = false
 var mouse_offset:Vector2
@@ -24,6 +28,9 @@ var first_released = false
 func _ready():
 	# stay awake for better collision detection
 	can_sleep = false
+	for child in get_children():
+		if (child.has_method("set_scale")):
+			child.scale *= rescale_factor
 
 func _physics_process(delta):
 	if held:
@@ -38,17 +45,20 @@ func _physics_process(delta):
 		global_position = lerp(global_position, last_global_mouse_pos, movement_multiplier * delta)
 		
 ##		TODO add some rotation while grabbing too?
-		var last_force = last_global_position.distance_to(last_global_mouse_pos) / last_delta / 100
-#		print(last_force)
-		if last_force > 10:
-#			get_parent().get_node("MyLine").clear_points()
-#			get_parent().get_node("MyLine").add_point(mouse_offset)
-#			get_parent().get_node("MyLine").add_point(global_position - last_global_position)
-			print(mouse_offset.angle_to(global_position - last_global_position))
-			var offset = mouse_offset.rotated(rotation - original_angle)
-			angular_velocity = offset.angle_to(global_position - last_global_position) * mouse_offset.length_squared() * 0.0001 * last_force * 0.05
+		if allow_rotation:
+			var last_force = last_global_position.distance_to(last_global_mouse_pos) / last_delta / 100
+	#		print(last_force)
+			if last_force > 10:
+	#			get_parent().get_node("MyLine").clear_points()
+	#			get_parent().get_node("MyLine").add_point(mouse_offset)
+	#			get_parent().get_node("MyLine").add_point(global_position - last_global_position)
+#				print(mouse_offset.angle_to(global_position - last_global_position))
+				var offset = mouse_offset.rotated(rotation - original_angle)
+				angular_velocity = offset.angle_to(global_position - last_global_position) * mouse_offset.length_squared() * 0.0001 * last_force * 0.05
+			else:
+				angular_velocity = lerp(angular_velocity, 0, 25 * delta)
 		else:
-			angular_velocity = lerp(angular_velocity, 0, 25 * delta)
+			rotation = 0
 #		applied_torque
 		
 #		angular_velocity = get_local_mouse_position().x * 0.125 - get_local_mouse_position().y * 0.125
@@ -94,11 +104,12 @@ func on_first_held():
 #			get_parent().get_node("MyLine").add_point(global_mouse_loc)
 	global_translate(mouse_offset)
 	for child in get_children():
-		if child != $no:
+#		if child != $no:
+		if (child.has_method("set_scale")):
 			child.global_translate(-mouse_offset)
 	old_collision_layer = collision_layer
 	collision_layer = movement_collision_layer
-#	mode = RigidBody2D.MODE_KINEMATIC
+	mode = movement_mode
 	first_held = false
 
 func drop(impulse=Vector2.ZERO):
@@ -128,7 +139,8 @@ func on_first_released():
 #		$MyLine.add_point(to_local(global_position-mouse_offset.rotated(offset_dir)+mouse_offset.rotated(offset_dir)))
 	global_translate(-offset)
 	for child in get_children():
-		if child != $no:
+		if (child.has_method("set_scale")):
+#		if child != $no:
 			child.global_translate(offset)
 #				var init = child.global_position
 #				var init2 = child.position
@@ -137,10 +149,14 @@ func on_first_released():
 #				offset = child.global_position - init
 #		global_translate(-offset)
 #		impulse = Input.get_last_mouse_speed() * .5
-#	mode = RigidBody2D.MODE_RIGID
+	mode = regular_mode
 	apply_central_impulse(impulse)
-	angular_velocity += ang_v
+	if allow_rotation:
+		angular_velocity += ang_v
 	first_released = false
+
+func can_pickup():
+	return true
 
 func get_click_order():
 	return click_order

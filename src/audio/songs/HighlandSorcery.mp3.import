@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HighlandSorcery.mp3-8e80e4b4d6b35c008c8f6c6c39989419.mp3str"
+
+[deps]
+
+source_file="res://src/audio/songs/HighlandSorcery.mp3"
+dest_files=[ "res://.import/HighlandSorcery.mp3-8e80e4b4d6b35c008c8f6c6c39989419.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
