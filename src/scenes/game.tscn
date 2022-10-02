@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/art/heart_icon.png" type="Texture" id=2]
+[ext_resource path="res://src/spawners/BottleSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/scenes/HealthBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/art/table_v1_inProgress.png" type="Texture" id=7]
+[ext_resource path="res://src/scenes/game.gd" type="Script" id=8]
+[ext_resource path="res://src/art/table_BETTER.png" type="Texture" id=9]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="TableBetter" type="Sprite" parent="."]
+position = Vector2( 962.742, 540.614 )
+scale = Vector2( 0.764129, 0.764129 )
+texture = ExtResource( 9 )
+
+[node name="TableV1InProgress" type="Sprite" parent="."]
+visible = false
+position = Vector2( 956.25, 540.25 )
+scale = Vector2( 0.754863, 0.757586 )
+texture = ExtResource( 7 )
+
+[node name="BottleSpawner" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1215, 908 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 5 )]
+position = Vector2( 33, 33 )
+image = ExtResource( 2 )
+horizontal_spacing = 30
+
+[node name="DrinkManager" parent="." instance=ExtResource( 1 )]
+
+[connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
+[connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]

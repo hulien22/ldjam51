@@ -1,6 +1,6 @@
 extends Area2D
 
-var item_to_spawn = preload("res://src/test/recipe.tscn")
+var item_to_spawn = preload("res://src/scene/recipe.tscn")
 
 func _init():
 #	preload item_to_spawn here

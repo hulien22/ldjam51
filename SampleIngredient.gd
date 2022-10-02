@@ -1,4 +1,4 @@
-extends "res://src/test/draggable_rigid.gd"
+extends "res://src/objects/draggable_rigid.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

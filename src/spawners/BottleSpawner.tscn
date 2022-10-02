@@ -7,7 +7,7 @@ extents = Vector2( 211, 69 )
 
 [node name="BottleSpawner" type="Area2D"]
 script = ExtResource( 1 )
-scene_path_to_spawn = "res://src/test/Potion.tscn"
+scene_path_to_spawn = "res://src/objects/Potion.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

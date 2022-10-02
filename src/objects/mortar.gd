@@ -1,4 +1,4 @@
-extends "res://src/test/station.gd"
+extends "res://src/objects/station.gd"
 
 var ground_mushroom_scene = preload("res://src/ingredients/GroundMushroom.tscn")
 var ground_crystal_scene = preload("res://src/ingredients/GroundCrystal.tscn")
