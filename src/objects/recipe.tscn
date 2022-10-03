@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/art/receipe_paper.png" type="Texture" id=1]
 [ext_resource path="res://src/fonts/recipe_font.tres" type="DynamicFont" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://src/objects/recipe.gd" type="Script" id=4]
 [ext_resource path="res://src/fonts/BetterGrade-519DV.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/fonts/Runalto.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/fonts/Myfontrunes-Regular.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+use_filter = true
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 150
@@ -45,9 +51,21 @@ polygon = PoolVector2Array( -333, -434, -333, 433, 248, 433, 330, 342, 332, -434
 modulate = Color( 0, 0, 0, 1 )
 margin_left = -86.0
 margin_top = -113.0
+margin_right = 564.0
+margin_bottom = -2.0
+rect_scale = Vector2( 0.255025, 0.25371 )
+custom_fonts/font = ExtResource( 2 )
+text = "INVISIBILITY"
+clip_text = true
+
+[node name="Label2" type="Label" parent="Node2D"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -86.0
+margin_top = -113.0
 margin_right = 87.0
 margin_bottom = -50.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Health"
 
 [node name="Steps" type="Label" parent="Node2D"]

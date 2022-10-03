@@ -76,11 +76,11 @@ func get_recipe_steps_str(potion_type:int):
 	
 	match potion_type:
 		potions.POWER:
-			steps += "(Power Potion)\n1. Start with Health potion\n"
+			steps += "1. Start with Health potion\n"
 			counter += 1
 			start = potions_recipes[potions.HEALTH].size()
 		potions.SHRINK:
-			steps += "(Shrink Potion)\n1. Start with Speed potion\n"
+			steps += "1. Start with Speed potion\n"
 			counter += 1
 			start = potions_recipes[potions.SPEED].size()
 		potions.SWIFT:

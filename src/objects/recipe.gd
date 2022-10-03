@@ -21,3 +21,6 @@ func set_potion(potion_name: String, pt:int):
 	potion_type = pt
 	$Node2D/Label.text = potion
 	$Node2D/Steps2.text = RECIPEGENERATOR.get_recipe_steps_str(potion_type)
+
+func can_delete():
+	return false
