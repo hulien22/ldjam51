@@ -5,6 +5,9 @@ var click_all = false
 var ignore_unclickable = true
 var cur_click_order = 0
 var selected_obj
+var potion_recipes
+var potions
+var rng 
 
 class MyCustomSorter:
 	static func sort_ascending(a, b):
@@ -61,8 +64,8 @@ func _input(event):
 			for shape in shapes:
 				if shape["collider"].has_method("can_add_item"):
 					if shape["collider"].can_add_item(selected_obj):
-						shape["collider"].add_item(selected_obj)
-						selected_obj.queue_free()
+						if shape["collider"].add_item(selected_obj):
+							selected_obj.queue_free()
 						break
 			selected_obj = null
 
@@ -80,18 +83,30 @@ func _notification(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#var arr = RECIPEGENERATOR.get_random_array(2,RECIPEGENERATOR.ingredients)
-	#for i in arr:
-	#	print(RECIPEGENERATOR.op.keys()[i])
-	#print(RECIPEGENERATOR.generate_recipes(4,3,3))
-	#print(RECIPEGENERATOR.op)
-	print(RECIPEGENERATOR.generate_recipe_template())
-	var potion_recipes= RECIPEGENERATOR.generate_recipe_template()
-	#print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,3,2))
-	#var potions = potion_recipes.keys()
-		#sleep(10s)
-		#potion_recipes[portion]
-	#get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
-	#get_node("Recipe").set_potion(GLOBAL.potions_recipes[GLOBAL.potions.HEALTH])
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
+	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
+	potions = RECIPEGENERATOR.potions.keys()
+	pass # Replace with function body.
+
+
+func _on_RecipeTimer_timeout():
+	#ship out new recipe
+	#pick random recipe
+	var rnd_potion = rng.randi() % potions.size()
 	
+	var instance = get_node("RecipeSpawner").spawn_obj()
+	instance.set_potion(potions[rnd_potion], rnd_potion)
+	instance.set_recipe(potion_recipes[rnd_potion])
+	instance.angular_velocity = rand_range(-8,8)
+	add_child(instance)
+	pass # Replace with function body.
+
+func _on_RequestTimer_timeout():
+	var rnd_potion = rng.randi()  % potions.size()
+	var instance = get_node("RequestSpawner").spawn_obj()
+	instance.set_potion_request(potions[rnd_potion])
+	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion))
+	instance.angular_velocity = rand_range(-8,8)
+	add_child(instance)
 	pass # Replace with function body.

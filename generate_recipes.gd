@@ -3,18 +3,39 @@ extends Node2D
 class_name RecipeGenerator
 
 enum op {WATER = 0,
-HEAT_SHORT=1, HEAT_MED, HEAT_LONG, SHAKE,
 PLANT=10, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
 GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM,
-EMPTY_BOTTLE=100, WATER_BOTTLE, POTION}
+HEAT_SHORT=30, HEAT_MED, HEAT_LONG, SHAKE,
+EMPTY_BOTTLE=100, WATER_BOTTLE, POTION, REQUEST}
+
+
+const HEAT_SHORT_LENGTH = 2
+const HEAT_MED_LENGTH = 5
+const HEAT_LONG_LENGTH = 10
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
-SHRINK, SHINE, LOVE, SWIFT, FIRE}
+SHRINK, SHINE, LOVE, SWIFT, GIANT}
 
 enum mode {EASY, MED, HARD}
 
-var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
-var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
+var ingredients= [op.PLANT,op.LIZARD,op.CRYSTAL,op.MUSHROOM,op.EYEBALL]
+var ground_ingredients= [op.GROUND_PLANT,op.GROUND_LIZARD,op.GROUND_CRYSTAL, op.GROUND_EYEBALL, op.GROUND_MUSHROOM]
+var operations= [op.HEAT_SHORT,op.HEAT_MED,op.HEAT_LONG,op.SHAKE] #same operation can't be together
+
+func is_heat_op(operation) -> bool:
+	match operation:
+		op.HEAT_SHORT: return true
+		op.HEAT_MED: return true
+		op.HEAT_LONG: return true
+		_: return false
+
+class AddShake:
+	func get_type():
+		return RECIPEGENERATOR.op.SHAKE
+
+var add_shake_obj:AddShake = AddShake.new()
+func get_shake_obj():
+	return add_shake_obj
 
 #long heat for complex 
 # ordered in easy to hard potions?
@@ -23,6 +44,7 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	pass # Replace with function body.
 
 #generates recipe with hardcoded recipes
@@ -30,20 +52,86 @@ func _ready():
 func generate_recipe_template():
 	#easy
 	potions_recipes[potions.HEALTH]= [op.WATER,rnd_ingred(),op.HEAT_MED,op.SHAKE]
-	potions_recipes[potions.SPEED]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT]
-	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred()]
+	potions_recipes[potions.SPEED]= [op.WATER,rnd_ingred(),rnd_ground_ingred(),op.HEAT_SHORT]
+	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ground_ingred()]
 	#medium
 	potions_recipes[potions.POWER]= potions_recipes[potions.HEALTH] + [op.HEAT_MED,rnd_ingred(),op.SHAKE]
-	potions_recipes[potions.DANCE]= [op.WATER,rnd_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
+	potions_recipes[potions.DANCE]= [op.WATER,rnd_ground_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
 	potions_recipes[potions.SHRINK]= potions_recipes[potions.SPEED] + [op.SHAKE,rnd_ingred()]
 	#hard
 	potions_recipes[potions.SHINE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
-	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ingred()]
+	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ground_ingred()]
 	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
 	#final
-	potions_recipes[potions.FIRE]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
-	
+	potions_recipes[potions.GIANT]= [op.WATER,rnd_ground_ingred(),rnd_ground_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ground_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
+
 	return potions_recipes
+
+func get_recipe_time(potion_type:int):
+	match potion_type:
+		potions.HEALTH: return 20.0
+		potions.SPEED: return 20.0
+		potions.INVISIBLE: return 20.0
+	#medium
+		potions.POWER: return 35.0
+		potions.DANCE: return 30.0
+		potions.SHRINK: return 30.0
+	#hard
+		potions.SHINE: return 50.0
+		potions.SWIFT: return 50.0
+		potions.LOVE: return 50.0
+	#final
+		potions.GIANT: return 1000.0 # should not make these orders though..
+
+func get_recipe_steps_str(potion_type:int):
+	var recipe = potions_recipes[potion_type]
+	
+	var steps = ""
+	var counter = 1
+	var start = 0
+	
+	match potion_type:
+		potions.POWER:
+			steps += "1. Start with Health potion\n"
+			counter += 1
+			start = potions_recipes[potions.HEALTH].size()
+		potions.SHRINK:
+			steps += "1. Start with Speed potion\n"
+			counter += 1
+			start = potions_recipes[potions.SPEED].size()
+		potions.SWIFT:
+			steps += "1. Start with Power potion\n"
+			counter += 1
+			start = potions_recipes[potions.POWER].size()
+		potions.LOVE:
+			steps += "1. Start with Shrink potion\n"
+			counter += 1
+			start = potions_recipes[potions.SHRINK].size()
+		_:
+			pass
+	
+	for i in range(start, recipe.size()):
+		steps += str(counter) + ". "
+		counter += 1
+		match recipe[i]:
+			RECIPEGENERATOR.op.MUSHROOM: steps += "Add mushroom"
+			RECIPEGENERATOR.op.GROUND_MUSHROOM: steps += "Add ground mushroom"
+			RECIPEGENERATOR.op.PLANT: steps += "Add twig"
+			RECIPEGENERATOR.op.GROUND_PLANT: steps += "Add ground twig"
+			RECIPEGENERATOR.op.EYEBALL: steps += "Add eyeball"
+			RECIPEGENERATOR.op.GROUND_EYEBALL: steps += "Add ground eyeball"
+			RECIPEGENERATOR.op.LIZARD: steps += "Add lizard"
+			RECIPEGENERATOR.op.GROUND_LIZARD: steps += "Add ground lizard"
+			RECIPEGENERATOR.op.CRYSTAL: steps += "Add crystal"
+			RECIPEGENERATOR.op.GROUND_CRYSTAL: steps += "Add ground crystal"
+			RECIPEGENERATOR.op.SHAKE: steps += "Shake well"
+			RECIPEGENERATOR.op.WATER: steps += "Add water"
+			RECIPEGENERATOR.op.HEAT_SHORT: steps += "Heat for 2 secs"
+			RECIPEGENERATOR.op.HEAT_MED: steps += "Heat for 5 secs"
+			RECIPEGENERATOR.op.HEAT_LONG: steps += "Heat for 10s"
+		steps += "\n"
+	
+	return steps
 
 # generate num_easy+num_med+num_hard recipes
 #returns dict of RECIPEGENERATOR.potions as keys and RECIPEGENERATOR.op as values
@@ -114,6 +202,10 @@ func get_random_array(num: int,arr: Array):
 func rnd_ingred():
 	return ingredients[rng.randi() % ingredients.size()]
 
+func rnd_ground_ingred():
+	return ground_ingredients[rng.randi() % ground_ingredients.size()]
+	
+
 #randomly merge ingredients with no negiboring ops being the same
 func random_ops_ingreds(max_ingred: int, max_op: int):
 	var merged_arr = []
@@ -162,7 +254,7 @@ func random_ops_ingreds(max_ingred: int, max_op: int):
 func get_color_from_recipe(recipe: Array):
 	match recipe:
 		[]: return '00000000'
-		[RECIPEGENERATOR.op.WATER]: return '01c6cb'
+		[RECIPEGENERATOR.op.WATER]: return '8c01c6cb'
 		_: pass
 	var recipe_string = ""
 	for i in recipe:

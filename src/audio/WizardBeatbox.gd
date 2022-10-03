@@ -11,9 +11,12 @@ func _ready():
 	stream = songs[cycle_position]
 	play()
 
-func _on_finished():
+func change_track(inc_cycle_posn = 1):
 	if cycle_songs:
-		cycle_position += 1
+		cycle_position += inc_cycle_posn
 		cycle_position %= songs.size()
 		stream = songs[cycle_position]
+
+func _on_finished():
+	change_track()
 	play()

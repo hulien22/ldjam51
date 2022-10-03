@@ -24,10 +24,10 @@ func _on_drink():
 		emit_signal("on_damage")
 		
 #testing
-var del = 0
-var dir = false
-func _process(delta):
-	del += delta
-	if del > 6:
-		del = 0
-		_on_drink()
+#var del = 0
+#var dir = false
+#func _process(delta):
+#	del += delta
+#	if del > 6:
+#		del = 0
+#		_on_drink()

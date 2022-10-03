@@ -106,6 +106,15 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 7 )
 
+[node name="SmokeParticles2" type="Particles2D" parent="Sprites/WithPotion"]
+modulate = Color( 0.627451, 0.556863, 0.556863, 0.364706 )
+scale = Vector2( 0.25, 0.25 )
+emitting = false
+amount = 5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 7 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.5708
