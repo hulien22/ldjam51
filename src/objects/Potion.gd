@@ -127,3 +127,6 @@ func get_time_on_heat() -> int:
 
 func set_time_on_heat(t:int):
 	time_on_heat = t
+
+func drink():
+	print("DRINKING")

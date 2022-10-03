@@ -79,6 +79,17 @@ func _input(event):
 							selected_obj.queue_free()
 						break
 			selected_obj = null
+	
+	if event is InputEventMouseButton and event.pressed and event.button_index == 2: # right mouse click
+		# The last 'true' enables Area2D intersections, previous four values are all defaults
+		var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
+		shapes.sort_custom(MyCustomSorter, "sort_ascending")
+
+		for shape in shapes:
+			if shape["collider"].has_method("drink"):
+				shape["collider"].drink()
+				shape["collider"].queue_free()
+
 
 func set_cur_click_order(co):
 	cur_click_order = co

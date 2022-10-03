@@ -111,10 +111,10 @@ z_index = 8
 position = Vector2( 1698, 580 )
 
 [node name="Heater" parent="." instance=ExtResource( 15 )]
-position = Vector2( 157, 485 )
+position = Vector2( 178, 468 )
 
 [node name="Heater2" parent="." instance=ExtResource( 15 )]
-position = Vector2( 119, 614 )
+position = Vector2( 130, 639 )
 
 [node name="Delivery" parent="." instance=ExtResource( 19 )]
 position = Vector2( 1000, 100 )
