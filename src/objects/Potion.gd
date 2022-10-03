@@ -38,7 +38,6 @@ func _physics_process(delta):
 		time_since_last_direction_change = 0
 		last_direction = new_direction
 	last_position_x = global_position.x
-	print(num_shakes)
 	
 	._physics_process(delta)
 
