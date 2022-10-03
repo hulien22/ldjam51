@@ -37,7 +37,7 @@ scale = Vector2( 0.764129, 0.764129 )
 texture = ExtResource( 16 )
 
 [node name="TableV1InProgress" type="Sprite" parent="."]
-visible == false
+visible = false
 position = Vector2( 956.25, 540.25 )
 scale = Vector2( 0.754863, 0.757586 )
 texture = ExtResource( 7 )
