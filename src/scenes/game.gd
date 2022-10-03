@@ -9,6 +9,13 @@ var potion_recipes
 var potions
 var rng 
 
+var tips:Array = [
+	"Throw unwanted items (like   this!) in the trash", 
+	"Give orders and potions to goblin to deliver",  
+#	"Drag bottles under cloud   to fill with water!", 
+	"Drag items into water bottles to make potions"]
+var tips_scene = preload("res://src/objects/tip.tscn")
+
 class MyCustomSorter:
 	static func sort_ascending(a, b):
 		if not a["collider"].has_method("get_click_order"):
@@ -90,6 +97,19 @@ func _ready():
 	garbage_items.append(preload("res://src/ingredients/GroundEyeball.tscn"))
 	garbage_items.append(preload("res://src/ingredients/Mushroom.tscn"))
 	garbage_items.append(preload("res://src/ingredients/Plant.tscn"))
+	
+#	Summon tips on load
+	for i in range(tips.size()):
+		var instance = tips_scene.instance()
+		instance.set_text(tips[i])
+		instance.global_position = $RequestSpawner.global_position
+		
+		instance.global_position.x += rng.randf_range(-10,10)
+		cur_click_order += 1
+		instance.set_click_order(cur_click_order)
+		instance.rotation_degrees = rng.randi_range(-20,20)
+		add_child_in_x_secs(instance, 1 + i * 0.2)
+		
 	pass # Replace with function body.
 
 
@@ -129,14 +149,14 @@ func _on_RequestTimer_timeout():
 		recipe_instance.global_position = $RequestSpawner.global_position
 		cur_click_order += 1
 		recipe_instance.set_click_order(cur_click_order)
-		add_child_in_x_secs(recipe_instance, things_spawned)
+		add_child_in_x_secs(recipe_instance, things_spawned * 0.2)
 		things_spawned += 1
 
 	if time_passed >= time_to_spawn_next_order1:
-		time_to_spawn_next_order1 = time_passed + min(spawn_request(things_spawned) * 2.0, 60.0)
+		time_to_spawn_next_order1 = time_passed + min(spawn_request(things_spawned * 0.2) * 2.0, 60.0)
 		things_spawned += 1
 	elif time_passed >= time_to_spawn_next_order2:
-		time_to_spawn_next_order2 = time_passed + min(spawn_request(things_spawned) * 2.0, 60.0)
+		time_to_spawn_next_order2 = time_passed + min(spawn_request(things_spawned * 0.2) * 2.0, 60.0)
 		things_spawned += 1
 	
 	var max_garbage_to_spawn = 3 - things_spawned
@@ -149,7 +169,7 @@ func _on_RequestTimer_timeout():
 		garb_instance.global_position = $RequestSpawner.global_position
 		cur_click_order += 1
 		garb_instance.set_click_order(cur_click_order)
-		add_child_in_x_secs(garb_instance,things_spawned)
+		add_child_in_x_secs(garb_instance,things_spawned * 0.2)
 		things_spawned += 1
 		
 	
@@ -189,7 +209,7 @@ func add_child_in_x_secs(instance, time):
 	add_child(timer)
 	timer.connect("timeout", self, "on_spawn_timer_complete", [timer, instance])
 	timer.one_shot = true
-	timer.wait_time = time * 0.2
+	timer.wait_time = time
 	timer.start()
 
 func on_spawn_timer_complete(timer, instance):
