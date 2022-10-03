@@ -6,17 +6,14 @@ extends AnimatedSprite
 # var b = "text"
 func _ready():
 	frame = 0
+	Music.unpause_on_scene_transition()
 
 
 # Called when the node enters the scene tree for the first time.
 
 func _on_animation_finished():
-	var restart_music = !Music.stream_paused
-	Music.stream_paused = true
-	print("music stop")
+	Music.pause_on_scene_transition()
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
-	if restart_music:
-		Music.stream_paused = false
 	
 
 func _on_start_outro():

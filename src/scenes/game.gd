@@ -135,6 +135,7 @@ func _ready():
 #		instance.rotation_degrees = rng.randi_range(-20,20)
 #		add_child_in_x_secs(instance, 1 + i * 0.2)
 		
+	Music.unpause_on_scene_transition()
 	pass # Replace with function body.
 
 var special_count = 0
@@ -270,12 +271,8 @@ func _start_player_dead():
 	timer.start()
 
 func _end_player_dead():
-	var restart_music = !Music.stream_paused
-	Music.stream_paused = true
-	print("music stop")
+	Music.pause_on_scene_transition()
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
-	if restart_music:
-		Music.stream_paused = false
 
 func _on_drink_potion(potion:int):
 	var timer = Timer.new()
@@ -298,9 +295,6 @@ func process_potion_drink_in_x(timer, potion):
 	timer.queue_free()
 	
 func _end_player_win():
-	var restart_music = !Music.stream_paused
-	Music.stream_paused = true
-	print("music stop")
+	Music.pause_on_scene_transition()
 	get_tree().change_scene("res://src/scenes/OutroCutscene.tscn")
-	if restart_music:
-		Music.stream_paused = false
+
