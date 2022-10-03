@@ -1,13 +1,7 @@
 extends "res://src/objects/station.gd"
 
-var ground_mushroom_scene = preload("res://src/ingredients/GroundMushroom.tscn")
-var ground_crystal_scene = preload("res://src/ingredients/GroundCrystal.tscn")
-var ground_lizard_scene = preload("res://src/ingredients/GroundLizard.tscn")
-var ground_plant_scene = preload("res://src/ingredients/GroundPlant.tscn")
-var ground_eyeball_scene = preload("res://src/ingredients/GroundEyeball.tscn")
-
-var ground_scenes = [ground_plant_scene, ground_lizard_scene,
-ground_crystal_scene, ground_eyeball_scene, ground_mushroom_scene]
+signal wrong_delivery
+signal correct_delivery
 
 var has_two_items
 var second_item
@@ -80,6 +74,26 @@ func process_item():
 
 func on_items_delivered():
 	print(str(item) + " " + str(second_item)) 
+	var ops
+	var potion
+	if item.get_type() == RECIPEGENERATOR.op.REQUEST:
+		ops = RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions[item.potion_request]]
+		potion = second_item.current_recipe
+	else:
+		ops = RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions[second_item.potion_request]]
+		potion = item.current_recipe
+	if ops.size() == potion.size():
+		for i in range(ops.size()):
+			if ops[i] != potion[i]:
+				print("wrong")
+				emit_signal("wrong_delivery")
+				return
+	else:
+		print("wrong")
+		emit_signal("wrong_delivery")
+		return
+	print("correct")
+	emit_signal("correct_delivery")
 
 func get_spawn_obj():
 	enable_item()
