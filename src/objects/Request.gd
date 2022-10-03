@@ -8,7 +8,8 @@ func _init(request: String =""):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	z_index = 0
+	collision_mask = 1<<12
 
 func get_type():
 	return RECIPEGENERATOR.op.REQUEST

@@ -86,8 +86,8 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	potions = RECIPEGENERATOR.potions.keys()
-	$RecipeSpawner/Sprite.modulate = Color(1,0,0)
-	$RequestSpawner/Sprite.modulate = Color(0,1,0)
+	$RecipeSpawner/Sprite.self_modulate = Color(1,0,0)
+	$RequestSpawner/Sprite.self_modulate = Color(0,1,0)
 	pass # Replace with function body.
 
 
