@@ -268,7 +268,7 @@ func _end_player_dead():
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
 
 func _on_drink_potion(recipe):
-	print("DRINKING", recipe)
+#	print("DRINKING", recipe)
 	$DrinkAnimation.show()
 	$DrinkAnimation/AnimationPlayer.play("drink potion")
 

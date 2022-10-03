@@ -46,7 +46,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -6191, -673 ), Vector2( -6191, -673 ), Vector2( -6300, -673 ), Vector2( -6100, -673 ), Vector2( -6300, -673 ), Vector2( -6100, -673 ), Vector2( -6300, -673 ), Vector2( -6191, -673 ) ]
+"values": [ Vector2( -6191, -673 ), Vector2( -6191, -673 ), Vector2( -6200, -673 ), Vector2( -6191, -673 ), Vector2( -6182, -673 ), Vector2( -6191, -673 ), Vector2( -6200, -673 ), Vector2( -6191, -673 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("ComicEnd2V2:modulate")
@@ -55,10 +55,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Game" type="Node2D"]
@@ -205,11 +205,11 @@ z_index = 4096
 z_as_relative = false
 
 [node name="DrinkAnimation" type="Node2D" parent="."]
-visible = false
 position = Vector2( 7227, 1292 )
 z_index = 4000
 
 [node name="ComicEnd2V2" type="Sprite" parent="DrinkAnimation"]
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -6191, -673 )
 texture = ExtResource( 26 )
 
