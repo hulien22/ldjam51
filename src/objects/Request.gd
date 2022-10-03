@@ -16,6 +16,7 @@ func _ready():
 	$Area2D/TextTimer.one_shot = true
 	$Area2D/TextTimer.start()
 	z_index = 0
+	time_remain = time
 	collision_mask = 1<<12
 	
 func _process(delta):
@@ -33,6 +34,8 @@ func set_potion_request(potion):
 	potion_request=potion
 	$Area2D/Label.text = potion_request
 
+func can_delete():
+	return time_remain == 0
 
 func _on_TextTimer_timeout():
 	$Area2D/FailLabel.visible=true

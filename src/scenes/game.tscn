@@ -86,17 +86,20 @@ scale = Vector2( 0.764129, 0.764129 )
 texture = ExtResource( 17 )
 
 [node name="Mortar" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1596, 499 )
+position = Vector2( 1813, 401 )
 
 [node name="Cloud" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1720, 211 )
 z_index = 8
 
 [node name="Mortar2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1803, 727 )
+position = Vector2( 1698, 580 )
 
 [node name="Heater" parent="." instance=ExtResource( 15 )]
-position = Vector2( 138, 502 )
+position = Vector2( 157, 485 )
+
+[node name="Heater2" parent="." instance=ExtResource( 15 )]
+position = Vector2( 119, 614 )
 
 [node name="Delivery" parent="." instance=ExtResource( 19 )]
 position = Vector2( 1000, 100 )
@@ -105,7 +108,8 @@ position = Vector2( 1000, 100 )
 position = Vector2( 1816, 964 )
 
 [node name="Cassette" parent="." instance=ExtResource( 22 )]
-position = Vector2( 1777, 204 )
+position = Vector2( 1804, 187 )
+rotation = 0.443522
 
 [node name="RequestSpawner" parent="." instance=ExtResource( 20 )]
 modulate = Color( 0.282353, 1, 0.129412, 1 )
