@@ -19,7 +19,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 43.8517
+radius = 51.8161
 height = 8.43824
 
 [sub_resource type="Curve" id=2]

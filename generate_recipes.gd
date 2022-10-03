@@ -159,5 +159,14 @@ func random_ops_ingreds(max_ingred: int, max_op: int):
 	return merged_arr
 	
 	
-	
+func get_color_from_recipe(recipe: Array):
+	match recipe:
+		[]: return '00000000'
+		[RECIPEGENERATOR.op.WATER]: return '01c6cb'
+		_: pass
+	var recipe_string = ""
+	for i in recipe:
+		recipe_string += str(i)
+	var my_hash_int = recipe_string.sha256_text().hash() | 0x000000ff
+	return my_hash_int
 	
