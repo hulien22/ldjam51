@@ -225,6 +225,12 @@ text = ""
 z_index = 4096
 z_as_relative = false
 
+[node name="WinFade" parent="." instance=ExtResource( 25 )]
+z_index = 4055
+z_as_relative = false
+color = Color( 0.886275, 0.847059, 0.733333, 1 )
+text = ""
+
 [node name="DrinkAnimation" type="Node2D" parent="."]
 position = Vector2( 7227, 1292 )
 z_index = 4000
@@ -247,4 +253,5 @@ frames = SubResource( 4 )
 [connection signal="timeout" from="RecipeSpawner/RecipeTimer" to="." method="_on_RecipeTimer_timeout"]
 [connection signal="ready" from="FadeIn" to="FadeIn" method="_on_fade_in"]
 [connection signal="on_animation_finished" from="DieFade" to="." method="_start_player_dead"]
+[connection signal="on_animation_finished" from="WinFade" to="." method="_end_player_win"]
 [connection signal="animation_finished" from="DrinkAnimation/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,6 +1,7 @@
 extends "res://src/objects/draggable_rigid.gd"
 
 signal potion_drink
+signal win_potion_drink
 
 var current_recipe: Array = []
 var time_on_heat: int = 0
@@ -25,6 +26,7 @@ func init(cur_recipe:Array = []):
 func _ready():
 	update_sprite()
 	connect("potion_drink", get_parent(), "_on_drink_potion")
+	connect("win_potion_drink", get_parent().get_node("WinFade"), "_on_fade_out")
 
 func _physics_process(delta):
 	._physics_process(delta)
@@ -133,7 +135,7 @@ func set_time_on_heat(t:int):
 
 func drink():
 	if current_recipe == RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions.GIANTIV]:
-		emit_signal("potion_drink", RECIPEGENERATOR.potions.GIANTIV)
+		emit_signal("win_potion_drink", RECIPEGENERATOR.potions.GIANTIV)
 		return true
 	
 	if current_recipe == RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions.HEALTH]:

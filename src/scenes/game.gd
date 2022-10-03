@@ -288,3 +288,5 @@ func process_potion_drink_in_x(timer, potion):
 			$HealthBar._on_heal()
 	timer.queue_free()
 	
+func _end_player_win():
+	get_tree().change_scene("res://src/scenes/OutroCutscene.tscn")
