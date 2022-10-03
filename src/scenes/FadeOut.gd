@@ -10,7 +10,7 @@ func _ready():
 	$RichTextLabel.text = text
 
 func _on_fade_out():
-	print("FADING")
+#	print("FADING")
 	$AnimationPlayer.play("Fade")
 	
 func _on_fade_in():

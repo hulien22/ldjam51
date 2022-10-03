@@ -16,7 +16,7 @@ func _ready():
 #	pass
 
 func _on_drink():
-	print("here")
+#	print("here")
 	var r = rng.randi_range(0, 1)
 	if r == 0:
 		emit_signal("on_heal")

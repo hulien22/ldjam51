@@ -18,7 +18,7 @@ func _ready():
 	allow_rotation = false
 
 func can_add_item(new_item):
-	print("my" + str(new_item))
+#	print("my" + str(new_item))
 	if has_two_items or not new_item.has_method("get_type"):
 		return false
 	if has_item:
@@ -77,7 +77,7 @@ func process_item():
 	has_two_items = false
 
 func on_items_delivered():
-	print(str(item) + " " + str(second_item)) 
+#	print(str(item) + " " + str(second_item)) 
 	var ops
 	var potion
 	if item.get_type() == RECIPEGENERATOR.op.REQUEST:

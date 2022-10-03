@@ -47,7 +47,7 @@ func add_item(new_item):
 func process_item():
 #	increase heat time
 	time_on_heat += 1
-	print(time_on_heat)
+#	print(time_on_heat)
 	var did_update = false
 	if time_on_heat >= RECIPEGENERATOR.HEAT_LONG_LENGTH:
 		did_update = update_recipe(RECIPEGENERATOR.op.HEAT_LONG)

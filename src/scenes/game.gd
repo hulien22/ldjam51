@@ -74,7 +74,7 @@ func _input(event):
 #			Check for stations
 			var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
 			shapes.sort_custom(MyCustomSorter, "sort_ascending")
-			print(shapes)
+#			print(shapes)
 			selected_obj.drop()
 			for shape in shapes:
 				if shape["collider"].has_method("can_add_item"):
@@ -205,7 +205,7 @@ func _on_RequestTimer_timeout():
 	spawn_tip(things_spawned*0.2)
 	things_spawned += 1
 	
-	print("time ", time_passed, " ", time_to_spawn_next_order1, " ", time_to_spawn_next_order2, " ", garbage_to_spawn)
+#	print("time ", time_passed, " ", time_to_spawn_next_order1, " ", time_to_spawn_next_order2, " ", garbage_to_spawn)
 
 	pass # Replace with function body.
 
