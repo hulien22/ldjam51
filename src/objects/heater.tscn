@@ -61,7 +61,6 @@ script = ExtResource( 3 )
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Empty" type="Node2D" parent="Sprites"]
-visible = false
 
 [node name="CandlesWithHolder" type="Sprite" parent="Sprites/Empty"]
 position = Vector2( -20, 0 )
@@ -69,6 +68,7 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="WithPotion" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="Candle" type="Sprite" parent="Sprites/WithPotion"]
 scale = Vector2( 0.25, 0.25 )

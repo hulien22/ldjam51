@@ -65,7 +65,7 @@ position = Vector2( 1720, 211 )
 position = Vector2( 1803, 727 )
 
 [node name="Heater" parent="." instance=ExtResource( 15 )]
-position = Vector2( 675, 348 )
+position = Vector2( 138, 502 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
