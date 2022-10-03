@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/mortar.tscn" type="PackedScene" id=2]
@@ -19,9 +19,15 @@
 [ext_resource path="res://src/art/table_TOP.png" type="Texture" id=17]
 [ext_resource path="res://src/art/filleable_potion_TOP.png" type="Texture" id=18]
 [ext_resource path="res://src/objects/delivery.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/objects/Request.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/spawners/recipespawner.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/objects/garbage.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/objects/cassette.tscn" type="PackedScene" id=22]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1504, 1106.75 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1955.5, 1925 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 8 )
@@ -94,14 +100,55 @@ position = Vector2( 138, 502 )
 [node name="Delivery" parent="." instance=ExtResource( 19 )]
 position = Vector2( 1000, 100 )
 
-[node name="Request" parent="." instance=ExtResource( 20 )]
-rescale_factor = 0.2
-
 [node name="Garbage" parent="." instance=ExtResource( 21 )]
 position = Vector2( 1816, 964 )
 
 [node name="Cassette" parent="." instance=ExtResource( 22 )]
-position = Vector2( 524, 190 )
+position = Vector2( 1777, 204 )
+
+[node name="RequestSpawner" parent="." instance=ExtResource( 20 )]
+position = Vector2( 286, -4 )
+scene_path_to_spawn = "res://src/objects/Request.tscn"
+
+[node name="RequestTimer" type="Timer" parent="RequestSpawner"]
+wait_time = 10.0
+autostart = true
+
+[node name="RecipeSpawner" parent="." instance=ExtResource( 20 )]
+position = Vector2( 537, -2 )
+scene_path_to_spawn = "res://src/objects/recipe.tscn"
+
+[node name="RecipeTimer" type="Timer" parent="RecipeSpawner"]
+wait_time = 30.0
+autostart = true
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2( -628, -1014 )
+shape = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopWall"]
+polygon = PoolVector2Array( 833, 16, 1128, 19, 1127, 88, 2189, 101, 2134, -2089, 855, -2095 )
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BottomWall"]
+polygon = PoolVector2Array( -123, 1216, -25, 861, 40, 851, 58, 1043, 108, 1065, 305, 1027, 393, 1038, 413, 1070, 498, 1085, 511, 1040, 931, 1053, 936, 861, 984, 864, 977, 1010, 1437, 1022, 1447, 859, 1681, 849, 1699, 1085, 1921, 1088, 4141, 1106, 4407, 3559, -1447, 3559, -1561, 1189 )
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2( -1956, 393 )
+shape = SubResource( 1 )
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2( 3882, 406 )
+shape = SubResource( 1 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
+[connection signal="timeout" from="RequestSpawner/RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[connection signal="timeout" from="RecipeSpawner/RecipeTimer" to="." method="_on_RecipeTimer_timeout"]
