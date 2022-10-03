@@ -130,7 +130,7 @@ position = Vector2( 353, 37 )
 scene_path_to_spawn = "res://src/objects/Request.tscn"
 
 [node name="RequestTimer" type="Timer" parent="RequestSpawner"]
-wait_time = 3.0
+wait_time = 10.0
 autostart = true
 
 [node name="RecipeSpawner" parent="." instance=ExtResource( 20 )]
