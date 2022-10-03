@@ -100,5 +100,5 @@ func animate_obj_start():
 func animate_obj_stop():
 	pass
 
-func get_class():
-	return "Heater"
+func can_delete():
+	return false
