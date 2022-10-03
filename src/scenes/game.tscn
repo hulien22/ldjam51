@@ -152,5 +152,6 @@ shape = SubResource( 1 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
+[connection signal="wrong_delivery" from="Delivery" to="HealthBar" method="_on_take_damage"]
 [connection signal="timeout" from="RequestSpawner/RequestTimer" to="." method="_on_RequestTimer_timeout"]
 [connection signal="timeout" from="RecipeSpawner/RecipeTimer" to="." method="_on_RecipeTimer_timeout"]
