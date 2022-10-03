@@ -1,6 +1,6 @@
 extends Station
 
-var potion_scene = preload("res://src/objects/Potion.tscn")
+var potion_scene = PRELOADS.potion_scene
 
 var potion_recipe = []
 var time_on_heat: int = 0

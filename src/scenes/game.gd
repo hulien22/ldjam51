@@ -19,8 +19,8 @@ var tips:Array = [
 	"Right click a health potion if injured!"
 	]
 #	"Drag bottles under cloud   to fill with water", ]
-var tips_scene = preload("res://src/objects/tip.tscn")
-var special_recip_scene = preload("res://src/objects/SpecialRecipe.tscn")
+var tips_scene = PRELOADS.tips_scene
+var special_recip_scene = PRELOADS.special_recip_scene
 
 class MyCustomSorter:
 	static func sort_ascending(a, b):
@@ -114,11 +114,11 @@ func _ready():
 	rng.randomize()
 	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	potions = RECIPEGENERATOR.potions.keys()
-	garbage_items.append(preload("res://src/ingredients/GroundEyeball.tscn"))
-	garbage_items.append(preload("res://src/ingredients/Mushroom.tscn"))
-	garbage_items.append(preload("res://src/ingredients/Plant.tscn"))
-	garbage_items.append(preload("res://src/ingredients/Crystal.tscn"))
-	garbage_items.append(preload("res://src/ingredients/GroundLizard.tscn"))
+	garbage_items.append(PRELOADS.ground_eyeball_scene)
+	garbage_items.append(PRELOADS.mushroom_scene)
+	garbage_items.append(PRELOADS.plant_scene)
+	garbage_items.append(PRELOADS.crystal_scene)
+	garbage_items.append(PRELOADS.ground_lizard_scene)
 #	garbage_items.append(preload("res://src/objects/tip.tscn"))
 	
 	
@@ -270,7 +270,12 @@ func _start_player_dead():
 	timer.start()
 
 func _end_player_dead():
+	var restart_music = !Music.stream_paused
+	Music.stream_paused = true
+	print("music stop")
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
+	if restart_music:
+		Music.stream_paused = false
 
 func _on_drink_potion(potion:int):
 	var timer = Timer.new()
@@ -293,4 +298,9 @@ func process_potion_drink_in_x(timer, potion):
 	timer.queue_free()
 	
 func _end_player_win():
+	var restart_music = !Music.stream_paused
+	Music.stream_paused = true
+	print("music stop")
 	get_tree().change_scene("res://src/scenes/OutroCutscene.tscn")
+	if restart_music:
+		Music.stream_paused = false

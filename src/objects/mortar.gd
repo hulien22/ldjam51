@@ -1,13 +1,7 @@
 extends "res://src/objects/station.gd"
 
-var ground_mushroom_scene = preload("res://src/ingredients/GroundMushroom.tscn")
-var ground_crystal_scene = preload("res://src/ingredients/GroundCrystal.tscn")
-var ground_lizard_scene = preload("res://src/ingredients/GroundLizard.tscn")
-var ground_plant_scene = preload("res://src/ingredients/GroundPlant.tscn")
-var ground_eyeball_scene = preload("res://src/ingredients/GroundEyeball.tscn")
-
-var ground_scenes = [ground_plant_scene, ground_lizard_scene,
-ground_crystal_scene, ground_eyeball_scene, ground_mushroom_scene]
+var ground_scenes = [PRELOADS.ground_plant_scene, PRELOADS.ground_lizard_scene,
+PRELOADS.ground_crystal_scene, PRELOADS.ground_eyeball_scene, PRELOADS.ground_mushroom_scene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
