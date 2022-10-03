@@ -42,6 +42,7 @@ func add_item(new_item):
 	$Sprites/Empty.visible = false
 	$Sprites/WithPotion.visible = true
 	start_wait($Timer)
+	return true
 
 func process_item():
 #	increase heat time
