@@ -10,7 +10,7 @@ var has_item = false
 var complete = false
 
 func add_item(new_item):
-	pass
+	return false
 	
 func can_add_item(new_item):
 	pass

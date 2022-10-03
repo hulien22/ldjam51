@@ -47,6 +47,7 @@ func can_add_item(new_item):
 func add_item(new_item):
 	current_recipe.push_back(new_item.get_type())
 	update_sprite()
+	return true
 
 func get_first_ingredient():
 	match current_recipe:

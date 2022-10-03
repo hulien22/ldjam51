@@ -1,0 +1,79 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/objects/delivery.gd" type="Script" id=1]
+[ext_resource path="res://src/art/hands_goblin.png" type="Texture" id=2]
+[ext_resource path="res://src/art/shroom.png" type="Texture" id=4]
+[ext_resource path="res://src/art/mushroom_MUSH.png" type="Texture" id=5]
+[ext_resource path="res://src/art/eyeball_MUSH.png" type="Texture" id=7]
+[ext_resource path="res://src/art/lizard_MUSH.png" type="Texture" id=8]
+[ext_resource path="res://src/art/crystal_MUSH.png" type="Texture" id=9]
+[ext_resource path="res://src/art/plant_MUSH.png" type="Texture" id=10]
+[ext_resource path="res://src/art/crystal.png" type="Texture" id=11]
+[ext_resource path="res://src/art/plant.png" type="Texture" id=12]
+[ext_resource path="res://src/art/eyeball.png" type="Texture" id=13]
+[ext_resource path="res://src/art/lizard.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 120, 80 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ null, ExtResource( 12 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 4 ), null, null, null, null, null, ExtResource( 10 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Pestle"
+length = 3.0
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.001, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1000 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Delivery" type="RigidBody2D"]
+collision_mask = 4097
+mode = 1
+script = ExtResource( 1 )
+process_time = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Delivery" type="Sprite" parent="Node2D"]
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
+
+[node name="IngredientSprite" type="AnimatedSprite" parent="Node2D/Delivery"]
+position = Vector2( -6.08731, 11.125 )
+rotation = -0.575949
+scale = Vector2( 0.370954, 0.370954 )
+frames = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D/Delivery"]
+anims/Pestle = SubResource( 5 )
+
+[node name="RightHand" type="Node2D" parent="Node2D"]
+position = Vector2( -75, 0 )
+
+[node name="LeftHand" type="Node2D" parent="Node2D"]
+position = Vector2( 75, 0 )
+
+[node name="DestroyTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
