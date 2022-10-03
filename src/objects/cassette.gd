@@ -34,3 +34,7 @@ func is_point_in_rect(top_left:Vector2, bottom_right:Vector2, point:Vector2) -> 
 func _physics_process(delta):
 	._physics_process(delta)
 	$AnimatedSprite/Particles2D.rotation = -rotation
+
+func can_delete():
+	return false
+
