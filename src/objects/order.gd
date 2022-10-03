@@ -1,7 +1,7 @@
 extends "res://src/objects/draggable_rigid.gd"
 
-var recipe = []
-var potion = ""
+
+var potion_order
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,8 +10,5 @@ func _ready():
 	z_index = 0
 	collision_mask = 1<<12
 
-func set_recipe(recipe_seq: Array):
-	recipe = recipe_seq
-
-func set_potion(potion_name: String):
-	potion = potion_name
+func set_potion_order(name: String):
+	potion_order = name

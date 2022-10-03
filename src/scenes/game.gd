@@ -5,6 +5,9 @@ var click_all = false
 var ignore_unclickable = true
 var cur_click_order = 0
 var selected_obj
+var potion_recipes
+var potions
+var rng 
 
 class MyCustomSorter:
 	static func sort_ascending(a, b):
@@ -80,18 +83,28 @@ func _notification(event):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#var arr = RECIPEGENERATOR.get_random_array(2,RECIPEGENERATOR.ingredients)
-	#for i in arr:
-	#	print(RECIPEGENERATOR.op.keys()[i])
-	#print(RECIPEGENERATOR.generate_recipes(4,3,3))
-	#print(RECIPEGENERATOR.op)
-	print(RECIPEGENERATOR.generate_recipe_template())
-	var potion_recipes= RECIPEGENERATOR.generate_recipe_template()
-	#print(RECIPEGENERATOR.random_ops_ingreds(RECIPEGENERATOR.ingredients,RECIPEGENERATOR.operations,3,2))
-	#var potions = potion_recipes.keys()
-		#sleep(10s)
-		#potion_recipes[portion]
-	#get_node("Recipe").set_recipe(RECIPEGENERATOR.potions_recipes["HEALTH"])
-	#get_node("Recipe").set_potion(GLOBAL.potions_recipes[GLOBAL.potions.HEALTH])
+	rng = RandomNumberGenerator.new()
+	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
+	potions = RECIPEGENERATOR.potions.keys()
+	#$OrderChute.modulate(1,0,0)
+	pass # Replace with function body.
+
+
+func _on_RecipeTimer_timeout():
+	#ship out new recipe
+	#pick random recipe
+	var rnd_potion = rng.randi() % potions.size()
 	
+	var instance = get_node("RecipeSpawner").spawn_obj()
+	instance.set_potion(potions[rnd_potion])
+	instance.set_recipe(potion_recipes[rnd_potion])
+	add_child(instance)
+	pass # Replace with function body.
+
+
+func _on_OrderTimer_timeout():
+	var rnd_potion = rng.randi()  % potions.size()
+	var instance = get_node("OrderSpawner").spawn_obj()
+	instance.set_potion_order(potions[rnd_potion])
+	add_child(instance)
 	pass # Replace with function body.

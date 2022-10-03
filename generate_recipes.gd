@@ -13,8 +13,8 @@ SHRINK, SHINE, LOVE, SWIFT, FIRE}
 
 enum mode {EASY, MED, HARD}
 
-var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
-var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
+var ingredients= [op.PLANT,op.LIZARD,op.CRYSTAL,op.MUSHROOM,op.EYEBALL,op.GROUND_PLANT,op.GROUND_LIZARD,op.GROUND_CRYSTAL, op.GROUND_EYEBALL, op.GROUND_MUSHROOM]
+var operations= [op.HEAT_SHORT,op.HEAT_MED,op.HEAT_LONG,op.SHAKE] #same operation can't be together
 
 #long heat for complex 
 # ordered in easy to hard potions?

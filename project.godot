@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/objects/draggable_rigid.gd"
 }, {
-"base": "RigidBody2D",
-"class": "Recipe",
-"language": "GDScript",
-"path": "res://src/objects/recipe.gd"
-}, {
 "base": "Node2D",
 "class": "RecipeGenerator",
 "language": "GDScript",
@@ -31,7 +26,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "DraggableBody2D": "",
-"Recipe": "",
 "RecipeGenerator": "",
 "Station": ""
 }
@@ -56,8 +50,7 @@ settings/fps/force_fps=60
 
 window/size/width=1920
 window/size/height=1080
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/resizable=false
 
 [gui]
 
