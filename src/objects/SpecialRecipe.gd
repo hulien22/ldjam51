@@ -15,6 +15,9 @@ func set_recipe(recipe_seq: Array):
 	recipe = recipe_seq
 #	$Node2D/Steps2.text = steps
 
+func get_type():
+	return -1
+
 func set_potion(potion_name: String, pt:int):
 	potion = potion_name
 	potion_type = pt
@@ -31,8 +34,6 @@ func set_potion(potion_name: String, pt:int):
 			$Node2D/RecipeAddStep.text = "EWIPFS"
 			$Node2D/RecipeAddStep.show()
 			$Node2D/Steps2.text += " - DRINK ME - "
-	
-		
 
 func can_delete():
 	return false

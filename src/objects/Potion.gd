@@ -70,7 +70,7 @@ func get_current_recipe():
 	return current_recipe
 
 func can_add_item(new_item):
-	print(new_item, new_item.get_type())
+#	print(new_item, new_item.get_type())
 	if not new_item.has_method("get_type"):
 		return false
 	if current_recipe.empty():
