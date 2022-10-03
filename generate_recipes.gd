@@ -28,6 +28,13 @@ func is_heat_op(operation) -> bool:
 		op.HEAT_LONG: return true
 		_: return false
 
+class AddShake:
+	func get_type():
+		return RECIPEGENERATOR.op.SHAKE
+
+var add_shake_obj:AddShake = AddShake.new()
+func get_shake_obj():
+	return add_shake_obj
 
 #long heat for complex 
 # ordered in easy to hard potions?
@@ -55,7 +62,7 @@ func generate_recipe_template():
 	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
 	#final
 	potions_recipes[potions.FIRE]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
-	
+
 	return potions_recipes
 
 # generate num_easy+num_med+num_hard recipes
