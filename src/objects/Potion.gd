@@ -5,6 +5,7 @@ var time_on_heat: int = 0
 
 const NUM_SHAKES_REQ = 8
 const MAX_TIME_BETWEEN_SHAKES = 0.2
+const MIN_MOUSE_MOVEMENT = 5
 
 var last_direction:int = 1
 var last_position_x:float = 0.0
@@ -26,20 +27,24 @@ func _physics_process(delta):
 	._physics_process(delta)
 	if held:
 		time_since_last_direction_change += delta
-		var new_direction = sign(global_position.x - last_position_x)
-		if new_direction != last_direction:
-	#		Shake!
-			if time_since_last_direction_change < MAX_TIME_BETWEEN_SHAKES:
-				num_shakes += 1
-				if num_shakes >= NUM_SHAKES_REQ:
-					if can_add_item(RECIPEGENERATOR.get_shake_obj()):
-						add_item(RECIPEGENERATOR.get_shake_obj())
-					num_shakes = 0
-			else:
-				num_shakes = 1
-			time_since_last_direction_change = 0
-			last_direction = new_direction
-		last_position_x = global_position.x
+		var mouse_global_x = get_global_mouse_position().x
+		if abs(mouse_global_x - last_position_x) > MIN_MOUSE_MOVEMENT:
+			var new_direction = sign(mouse_global_x - last_position_x)
+			if new_direction != last_direction:
+		#		Shake!
+				if time_since_last_direction_change < MAX_TIME_BETWEEN_SHAKES:
+					num_shakes += 1
+					if num_shakes >= NUM_SHAKES_REQ:
+						if can_add_item(RECIPEGENERATOR.get_shake_obj()):
+							add_item(RECIPEGENERATOR.get_shake_obj())
+						num_shakes = 0
+				else:
+					num_shakes = 1
+				time_since_last_direction_change = 0
+				last_direction = new_direction
+
+		print(num_shakes, " ", abs(mouse_global_x - last_position_x))
+		last_position_x = mouse_global_x
 	
 
 func on_first_held():
@@ -76,7 +81,7 @@ func can_add_item(new_item):
 		RECIPEGENERATOR.op.GROUND_LIZARD: return true
 		RECIPEGENERATOR.op.CRYSTAL: return true
 		RECIPEGENERATOR.op.GROUND_CRYSTAL: return true
-		RECIPEGENERATOR.op.SHAKE: return true
+		RECIPEGENERATOR.op.SHAKE: return current_recipe.back() != RECIPEGENERATOR.op.SHAKE
 		_: return false
 
 func add_item(new_item):
