@@ -67,6 +67,22 @@ func generate_recipe_template():
 
 	return potions_recipes
 
+func get_recipe_time(potion_type:int):
+	match potion_type:
+		potions.HEALTH: return 20.0
+		potions.SPEED: return 20.0
+		potions.INVISIBLE: return 20.0
+	#medium
+		potions.POWER: return 35.0
+		potions.DANCE: return 30.0
+		potions.SHRINK: return 30.0
+	#hard
+		potions.SHINE: return 50.0
+		potions.SWIFT: return 50.0
+		potions.LOVE: return 50.0
+	#final
+		potions.GIANT: return 1000.0 # should not make these orders though..
+
 func get_recipe_steps_str(potion_type:int):
 	var recipe = potions_recipes[potion_type]
 	

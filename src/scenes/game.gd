@@ -106,6 +106,7 @@ func _on_RequestTimer_timeout():
 	var rnd_potion = rng.randi()  % potions.size()
 	var instance = get_node("RequestSpawner").spawn_obj()
 	instance.set_potion_request(potions[rnd_potion])
+	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion))
 	instance.angular_velocity = rand_range(-8,8)
 	add_child(instance)
 	pass # Replace with function body.
