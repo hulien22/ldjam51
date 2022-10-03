@@ -6,7 +6,6 @@
 [ext_resource path="res://src/audio/WizardBeatbox.gd" type="Script" id=4]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
-volume_db = -25.345
 script = ExtResource( 4 )
 songs = [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ]
 

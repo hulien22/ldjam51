@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/art/title_page.png" type="Texture" id=1]
 [ext_resource path="res://src/art/order_paper.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/scenes/MenuButton.gd" type="Script" id=13]
 [ext_resource path="res://src/scenes/MainMenu.gd" type="Script" id=14]
 [ext_resource path="res://src/art/potion_healing_4.png" type="Texture" id=15]
+[ext_resource path="res://src/scenes/VolumeControl.gd" type="Script" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "GotoOptions"
@@ -102,6 +103,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ -204.6, 16.1406 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Volume:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
 }
 
 [node name="Control" type="Control"]
@@ -254,6 +267,32 @@ texture = ExtResource( 10 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GotoOptions = SubResource( 1 )
 
+[node name="Volume" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Volume"]
+margin_left = 568.0
+margin_top = 225.0
+margin_right = 1270.0
+margin_bottom = 647.0
+custom_colors/default_color = Color( 0.345098, 0.4, 0.0470588, 1 )
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Volume
+"
+
+[node name="HSlider" type="HSlider" parent="Volume"]
+margin_left = 1004.0
+margin_top = 202.0
+margin_right = 1233.0
+margin_bottom = 302.0
+rect_min_size = Vector2( 0, 100 )
+rect_scale = Vector2( 2, 2 )
+max_value = 1.0
+step = 0.05
+script = ExtResource( 16 )
+
 [connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_enter_hover"]
 [connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_exit_hover"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_options"]
@@ -263,3 +302,4 @@ anims/GotoOptions = SubResource( 1 )
 [connection signal="mouse_entered" from="TextureButton3" to="TextureButton3" method="_on_enter_hover"]
 [connection signal="mouse_exited" from="TextureButton3" to="TextureButton3" method="_on_exit_hover"]
 [connection signal="pressed" from="TextureButton3" to="." method="_on_back"]
+[connection signal="value_changed" from="Volume/HSlider" to="Volume/HSlider" method="_on_value_changed"]

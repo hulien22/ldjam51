@@ -82,6 +82,8 @@ func on_items_delivered():
 	else:
 		ops = RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions[second_item.potion_request]]
 		potion = item.current_recipe
+	print(ops) 
+	print(potion)
 	if ops.size() == potion.size():
 		for i in range(ops.size()):
 			if ops[i] != potion[i]:
