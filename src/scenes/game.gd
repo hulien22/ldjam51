@@ -56,14 +56,11 @@ func _input(event):
 #			Check for stations
 			var shapes = get_world_2d().direct_space_state.intersect_point(get_global_mouse_position(), 32, [], 0x7FFFFFFF, true, true)
 			shapes.sort_custom(MyCustomSorter, "sort_ascending")
-			print("mo"+str(shapes))
+			print(shapes)
 			selected_obj.drop()
 			for shape in shapes:
-				print("g")
 				if shape["collider"].has_method("can_add_item"):
-					print("hg")
 					if shape["collider"].can_add_item(selected_obj):
-						print("wow")
 						if shape["collider"].add_item(selected_obj):
 							selected_obj.queue_free()
 						break
