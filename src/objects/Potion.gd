@@ -6,6 +6,9 @@ func _init(cur_recipe:Array = []):
 	current_recipe = cur_recipe
 #	current_recipe.push_back(RECIPEGENERATOR.op.WATER)
 
+func init(cur_recipe:Array = []):
+	current_recipe = cur_recipe
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_sprite()

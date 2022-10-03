@@ -2,9 +2,6 @@ extends RigidBody2D
 
 class_name DraggableBody2D
 
-# To inherit from this class, create new rigidbody2d and attach a script.
-# When the popup appears, choose to inherit from this gdscript.
-
 export var regular_collision_layer = 1
 export var movement_collision_layer = 1 << 12 # layer 13, mask 13 will collide with this
 export var throw_force_multiplier = 1

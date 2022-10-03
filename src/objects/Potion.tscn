@@ -5,7 +5,6 @@
 [ext_resource path="res://src/art/filleable_potion_BOTTOM.png" type="Texture" id=3]
 [ext_resource path="res://src/art/potion_WHITE_VERSION.png" type="Texture" id=4]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 43.8517
 height = 8.43824
