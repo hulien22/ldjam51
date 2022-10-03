@@ -1,0 +1,265 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/art/title_page.png" type="Texture" id=1]
+[ext_resource path="res://src/art/order_paper.png" type="Texture" id=2]
+[ext_resource path="res://src/art/potion_healing_1.png" type="Texture" id=3]
+[ext_resource path="res://src/art/scroll.png" type="Texture" id=4]
+[ext_resource path="res://src/fonts/menu_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://src/art/crystal_MUSH.png" type="Texture" id=6]
+[ext_resource path="res://src/art/crystal.png" type="Texture" id=7]
+[ext_resource path="res://src/art/mushroom.png" type="Texture" id=8]
+[ext_resource path="res://src/art/lizard.png" type="Texture" id=9]
+[ext_resource path="res://src/art/pestle.png" type="Texture" id=10]
+[ext_resource path="res://src/art/mortar.png" type="Texture" id=11]
+[ext_resource path="res://src/art/eyeball.png" type="Texture" id=12]
+[ext_resource path="res://src/scenes/MenuButton.gd" type="Script" id=13]
+[ext_resource path="res://src/scenes/MainMenu.gd" type="Script" id=14]
+[ext_resource path="res://src/art/potion_healing_4.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=1]
+resource_name = "GotoOptions"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureButton:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 937, 242 ), Vector2( 1200, -1000 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureButton:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.7, 336.5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureButton2:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 234, 228 ), Vector2( -1000, 500 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TextureButton2:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -26.9, -360.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Mortar/Pestle:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 156, -102 ), Vector2( 98, -200 ), Vector2( 12, -106 ), Vector2( 72, -16 ), Vector2( 156, -102 ), Vector2( 98, -200 ), Vector2( 12, -106 ), Vector2( 72, -16 ), Vector2( 156, -102 ), Vector2( 98, -200 ), Vector2( 12, -106 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TextureButton3:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -822, -365 ), Vector2( 1.00012, -18 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TextureButton3:rect_rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -204.6, 16.1406 ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 14 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Mushroom" type="Sprite" parent="TextureRect"]
+position = Vector2( 1240, 909 )
+rotation = 0.663567
+scale = Vector2( 0.185898, 0.185898 )
+texture = ExtResource( 8 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 937.0
+margin_top = 242.0
+margin_right = 1436.99
+margin_bottom = 592.0
+rect_rotation = 10.7
+rect_pivot_offset = Vector2( 250, 175 )
+texture_normal = ExtResource( 4 )
+expand = true
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton"]
+margin_left = 24.0
+margin_top = 82.0
+margin_right = 473.0
+margin_bottom = 292.0
+mouse_filter = 2
+custom_colors/default_color = Color( 0.345098, 0.4, 0.0470588, 1 )
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Options"
+
+[node name="Eyeball" type="Sprite" parent="TextureButton"]
+position = Vector2( 370.513, 328.927 )
+rotation = -0.18675
+scale = Vector2( 0.219737, 0.219737 )
+texture = ExtResource( 12 )
+
+[node name="TextureButton2" type="TextureButton" parent="."]
+margin_left = 234.0
+margin_top = 228.0
+margin_right = 634.0
+margin_bottom = 627.97
+rect_rotation = -26.9
+rect_pivot_offset = Vector2( 200, 200 )
+texture_normal = ExtResource( 2 )
+expand = true
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton2"]
+margin_left = 36.9106
+margin_top = 125.326
+margin_right = 417.911
+margin_bottom = 335.326
+mouse_filter = 2
+custom_colors/default_color = Color( 0.345098, 0.4, 0.0470588, 1 )
+custom_colors/selection_color = Color( 0.839216, 0.117647, 0.117647, 1 )
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Start"
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton2"]
+margin_left = 367.817
+margin_top = 158.464
+margin_right = 1307.82
+margin_bottom = 1489.46
+rect_rotation = 22.4
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="TextureButton3" type="TextureButton" parent="."]
+margin_left = -822.0
+margin_top = -365.0
+margin_right = -422.0
+margin_bottom = 35.0
+rect_rotation = -204.6
+rect_pivot_offset = Vector2( 200, 200 )
+texture_normal = ExtResource( 2 )
+expand = true
+script = ExtResource( 13 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton3"]
+margin_left = 70.6071
+margin_top = 119.81
+margin_right = 451.607
+margin_bottom = 329.81
+mouse_filter = 2
+custom_colors/default_color = Color( 0.345098, 0.4, 0.0470588, 1 )
+custom_colors/selection_color = Color( 0.839216, 0.117647, 0.117647, 1 )
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Back"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton3"]
+margin_left = 367.817
+margin_top = 158.464
+margin_right = 1307.82
+margin_bottom = 1489.46
+rect_rotation = 22.4
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 15 )
+
+[node name="Crystal" type="Sprite" parent="."]
+position = Vector2( 436, 904 )
+rotation = 1.50073
+scale = Vector2( 0.24621, 0.24621 )
+texture = ExtResource( 7 )
+
+[node name="CrystalMush" type="Sprite" parent="."]
+position = Vector2( 693, 902 )
+rotation = -0.255059
+scale = Vector2( 0.24621, 0.24621 )
+texture = ExtResource( 6 )
+
+[node name="Lizard" type="Sprite" parent="."]
+position = Vector2( 1663, 589 )
+rotation = -0.22552
+scale = Vector2( 0.32797, 0.32797 )
+texture = ExtResource( 9 )
+
+[node name="Mortar" type="Sprite" parent="."]
+position = Vector2( 1696, 259 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="Pestle" type="Sprite" parent="Mortar"]
+position = Vector2( 156, -102 )
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/GotoOptions = SubResource( 1 )
+
+[connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_enter_hover"]
+[connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_exit_hover"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_options"]
+[connection signal="mouse_entered" from="TextureButton2" to="TextureButton2" method="_on_enter_hover"]
+[connection signal="mouse_exited" from="TextureButton2" to="TextureButton2" method="_on_exit_hover"]
+[connection signal="pressed" from="TextureButton2" to="." method="_on_start"]
+[connection signal="mouse_entered" from="TextureButton3" to="TextureButton3" method="_on_enter_hover"]
+[connection signal="mouse_exited" from="TextureButton3" to="TextureButton3" method="_on_exit_hover"]
+[connection signal="pressed" from="TextureButton3" to="." method="_on_back"]
