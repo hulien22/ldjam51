@@ -99,6 +99,7 @@ func _on_RecipeTimer_timeout():
 	var instance = get_node("RecipeSpawner").spawn_obj()
 	instance.set_potion(potions[rnd_potion])
 	instance.set_recipe(potion_recipes[rnd_potion])
+	instance.angular_velocity = rand_range(-8,8)
 	add_child(instance)
 	pass # Replace with function body.
 
@@ -106,5 +107,6 @@ func _on_RequestTimer_timeout():
 	var rnd_potion = rng.randi()  % potions.size()
 	var instance = get_node("RequestSpawner").spawn_obj()
 	instance.set_potion_request(potions[rnd_potion])
+	instance.angular_velocity = rand_range(-8,8)
 	add_child(instance)
 	pass # Replace with function body.

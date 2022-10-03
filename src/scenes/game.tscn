@@ -24,7 +24,7 @@
 [ext_resource path="res://src/objects/cassette.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1504, 1106.75 )
+extents = Vector2( 4151.5, 1469.38 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1955.5, 1925 )
@@ -107,7 +107,7 @@ position = Vector2( 1816, 964 )
 position = Vector2( 1777, 204 )
 
 [node name="RequestSpawner" parent="." instance=ExtResource( 20 )]
-position = Vector2( 286, -4 )
+position = Vector2( 298, 39 )
 scene_path_to_spawn = "res://src/objects/Request.tscn"
 
 [node name="RequestTimer" type="Timer" parent="RequestSpawner"]
@@ -115,7 +115,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="RecipeSpawner" parent="." instance=ExtResource( 20 )]
-position = Vector2( 537, -2 )
+position = Vector2( 549, 41 )
 scene_path_to_spawn = "res://src/objects/recipe.tscn"
 
 [node name="RecipeTimer" type="Timer" parent="RecipeSpawner"]
@@ -125,16 +125,14 @@ autostart = true
 [node name="TopWall" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2( -628, -1014 )
+position = Vector2( 1208, -1372 )
 shape = SubResource( 2 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopWall"]
-polygon = PoolVector2Array( 833, 16, 1128, 19, 1127, 88, 2189, 101, 2134, -2089, 855, -2095 )
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BottomWall"]
-polygon = PoolVector2Array( -123, 1216, -25, 861, 40, 851, 58, 1043, 108, 1065, 305, 1027, 393, 1038, 413, 1070, 498, 1085, 511, 1040, 931, 1053, 936, 861, 984, 864, 977, 1010, 1437, 1022, 1447, 859, 1681, 849, 1699, 1085, 1921, 1088, 4141, 1106, 4407, 3559, -1447, 3559, -1561, 1189 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2( 1204, 2311.63 )
+shape = SubResource( 2 )
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 
