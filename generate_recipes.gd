@@ -13,8 +13,8 @@ const HEAT_SHORT_LENGTH = 2
 const HEAT_MED_LENGTH = 5
 const HEAT_LONG_LENGTH = 10
 
-enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
-SHRINK, SHINE, LOVE, SWIFT, GIANT}
+enum potions {HEALTH, SPEED, INVISIBLE, POWER, SHINE,
+SHRINK, DANCE, LOVE, SWIFT, GIANT}
 
 enum mode {EASY, MED, HARD}
 
@@ -56,10 +56,10 @@ func generate_recipe_template():
 	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ground_ingred()]
 	#medium
 	potions_recipes[potions.POWER]= potions_recipes[potions.HEALTH] + [op.HEAT_MED,rnd_ingred(),op.SHAKE]
-	potions_recipes[potions.DANCE]= [op.WATER,rnd_ground_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
+	potions_recipes[potions.SHINE]= [op.WATER,rnd_ground_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
 	potions_recipes[potions.SHRINK]= potions_recipes[potions.SPEED] + [op.SHAKE,rnd_ingred()]
 	#hard
-	potions_recipes[potions.SHINE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
+	potions_recipes[potions.DANCE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
 	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ground_ingred()]
 	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
 	#final
