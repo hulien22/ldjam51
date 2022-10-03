@@ -30,3 +30,7 @@ func on_first_held():
 	
 func is_point_in_rect(top_left:Vector2, bottom_right:Vector2, point:Vector2) -> bool:
 	return point.x >= top_left.x and point.x <= bottom_right.x and point.y >= top_left.y and point.y <= bottom_right.y
+
+func _physics_process(delta):
+	._physics_process(delta)
+	$AnimatedSprite/Particles2D.rotation = -rotation
