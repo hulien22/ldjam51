@@ -130,3 +130,4 @@ func set_time_on_heat(t:int):
 
 func drink():
 	print("DRINKING")
+	return false

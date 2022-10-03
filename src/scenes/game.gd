@@ -87,8 +87,8 @@ func _input(event):
 
 		for shape in shapes:
 			if shape["collider"].has_method("drink"):
-				shape["collider"].drink()
-				shape["collider"].queue_free()
+				if shape["collider"].drink():
+					shape["collider"].queue_free()
 
 
 func set_cur_click_order(co):
