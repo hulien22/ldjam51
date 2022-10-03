@@ -1,6 +1,7 @@
 extends "res://src/objects/draggable_rigid.gd"
 
 var current_recipe: Array = []
+var time_on_heat: int = 0
 
 func _init(cur_recipe:Array = []):
 	current_recipe = cur_recipe
@@ -46,6 +47,8 @@ func can_add_item(new_item):
 
 func add_item(new_item):
 	current_recipe.push_back(new_item.get_type())
+	if (not RECIPEGENERATOR.is_heat_op(new_item.get_type())):
+		set_time_on_heat(0)
 	update_sprite()
 	return true
 
@@ -79,3 +82,9 @@ func filling_with_water_start():
 	
 func filling_with_water_stop():
 	$WaterFillingParticles2D.emitting = false
+
+func get_time_on_heat() -> int:
+	return time_on_heat
+
+func set_time_on_heat(t:int):
+	time_on_heat = t

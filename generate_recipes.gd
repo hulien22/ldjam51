@@ -3,10 +3,15 @@ extends Node2D
 class_name RecipeGenerator
 
 enum op {WATER = 0,
-HEAT_SHORT=1, HEAT_MED, HEAT_LONG, SHAKE,
 PLANT=10, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
 GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM,
+HEAT_SHORT=30, HEAT_MED, HEAT_LONG, SHAKE,
 EMPTY_BOTTLE=100, WATER_BOTTLE, POTION, REQUEST}
+
+
+const HEAT_SHORT_LENGTH = 2
+const HEAT_MED_LENGTH = 5
+const HEAT_LONG_LENGTH = 10
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
 SHRINK, SHINE, LOVE, SWIFT, FIRE}
@@ -15,6 +20,14 @@ enum mode {EASY, MED, HARD}
 
 var ingredients= op.values().slice(op.PLANT, op.keys().size()-1)
 var operations= op.values().slice(op.HEAT_SHORT, op.SHAKE) #same operation can't be together
+
+func is_heat_op(operation) -> bool:
+	match operation:
+		op.HEAT_SHORT: return true
+		op.HEAT_MED: return true
+		op.HEAT_LONG: return true
+		_: return false
+
 
 #long heat for complex 
 # ordered in easy to hard potions?
