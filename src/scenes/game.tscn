@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/mortar.tscn" type="PackedScene" id=2]
@@ -25,13 +25,22 @@
 [ext_resource path="res://src/art/potions_spawn.png" type="Texture" id=23]
 [ext_resource path="res://src/art/chute.png" type="Texture" id=24]
 [ext_resource path="res://src/scenes/FadeOut.tscn" type="PackedScene" id=25]
-[ext_resource path="res://src/art/comic_end_2_V2.png" type="Texture" id=26]
+[ext_resource path="res://src/art/drinkframe1.png" type="Texture" id=26]
+[ext_resource path="res://src/art/drinkframe2.png" type="Texture" id=27]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4151.5, 1469.38 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1955.5, 1925 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 26 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=3]
 resource_name = "drink potion"
@@ -59,6 +68,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ComicEnd2V2:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0 ]
 }
 
 [node name="Game" type="Node2D"]
@@ -208,10 +229,12 @@ z_as_relative = false
 position = Vector2( 7227, 1292 )
 z_index = 4000
 
-[node name="ComicEnd2V2" type="Sprite" parent="DrinkAnimation"]
+[node name="ComicEnd2V2" type="AnimatedSprite" parent="DrinkAnimation"]
 modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 0, 0, 0, 0.745098 )
 position = Vector2( -6191, -673 )
-texture = ExtResource( 26 )
+scale = Vector2( 1.1, 1.1 )
+frames = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DrinkAnimation"]
 "anims/drink potion" = SubResource( 3 )
