@@ -90,6 +90,7 @@ position = Vector2( 1596, 499 )
 
 [node name="Cloud" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1720, 211 )
+z_index = 8
 
 [node name="Mortar2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1803, 727 )
@@ -107,6 +108,7 @@ position = Vector2( 1816, 964 )
 position = Vector2( 1777, 204 )
 
 [node name="RequestSpawner" parent="." instance=ExtResource( 20 )]
+modulate = Color( 0.282353, 1, 0.129412, 1 )
 position = Vector2( 298, 39 )
 scene_path_to_spawn = "res://src/objects/Request.tscn"
 
@@ -115,6 +117,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="RecipeSpawner" parent="." instance=ExtResource( 20 )]
+modulate = Color( 1, 0.337255, 0.337255, 1 )
 position = Vector2( 549, 41 )
 scene_path_to_spawn = "res://src/objects/recipe.tscn"
 
@@ -123,6 +126,7 @@ wait_time = 30.0
 autostart = true
 
 [node name="TopWall" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
 position = Vector2( 1208, -1372 )

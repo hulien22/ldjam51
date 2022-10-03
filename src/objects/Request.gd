@@ -19,3 +19,4 @@ func get_potion_request():
 
 func set_potion_request(potion):
 	potion_request=potion
+	$Area2D/Label.text = potion_request
