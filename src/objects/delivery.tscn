@@ -14,7 +14,7 @@
 [ext_resource path="res://src/art/lizard.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 120, 196.5 )
+extents = Vector2( 120, 183.5 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -49,7 +49,7 @@ script = ExtResource( 1 )
 process_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -66.5 )
+position = Vector2( 0, -79.5 )
 shape = SubResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]

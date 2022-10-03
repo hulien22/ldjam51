@@ -182,7 +182,7 @@ func random_ops_ingreds(max_ingred: int, max_op: int):
 func get_color_from_recipe(recipe: Array):
 	match recipe:
 		[]: return '00000000'
-		[RECIPEGENERATOR.op.WATER]: return '01c6cb'
+		[RECIPEGENERATOR.op.WATER]: return '8c01c6cb'
 		_: pass
 	var recipe_string = ""
 	for i in recipe:
