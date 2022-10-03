@@ -84,6 +84,7 @@ func _notification(event):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	potions = RECIPEGENERATOR.potions.keys()
 	pass # Replace with function body.
@@ -95,7 +96,7 @@ func _on_RecipeTimer_timeout():
 	var rnd_potion = rng.randi() % potions.size()
 	
 	var instance = get_node("RecipeSpawner").spawn_obj()
-	instance.set_potion(potions[rnd_potion])
+	instance.set_potion(potions[rnd_potion], rnd_potion)
 	instance.set_recipe(potion_recipes[rnd_potion])
 	instance.angular_velocity = rand_range(-8,8)
 	add_child(instance)

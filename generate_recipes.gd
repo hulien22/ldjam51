@@ -65,6 +65,56 @@ func generate_recipe_template():
 
 	return potions_recipes
 
+func get_recipe_steps_str(potion_type:int):
+	var recipe = potions_recipes[potion_type]
+	
+	var steps = ""
+	var counter = 1
+	var start = 0
+	
+	match potion_type:
+		potions.POWER:
+			steps += "(Power Potion)\n1. Start with Health potion\n"
+			counter += 1
+			start = potions_recipes[potions.HEALTH].size()
+		potions.SHRINK:
+			steps += "(Shrink Potion)\n1. Start with Speed potion\n"
+			counter += 1
+			start = potions_recipes[potions.SPEED].size()
+		potions.SWIFT:
+			steps += "1. Start with Power potion\n"
+			counter += 1
+			start = potions_recipes[potions.POWER].size()
+		potions.LOVE:
+			steps += "1. Start with Shrink potion\n"
+			counter += 1
+			start = potions_recipes[potions.SHRINK].size()
+		_:
+			pass
+	
+	for i in range(start, recipe.size()):
+		steps += str(counter) + ". "
+		counter += 1
+		match recipe[i]:
+			RECIPEGENERATOR.op.MUSHROOM: steps += "Add mushroom"
+			RECIPEGENERATOR.op.GROUND_MUSHROOM: steps += "Add ground mushroom"
+			RECIPEGENERATOR.op.PLANT: steps += "Add twig"
+			RECIPEGENERATOR.op.GROUND_PLANT: steps += "Add ground twig"
+			RECIPEGENERATOR.op.EYEBALL: steps += "Add eyeball"
+			RECIPEGENERATOR.op.GROUND_EYEBALL: steps += "Add ground eyeball"
+			RECIPEGENERATOR.op.LIZARD: steps += "Add lizard"
+			RECIPEGENERATOR.op.GROUND_LIZARD: steps += "Add ground lizard"
+			RECIPEGENERATOR.op.CRYSTAL: steps += "Add crystal"
+			RECIPEGENERATOR.op.GROUND_CRYSTAL: steps += "Add ground crystal"
+			RECIPEGENERATOR.op.SHAKE: steps += "Shake well"
+			RECIPEGENERATOR.op.WATER: steps += "Add water"
+			RECIPEGENERATOR.op.HEAT_SHORT: steps += "Heat for 2 secs"
+			RECIPEGENERATOR.op.HEAT_MED: steps += "Heat for 5 secs"
+			RECIPEGENERATOR.op.HEAT_LONG: steps += "Heat for 10 secs"
+		steps += "\n"
+	
+	return steps
+
 # generate num_easy+num_med+num_hard recipes
 #returns dict of RECIPEGENERATOR.potions as keys and RECIPEGENERATOR.op as values
 func generate_recipes_random(num_easy, num_med, num_hard):

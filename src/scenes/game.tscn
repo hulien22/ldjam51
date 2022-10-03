@@ -126,7 +126,6 @@ position = Vector2( 549, 41 )
 scene_path_to_spawn = "res://src/objects/recipe.tscn"
 
 [node name="RecipeTimer" type="Timer" parent="RecipeSpawner"]
-wait_time = 30.0
 autostart = true
 
 [node name="TopWall" type="StaticBody2D" parent="."]
