@@ -9,7 +9,11 @@ func _ready():
 	collision_mask = 1<<12
 
 func set_text(t:String):
-	$Node2D/Steps2.text = t
+	$Sprite2/Node2D/Label.text = "TIP:"
+	$Sprite2/Node2D/Steps2.text = t
+
+func get_type():
+	return -1
 
 func can_delete():
 	return true

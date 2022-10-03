@@ -10,10 +10,12 @@ var potions
 var rng 
 
 var tips:Array = [
-	"Throw unwanted items (like   this!) in the trash", 
-	"Give orders and potions to goblin to deliver",  
-#	"Drag bottles under cloud   to fill with water!", 
-	"Drag items into water bottles to make potions"]
+	"Drag bottles under cloud   to fill with water",
+	"Drop items into bottles to make potions",   
+	"Give both  order and potion to goblin to deliver",
+	"Throw unwanted items (like   this!) in the trash",
+	]
+#	"Drag bottles under cloud   to fill with water", ]
 var tips_scene = preload("res://src/objects/tip.tscn")
 
 class MyCustomSorter:
@@ -97,18 +99,23 @@ func _ready():
 	garbage_items.append(preload("res://src/ingredients/GroundEyeball.tscn"))
 	garbage_items.append(preload("res://src/ingredients/Mushroom.tscn"))
 	garbage_items.append(preload("res://src/ingredients/Plant.tscn"))
+	garbage_items.append(preload("res://src/ingredients/Crystal.tscn"))
+	garbage_items.append(preload("res://src/ingredients/GroundLizard.tscn"))
+#	garbage_items.append(preload("res://src/objects/tip.tscn"))
+	
 	
 #	Summon tips on load
-	for i in range(tips.size()):
-		var instance = tips_scene.instance()
-		instance.set_text(tips[i])
-		instance.global_position = $RequestSpawner.global_position
-		
-		instance.global_position.x += rng.randf_range(-10,10)
-		cur_click_order += 1
-		instance.set_click_order(cur_click_order)
-		instance.rotation_degrees = rng.randi_range(-20,20)
-		add_child_in_x_secs(instance, 1 + i * 0.2)
+	spawn_tip(1.0)
+#	for i in range(tips.size()):
+#		var instance = tips_scene.instance()
+#		instance.set_text(tips[i])
+#		instance.global_position = $RequestSpawner.global_position
+#
+#		instance.global_position.x += rng.randf_range(-10,10)
+#		cur_click_order += 1
+#		instance.set_click_order(cur_click_order)
+#		instance.rotation_degrees = rng.randi_range(-20,20)
+#		add_child_in_x_secs(instance, 1 + i * 0.2)
 		
 	pass # Replace with function body.
 
@@ -135,6 +142,7 @@ var time_multiplier = 10.0
 var time_to_spawn_next_order1 = 0.0
 var time_to_spawn_next_order2 = 20.0
 var garbage_items:Array = []
+var tip_index = 0
 
 func _on_RequestTimer_timeout():
 	time_passed += 10
@@ -159,7 +167,7 @@ func _on_RequestTimer_timeout():
 		time_to_spawn_next_order2 = time_passed + min(spawn_request(things_spawned * 0.2) * 2.0, 60.0)
 		things_spawned += 1
 	
-	var max_garbage_to_spawn = 3 - things_spawned
+	var max_garbage_to_spawn = min(3 - things_spawned, 2)
 	var min_garbage_to_spawn = 1 - things_spawned
 	var garbage_to_spawn = max(0, rng.randi_range(min_garbage_to_spawn, max_garbage_to_spawn))
 	
@@ -171,7 +179,9 @@ func _on_RequestTimer_timeout():
 		garb_instance.set_click_order(cur_click_order)
 		add_child_in_x_secs(garb_instance,things_spawned * 0.2)
 		things_spawned += 1
-		
+	
+	spawn_tip(things_spawned*0.2)
+	things_spawned += 1
 	
 	print("time ", time_passed, " ", time_to_spawn_next_order1, " ", time_to_spawn_next_order2, " ", garbage_to_spawn)
 
@@ -200,6 +210,18 @@ func spawn_request(spawn_delay):
 	instance.set_click_order(cur_click_order)
 	add_child_in_x_secs(instance, spawn_delay)
 	return RECIPEGENERATOR.get_recipe_time(rnd_potion)
+
+func spawn_tip(time):
+	if tip_index < tips.size():
+		var instance = tips_scene.instance()
+		instance.set_text(tips[tip_index])
+		tip_index += 1
+		instance.global_position = $RequestSpawner.global_position
+		instance.global_position.x += rng.randf_range(-10,10)
+		cur_click_order += 1
+		instance.set_click_order(cur_click_order)
+		instance.rotation_degrees = rng.randi_range(-20,20)
+		add_child_in_x_secs(instance, time)
 
 func add_child_in_x_secs(instance, time):
 	if time == 0:

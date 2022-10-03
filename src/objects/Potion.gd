@@ -43,7 +43,7 @@ func _physics_process(delta):
 				time_since_last_direction_change = 0
 				last_direction = new_direction
 
-		print(num_shakes, " ", abs(mouse_global_x - last_position_x))
+#		print(num_shakes, " ", abs(mouse_global_x - last_position_x))
 		last_position_x = mouse_global_x
 	
 
