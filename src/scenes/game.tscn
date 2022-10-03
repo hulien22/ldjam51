@@ -37,6 +37,7 @@ scale = Vector2( 0.764129, 0.764129 )
 texture = ExtResource( 16 )
 
 [node name="TableV1InProgress" type="Sprite" parent="."]
+visible == false
 position = Vector2( 956.25, 540.25 )
 scale = Vector2( 0.754863, 0.757586 )
 texture = ExtResource( 7 )
@@ -81,8 +82,7 @@ texture = ExtResource( 17 )
 position = Vector2( 1596, 499 )
 
 [node name="Cloud" parent="." instance=ExtResource( 14 )]
-position = Vector2( 1182, 184 )
-z_index = 1
+position = Vector2( 1720, 211 )
 
 [node name="Mortar2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1803, 727 )
@@ -101,5 +101,3 @@ position = Vector2( 1816, 964 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
-[connection signal="timeout" from="RecipeTimer" to="." method="_on_RecipeTimer_timeout"]
-[connection signal="timeout" from="OrderTimer" to="." method="_on_OrderTimer_timeout"]
