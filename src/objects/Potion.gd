@@ -1,6 +1,7 @@
 extends "res://src/objects/draggable_rigid.gd"
 
 var current_recipe: Array = []
+var time_on_heat: int = 0
 
 func _init(cur_recipe:Array = []):
 	current_recipe = cur_recipe
@@ -34,11 +35,22 @@ func can_add_item(new_item):
 	match new_item.get_type():
 		RECIPEGENERATOR.op.MUSHROOM: return true
 		RECIPEGENERATOR.op.GROUND_MUSHROOM: return true
+		RECIPEGENERATOR.op.PLANT: return true
+		RECIPEGENERATOR.op.GROUND_PLANT: return true
+		RECIPEGENERATOR.op.EYEBALL: return true
+		RECIPEGENERATOR.op.GROUND_EYEBALL: return true
+		RECIPEGENERATOR.op.LIZARD: return true
+		RECIPEGENERATOR.op.GROUND_LIZARD: return true
+		RECIPEGENERATOR.op.CRYSTAL: return true
+		RECIPEGENERATOR.op.GROUND_CRYSTAL: return true
 		_: return false
 
 func add_item(new_item):
 	current_recipe.push_back(new_item.get_type())
+	if (not RECIPEGENERATOR.is_heat_op(new_item.get_type())):
+		set_time_on_heat(0)
 	update_sprite()
+	return true
 
 func get_first_ingredient():
 	match current_recipe:
@@ -48,14 +60,18 @@ func get_first_ingredient():
 
 func update_sprite():
 	#color based on first ingredient mostly, then other things will just affect slightly
-	var f_ing = get_first_ingredient()
-	match f_ing:
-		RECIPEGENERATOR.op.EMPTY_BOTTLE:
-			$PotionFilling.modulate = Color8(0,0,0,0)
-		RECIPEGENERATOR.op.WATER:
-			$PotionFilling.modulate = Color('01c6cb')
-		RECIPEGENERATOR.op.MUSHROOM:
-			$PotionFilling.modulate = Color('daec03')
+	$PotionFilling.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(current_recipe))
+#	var f_ing = get_first_ingredient()
+#	match f_ing:
+#		RECIPEGENERATOR.op.EMPTY_BOTTLE:
+#			$PotionFilling.modulate = Color8(0,0,0,0)
+#		RECIPEGENERATOR.op.WATER:
+#			$PotionFilling.modulate = Color('01c6cb')
+#		_:
+#			# Create a random has out of the contents of the string
+#			# Ensure alpha channel is opaque
+#			$PotionFilling.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(current_recipe))
+
 	# TODO play poof effect
 	# TODO change alpha
 #	TODO other stuffs
@@ -66,3 +82,9 @@ func filling_with_water_start():
 	
 func filling_with_water_stop():
 	$WaterFillingParticles2D.emitting = false
+
+func get_time_on_heat() -> int:
+	return time_on_heat
+
+func set_time_on_heat(t:int):
+	time_on_heat = t

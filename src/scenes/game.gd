@@ -64,8 +64,8 @@ func _input(event):
 			for shape in shapes:
 				if shape["collider"].has_method("can_add_item"):
 					if shape["collider"].can_add_item(selected_obj):
-						shape["collider"].add_item(selected_obj)
-						selected_obj.queue_free()
+						if shape["collider"].add_item(selected_obj):
+							selected_obj.queue_free()
 						break
 			selected_obj = null
 

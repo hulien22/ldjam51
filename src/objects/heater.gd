@@ -1,7 +1,9 @@
 extends Station
 
-var potion_recipe = []
 var potion_scene = preload("res://src/objects/Potion.tscn")
+
+var potion_recipe = []
+var time_on_heat: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +31,7 @@ func can_add_item(new_item):
 func add_item(new_item):
 	item = new_item.get_type()
 	potion_recipe = new_item.get_current_recipe()
-	
+	time_on_heat = new_item.get_time_on_heat()
 	# TODO check if heat time is on potion and if last op is a heating op
 	# else reset heat time to 0
 	
@@ -40,26 +42,57 @@ func add_item(new_item):
 	$Sprites/Empty.visible = false
 	$Sprites/WithPotion.visible = true
 	start_wait($Timer)
+	return true
 
 func process_item():
 #	increase heat time
+	time_on_heat += 1
+	print(time_on_heat)
+	var did_update = false
+	if time_on_heat >= RECIPEGENERATOR.HEAT_LONG_LENGTH:
+		did_update = update_recipe(RECIPEGENERATOR.op.HEAT_LONG)
+	elif time_on_heat >= RECIPEGENERATOR.HEAT_MED_LENGTH:
+		did_update = update_recipe(RECIPEGENERATOR.op.HEAT_MED)
+	elif time_on_heat >= RECIPEGENERATOR.HEAT_SHORT_LENGTH:
+		did_update = update_recipe(RECIPEGENERATOR.op.HEAT_SHORT)
 	update_potion()
-	$Sprites/WithPotion/SmokeParticles.emitting = true
-	$Sprites/WithPotion/SmokeParticles.restart()
+	if (did_update):
+		$Sprites/WithPotion/SmokeParticles.emitting = true
+		$Sprites/WithPotion/SmokeParticles.restart()
+		$Sprites/WithPotion/SmokeParticles2.emitting = true
+		$Sprites/WithPotion/SmokeParticles2.restart()
+	else:
+		$Sprites/WithPotion/SmokeParticles.emitting = true
+		$Sprites/WithPotion/SmokeParticles.restart()
 	start_wait($Timer)
 
+func update_recipe(new_op):
+	if (RECIPEGENERATOR.is_heat_op(potion_recipe.back())):
+		if potion_recipe.back() == new_op:
+			return false
+		potion_recipe.pop_back()
+		potion_recipe.push_back(new_op)
+	else:
+		potion_recipe.push_back(new_op)
+	return true
+
 func get_spawn_obj():
-	$Sprites/Empty.visible = true
-	$Sprites/WithPotion.visible = false
 	var instance = potion_scene.instance()
 	instance.init(potion_recipe)
+	instance.set_time_on_heat(time_on_heat)
 	item = null
 	has_item = false
 	$Timer.stop()
+	$Sprites/WithPotion/SmokeParticles.restart()
+	$Sprites/WithPotion/SmokeParticles.emitting = false
+	$Sprites/WithPotion/SmokeParticles2.restart()
+	$Sprites/WithPotion/SmokeParticles2.emitting = false
+	$Sprites/Empty.visible = true
+	$Sprites/WithPotion.visible = false
 	return {"spawn_obj": instance, "parent": get_parent()}
 
 func update_potion():
-	$Sprites/WithPotion/PotionWhiteVersion.modulate = Color(0,0,0,0)
+	$Sprites/WithPotion/PotionWhiteVersion.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(potion_recipe))
 
 func animate_obj_start():
 	pass
@@ -67,3 +100,5 @@ func animate_obj_start():
 func animate_obj_stop():
 	pass
 
+func get_class():
+	return "Heater"

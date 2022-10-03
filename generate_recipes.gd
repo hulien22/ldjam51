@@ -3,10 +3,15 @@ extends Node2D
 class_name RecipeGenerator
 
 enum op {WATER = 0,
-HEAT_SHORT=1, HEAT_MED, HEAT_LONG, SHAKE,
 PLANT=10, LIZARD, CRYSTAL, EYEBALL, MUSHROOM,
 GROUND_PLANT=20, GROUND_LIZARD, GROUND_CRYSTAL, GROUND_EYEBALL, GROUND_MUSHROOM,
-EMPTY_BOTTLE=100, WATER_BOTTLE, POTION}
+HEAT_SHORT=30, HEAT_MED, HEAT_LONG, SHAKE,
+EMPTY_BOTTLE=100, WATER_BOTTLE, POTION, REQUEST}
+
+
+const HEAT_SHORT_LENGTH = 2
+const HEAT_MED_LENGTH = 5
+const HEAT_LONG_LENGTH = 10
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
 SHRINK, SHINE, LOVE, SWIFT, FIRE}
@@ -15,6 +20,14 @@ enum mode {EASY, MED, HARD}
 
 var ingredients= [op.PLANT,op.LIZARD,op.CRYSTAL,op.MUSHROOM,op.EYEBALL,op.GROUND_PLANT,op.GROUND_LIZARD,op.GROUND_CRYSTAL, op.GROUND_EYEBALL, op.GROUND_MUSHROOM]
 var operations= [op.HEAT_SHORT,op.HEAT_MED,op.HEAT_LONG,op.SHAKE] #same operation can't be together
+
+func is_heat_op(operation) -> bool:
+	match operation:
+		op.HEAT_SHORT: return true
+		op.HEAT_MED: return true
+		op.HEAT_LONG: return true
+		_: return false
+
 
 #long heat for complex 
 # ordered in easy to hard potions?
@@ -159,5 +172,14 @@ func random_ops_ingreds(max_ingred: int, max_op: int):
 	return merged_arr
 	
 	
-	
+func get_color_from_recipe(recipe: Array):
+	match recipe:
+		[]: return '00000000'
+		[RECIPEGENERATOR.op.WATER]: return '01c6cb'
+		_: pass
+	var recipe_string = ""
+	for i in recipe:
+		recipe_string += str(i)
+	var my_hash_int = recipe_string.sha256_text().hash() | 0x000000ff
+	return my_hash_int
 	
