@@ -1,17 +1,21 @@
 extends "res://src/objects/draggable_rigid.gd"
 
-var current_recipe: Array = []
+var potion_request: String =""
 
-func _init(cur_recipe:Array = []):
-	current_recipe = cur_recipe
+func _init(request: String =""):
+	potion_request = request
 #	current_recipe.push_back(RECIPEGENERATOR.op.WATER)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	z_index = 0
+	collision_mask = 1<<12
 
 func get_type():
 	return RECIPEGENERATOR.op.REQUEST
+	
+func get_potion_request():
+	return potion_request
 
-func get_current_recipe():
-	return current_recipe
+func set_potion_request(potion):
+	potion_request=potion
