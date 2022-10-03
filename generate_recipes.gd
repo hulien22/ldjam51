@@ -59,7 +59,7 @@ func generate_recipe_template():
 	potions_recipes[potions.DANCE]= [op.WATER,rnd_ground_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
 	potions_recipes[potions.SHRINK]= potions_recipes[potions.SPEED] + [op.SHAKE,rnd_ingred()]
 	#hard
-	potions_recipes[potions.SHINE]= [op.WATER,rnd_ground_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
+	potions_recipes[potions.SHINE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
 	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ground_ingred()]
 	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
 	#final
@@ -112,7 +112,7 @@ func get_recipe_steps_str(potion_type:int):
 			RECIPEGENERATOR.op.WATER: steps += "Add water"
 			RECIPEGENERATOR.op.HEAT_SHORT: steps += "Heat for 2 secs"
 			RECIPEGENERATOR.op.HEAT_MED: steps += "Heat for 5 secs"
-			RECIPEGENERATOR.op.HEAT_LONG: steps += "Heat for 10 secs"
+			RECIPEGENERATOR.op.HEAT_LONG: steps += "Heat for 10s"
 		steps += "\n"
 	
 	return steps

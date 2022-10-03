@@ -87,12 +87,12 @@ autowrap = true
 modulate = Color( 0, 0, 0, 1 )
 margin_left = -83.0
 margin_top = -78.0
-margin_right = 717.0
+margin_right = 817.0
 margin_bottom = 899.0
-rect_scale = Vector2( 0.206171, 0.206171 )
+rect_scale = Vector2( 0.188842, 0.199126 )
 custom_fonts/font = SubResource( 2 )
 text = "1. Add water
-2. Add crushed mushroom
+2. Add mushroom
 3. Heat for 2 seconds
 4. Shake well
 5. Add crushed mushroom"
