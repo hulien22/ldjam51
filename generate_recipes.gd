@@ -14,11 +14,12 @@ const HEAT_MED_LENGTH = 5
 const HEAT_LONG_LENGTH = 10
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, DANCE,
-SHRINK, SHINE, LOVE, SWIFT, FIRE}
+SHRINK, SHINE, LOVE, SWIFT, GIANT}
 
 enum mode {EASY, MED, HARD}
 
-var ingredients= [op.PLANT,op.LIZARD,op.CRYSTAL,op.MUSHROOM,op.EYEBALL,op.GROUND_PLANT,op.GROUND_LIZARD,op.GROUND_CRYSTAL, op.GROUND_EYEBALL, op.GROUND_MUSHROOM]
+var ingredients= [op.PLANT,op.LIZARD,op.CRYSTAL,op.MUSHROOM,op.EYEBALL]
+var ground_ingredients= [op.GROUND_PLANT,op.GROUND_LIZARD,op.GROUND_CRYSTAL, op.GROUND_EYEBALL, op.GROUND_MUSHROOM]
 var operations= [op.HEAT_SHORT,op.HEAT_MED,op.HEAT_LONG,op.SHAKE] #same operation can't be together
 
 func is_heat_op(operation) -> bool:
@@ -43,6 +44,7 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	pass # Replace with function body.
 
 #generates recipe with hardcoded recipes
@@ -50,18 +52,18 @@ func _ready():
 func generate_recipe_template():
 	#easy
 	potions_recipes[potions.HEALTH]= [op.WATER,rnd_ingred(),op.HEAT_MED,op.SHAKE]
-	potions_recipes[potions.SPEED]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT]
-	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred()]
+	potions_recipes[potions.SPEED]= [op.WATER,rnd_ingred(),rnd_ground_ingred(),op.HEAT_SHORT]
+	potions_recipes[potions.INVISIBLE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ground_ingred()]
 	#medium
 	potions_recipes[potions.POWER]= potions_recipes[potions.HEALTH] + [op.HEAT_MED,rnd_ingred(),op.SHAKE]
-	potions_recipes[potions.DANCE]= [op.WATER,rnd_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
+	potions_recipes[potions.DANCE]= [op.WATER,rnd_ground_ingred(),op.HEAT_LONG,rnd_ingred(),op.SHAKE,op.HEAT_SHORT]
 	potions_recipes[potions.SHRINK]= potions_recipes[potions.SPEED] + [op.SHAKE,rnd_ingred()]
 	#hard
-	potions_recipes[potions.SHINE]= [op.WATER,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
-	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ingred()]
+	potions_recipes[potions.SHINE]= [op.WATER,rnd_ground_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,rnd_ingred(),op.SHAKE,op.HEAT_LONG]
+	potions_recipes[potions.SWIFT]= potions_recipes[potions.POWER]+ [rnd_ground_ingred()]
 	potions_recipes[potions.LOVE]= potions_recipes[potions.SHRINK]+ [op.HEAT_SHORT,rnd_ingred(),op.HEAT_MED]
 	#final
-	potions_recipes[potions.FIRE]= [op.WATER,rnd_ingred(),rnd_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
+	potions_recipes[potions.GIANT]= [op.WATER,rnd_ground_ingred(),rnd_ground_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ground_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
 
 	return potions_recipes
 
@@ -183,6 +185,10 @@ func get_random_array(num: int,arr: Array):
 	
 func rnd_ingred():
 	return ingredients[rng.randi() % ingredients.size()]
+
+func rnd_ground_ingred():
+	return ground_ingredients[rng.randi() % ground_ingredients.size()]
+	
 
 #randomly merge ingredients with no negiboring ops being the same
 func random_ops_ingreds(max_ingred: int, max_op: int):
