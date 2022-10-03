@@ -14,6 +14,9 @@ func can_add_item(new_item):
 		return new_item.can_delete()
 	return true
 
+func can_pickup():
+	return false
+
 func add_item(new_item):
 	start_wait($Timer)
 	return true
