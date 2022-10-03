@@ -195,3 +195,14 @@ func add_child_in_x_secs(instance, time):
 func on_spawn_timer_complete(timer, instance):
 	timer.queue_free()
 	add_child(instance)
+
+func _start_player_dead():
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", self, "_end_player_dead")
+	timer.one_shot = true
+	timer.wait_time = 3
+	timer.start()
+
+func _end_player_dead():
+	get_tree().change_scene("res://src/scenes/MainMenu.tscn")

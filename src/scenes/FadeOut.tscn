@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/scenes/FadeOut.gd" type="Script" id=1]
+[ext_resource path="res://src/fonts/menu_font.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Polygon2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+text = "YOU DIED"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 4, -30 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -5000, -5000, -5000, 10000, 10000, 10000, 10000, -5000 )
+
+[node name="RichTextLabel" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 587.0
+margin_top = 426.0
+margin_right = 1247.0
+margin_bottom = 643.0
+custom_fonts/font = ExtResource( 2 )
+text = "Here is example"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
