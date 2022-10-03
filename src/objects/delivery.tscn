@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/objects/delivery.gd" type="Script" id=1]
 [ext_resource path="res://src/art/hands_goblin.png" type="Texture" id=2]
+[ext_resource path="res://src/art/spotlight_5.png" type="Texture" id=3]
 [ext_resource path="res://src/art/shroom.png" type="Texture" id=4]
 [ext_resource path="res://src/art/mushroom_MUSH.png" type="Texture" id=5]
+[ext_resource path="res://src/art/spotlight_1.png" type="Texture" id=6]
 [ext_resource path="res://src/art/eyeball_MUSH.png" type="Texture" id=7]
 [ext_resource path="res://src/art/lizard_MUSH.png" type="Texture" id=8]
 [ext_resource path="res://src/art/crystal_MUSH.png" type="Texture" id=9]
@@ -42,6 +44,49 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -1000 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=9]
+blend_mode = 1
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0.264045, 0.670455 ), 0.0, 0.0, 0, 0, Vector2( 0.994382, 0.297727 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.52
+angular_velocity = 114.05
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+scale_random = 0.13
+scale_curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.52
+angular_velocity = 114.05
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+scale_random = 0.13
+scale_curve = SubResource( 8 )
+
 [node name="Delivery" type="RigidBody2D"]
 collision_mask = 4097
 mode = 1
@@ -74,6 +119,28 @@ position = Vector2( -75, 0 )
 
 [node name="LeftHand" type="Node2D" parent="Node2D"]
 position = Vector2( 75, 0 )
+
+[node name="GoodParticles" type="Particles2D" parent="."]
+modulate = Color( 0, 1, 0.0627451, 0.364706 )
+material = SubResource( 9 )
+position = Vector2( 1, 1 )
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.13
+process_material = SubResource( 11 )
+texture = ExtResource( 3 )
+
+[node name="BadParticles" type="Particles2D" parent="."]
+modulate = Color( 1, 0, 0, 0.364706 )
+material = SubResource( 9 )
+position = Vector2( 1, 1 )
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 0.71
+process_material = SubResource( 12 )
+texture = ExtResource( 6 )
 
 [node name="DestroyTimer" type="Timer" parent="."]
 

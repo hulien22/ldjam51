@@ -23,23 +23,29 @@ func _ready():
 	update_sprite()
 
 func _physics_process(delta):
-	time_since_last_direction_change += delta
-	var new_direction = sign(global_position.x - last_position_x)
-	if new_direction != last_direction:
-#		Shake!
-		if time_since_last_direction_change < MAX_TIME_BETWEEN_SHAKES:
-			num_shakes += 1
-			if num_shakes >= NUM_SHAKES_REQ:
-				if can_add_item(RECIPEGENERATOR.get_shake_obj()):
-					add_item(RECIPEGENERATOR.get_shake_obj())
-				num_shakes = 0
-		else:
-			num_shakes = 1
-		time_since_last_direction_change = 0
-		last_direction = new_direction
-	last_position_x = global_position.x
-	
 	._physics_process(delta)
+	if held:
+		time_since_last_direction_change += delta
+		var new_direction = sign(global_position.x - last_position_x)
+		if new_direction != last_direction:
+	#		Shake!
+			if time_since_last_direction_change < MAX_TIME_BETWEEN_SHAKES:
+				num_shakes += 1
+				if num_shakes >= NUM_SHAKES_REQ:
+					if can_add_item(RECIPEGENERATOR.get_shake_obj()):
+						add_item(RECIPEGENERATOR.get_shake_obj())
+					num_shakes = 0
+			else:
+				num_shakes = 1
+			time_since_last_direction_change = 0
+			last_direction = new_direction
+		last_position_x = global_position.x
+	
+
+func on_first_held():
+	.on_first_held()
+	num_shakes = 0
+	time_since_last_direction_change = 0.0
 
 func get_type():
 	match current_recipe:

@@ -93,13 +93,19 @@ func on_items_delivered():
 			if ops[i] != potion[i]:
 				print("wrong")
 				emit_signal("wrong_delivery")
+				$BadParticles.emitting = true
+				$BadParticles.restart()
 				return
 	else:
 		print("wrong")
 		emit_signal("wrong_delivery")
+		$BadParticles.emitting = true
+		$BadParticles.restart()
 		return
 	print("correct")
 	emit_signal("correct_delivery")
+	$GoodParticles.emitting = true
+	$GoodParticles.restart()
 
 func get_spawn_obj():
 	enable_item()

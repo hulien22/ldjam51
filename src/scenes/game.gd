@@ -87,6 +87,9 @@ func _ready():
 	rng.randomize()
 	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	potions = RECIPEGENERATOR.potions.keys()
+	garbage_items.append(preload("res://src/ingredients/GroundEyeball.tscn"))
+	garbage_items.append(preload("res://src/ingredients/Mushroom.tscn"))
+	garbage_items.append(preload("res://src/ingredients/Plant.tscn"))
 	pass # Replace with function body.
 
 
@@ -109,28 +112,86 @@ func _on_RecipeTimer_timeout():
 var current_potion = 0
 var time_passed = 0
 var time_multiplier = 10.0
+var time_to_spawn_next_order1 = 0.0
+var time_to_spawn_next_order2 = 20.0
+var garbage_items:Array = []
 
 func _on_RequestTimer_timeout():
 	time_passed += 10
-	var rnd_potion
+	var things_spawned = 0
 	var max_pot = RECIPEGENERATOR.get_max_potion_for_time(time_passed)
 	if max_pot > current_potion:
 		current_potion = max_pot
-		rnd_potion = max_pot - 1
 		var recipe_instance = get_node("RecipeSpawner").spawn_obj()
-		recipe_instance.set_potion(potions[rnd_potion], rnd_potion)
-		recipe_instance.set_recipe(potion_recipes[rnd_potion])
+		recipe_instance.set_potion(potions[current_potion - 1], current_potion - 1)
+		recipe_instance.set_recipe(potion_recipes[current_potion - 1])
 		recipe_instance.angular_velocity = rng.randf_range(-8,8)
+		recipe_instance.global_position = $RequestSpawner.global_position
 		cur_click_order += 1
 		recipe_instance.set_click_order(cur_click_order)
-		add_child(recipe_instance)
-	else:
-		rnd_potion = rng.randi() % max_pot  #potions.size()
+		add_child_in_x_secs(recipe_instance, things_spawned)
+		things_spawned += 1
+
+	if time_passed >= time_to_spawn_next_order1:
+		time_to_spawn_next_order1 = time_passed + min(spawn_request(things_spawned) * 2.0, 60.0)
+		things_spawned += 1
+	elif time_passed >= time_to_spawn_next_order2:
+		time_to_spawn_next_order2 = time_passed + min(spawn_request(things_spawned) * 2.0, 60.0)
+		things_spawned += 1
+	
+	var max_garbage_to_spawn = 3 - things_spawned
+	var min_garbage_to_spawn = 1 - things_spawned
+	var garbage_to_spawn = max(0, rng.randi_range(min_garbage_to_spawn, max_garbage_to_spawn))
+	
+	for i in range(garbage_to_spawn):
+		var garb_instance = garbage_items[rng.randi() % garbage_items.size()].instance()
+		garb_instance.angular_velocity = rng.randf_range(-8,8)
+		garb_instance.global_position = $RequestSpawner.global_position
+		cur_click_order += 1
+		garb_instance.set_click_order(cur_click_order)
+		add_child_in_x_secs(garb_instance,things_spawned)
+		things_spawned += 1
+		
+	
+	print("time ", time_passed, " ", time_to_spawn_next_order1, " ", time_to_spawn_next_order2, " ", garbage_to_spawn)
+
+	pass # Replace with function body.
+
+func spawn_request(spawn_delay):
+	var rnd_potion = rng.randi() % current_potion  #potions.size()
+#	var max_pot = RECIPEGENERATOR.get_max_potion_for_time(time_passed)
+#	if max_pot > current_potion:
+#		current_potion = max_pot
+#		rnd_potion = max_pot - 1
+#		var recipe_instance = get_node("RecipeSpawner").spawn_obj()
+#		recipe_instance.set_potion(potions[rnd_potion], rnd_potion)
+#		recipe_instance.set_recipe(potion_recipes[rnd_potion])
+#		recipe_instance.angular_velocity = rng.randf_range(-8,8)
+#		cur_click_order += 1
+#		recipe_instance.set_click_order(cur_click_order)
+#		add_child(recipe_instance)
+#	else:
+#		rnd_potion = rng.randi() % max_pot  #potions.size()
 	var instance = get_node("RequestSpawner").spawn_obj()
 	instance.set_potion_request(potions[rnd_potion])
 	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion) * time_multiplier)
 	instance.angular_velocity = rng.randf_range(-8,8)
 	cur_click_order += 1
 	instance.set_click_order(cur_click_order)
+	add_child_in_x_secs(instance, spawn_delay)
+	return RECIPEGENERATOR.get_recipe_time(rnd_potion)
+
+func add_child_in_x_secs(instance, time):
+	if time == 0:
+		add_child(instance)
+		return
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", self, "on_spawn_timer_complete", [timer, instance])
+	timer.one_shot = true
+	timer.wait_time = time * 0.2
+	timer.start()
+
+func on_spawn_timer_complete(timer, instance):
+	timer.queue_free()
 	add_child(instance)
-	pass # Replace with function body.
