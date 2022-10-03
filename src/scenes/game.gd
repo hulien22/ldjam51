@@ -18,6 +18,7 @@ var tips:Array = [
 	]
 #	"Drag bottles under cloud   to fill with water", ]
 var tips_scene = preload("res://src/objects/tip.tscn")
+var special_recip_scene = preload("res://src/objects/SpecialRecipe.tscn")
 
 class MyCustomSorter:
 	static func sort_ascending(a, b):
@@ -120,17 +121,21 @@ func _ready():
 		
 	pass # Replace with function body.
 
-
+var special_count = 0
 func _on_RecipeTimer_timeout():
 	#ship out new recipe
 	#pick random recipe
-#	var rnd_potion = rng.randi() % potions.size()
-#
-#	var instance = get_node("RecipeSpawner").spawn_obj()
-#	instance.set_potion(potions[rnd_potion], rnd_potion)
-#	instance.set_recipe(potion_recipes[rnd_potion])
-#	instance.angular_velocity = rand_range(-8,8)
-#	add_child(instance)
+	if special_count < 3:
+		var rnd_potion = special_count + RECIPEGENERATOR.potions.XASIO
+		special_count += 1
+		var instance = special_recip_scene.instance()
+		instance.global_position = $RequestSpawner.global_position
+		instance.set_potion(potions[rnd_potion], rnd_potion)
+		instance.set_recipe(potion_recipes[rnd_potion])
+		instance.angular_velocity = rand_range(-8,8)
+		add_child(instance)
+		$RecipeSpawner/RecipeTimer.wait_time += 30
+		$RecipeSpawner/RecipeTimer.start()
 
 #TODO spawn in special recipes
 

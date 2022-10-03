@@ -14,7 +14,7 @@ const HEAT_MED_LENGTH = 5
 const HEAT_LONG_LENGTH = 10
 
 enum potions {HEALTH, SPEED, INVISIBLE, POWER, SHINE,
-SHRINK, DANCE, LOVE, SWIFT, GIANT}
+SHRINK, DANCE, LOVE, SWIFT, GIANT, XASIO, EWIPFS, GIANTIV}
 
 enum mode {EASY, MED, HARD}
 
@@ -65,6 +65,10 @@ func generate_recipe_template():
 	#final
 	potions_recipes[potions.GIANT]= [op.WATER,rnd_ground_ingred(),rnd_ground_ingred(),op.HEAT_SHORT,rnd_ingred(),op.SHAKE,op.HEAT_LONG,rnd_ground_ingred(),rnd_ingred(),op.SHAKE, rnd_ingred()]
 
+	potions_recipes[potions.XASIO] = [op.WATER,rnd_ground_ingred(),rnd_ground_ingred(),op.HEAT_LONG]
+	potions_recipes[potions.EWIPFS] = potions_recipes[potions.XASIO] + [rnd_ingred(),op.SHAKE,op.HEAT_MED,rnd_ground_ingred()]
+	potions_recipes[potions.GIANTIV] = potions_recipes[potions.EWIPFS] + [rnd_ingred(),op.SHAKE, rnd_ground_ingred(), op.HEAT_SHORT]
+
 	return potions_recipes
 
 func get_recipe_time(potion_type:int):
@@ -107,6 +111,14 @@ func get_recipe_steps_str(potion_type:int):
 			steps += "1. Start with Shrink potion\n"
 			counter += 1
 			start = potions_recipes[potions.SHRINK].size()
+		potions.EWIPFS:
+			steps += "1. Make \n"
+			counter += 1
+			start = potions_recipes[potions.XASIO].size()
+		potions.GIANTIV:
+			steps += "1. Make \n"
+			counter += 1
+			start = potions_recipes[potions.EWIPFS].size()
 		_:
 			pass
 	

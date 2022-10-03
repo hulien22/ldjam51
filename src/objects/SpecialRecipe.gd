@@ -18,8 +18,21 @@ func set_recipe(recipe_seq: Array):
 func set_potion(potion_name: String, pt:int):
 	potion = potion_name
 	potion_type = pt
-	$Node2D/Label.text = potion
+	$Node2D/Label2.text = potion
 	$Node2D/Steps2.text = RECIPEGENERATOR.get_recipe_steps_str(potion_type)
+	match pt:
+		RECIPEGENERATOR.potions.XASIO:
+			$Node2D/RecipeAddStep.text = ""
+			$Node2D/RecipeAddStep.hide()
+		RECIPEGENERATOR.potions.EWIPFS:
+			$Node2D/RecipeAddStep.text = "XASIO"
+			$Node2D/RecipeAddStep.show()
+		RECIPEGENERATOR.potions.GIANTIV:
+			$Node2D/RecipeAddStep.text = "EWIPFS"
+			$Node2D/RecipeAddStep.show()
+			$Node2D/Steps2.text += " - DRINK ME - "
+	
+		
 
 func can_delete():
 	return false
