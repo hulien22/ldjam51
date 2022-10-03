@@ -46,7 +46,7 @@ func can_delete():
 func _on_TextTimer_timeout():
 	$Area2D/FailLabel.visible=true
 	$Area2D/TextTimer.stop()
-	print("TIMEEEEEEEEEEEEEEEEEEEER")
+	$Area2D/SmokeParticles2.emitting = true
 	emit_signal("request_expired")
 
 func pause_text_timer():
