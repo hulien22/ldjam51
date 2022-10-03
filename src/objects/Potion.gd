@@ -1,5 +1,7 @@
 extends "res://src/objects/draggable_rigid.gd"
 
+signal potion_drink
+
 var current_recipe: Array = []
 var time_on_heat: int = 0
 
@@ -22,6 +24,7 @@ func init(cur_recipe:Array = []):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_sprite()
+	connect("potion_drink", get_parent(), "_on_drink_potion")
 
 func _physics_process(delta):
 	._physics_process(delta)
@@ -130,4 +133,5 @@ func set_time_on_heat(t:int):
 
 func drink():
 	print("DRINKING")
+	emit_signal("potion_drink", current_recipe)
 	return false

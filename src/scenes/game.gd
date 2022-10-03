@@ -266,3 +266,12 @@ func _start_player_dead():
 
 func _end_player_dead():
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
+
+func _on_drink_potion(recipe):
+	print("DRINKING", recipe)
+	$DrinkAnimation.show()
+	$DrinkAnimation/AnimationPlayer.play("drink potion")
+
+func _on_AnimationPlayer_animation_finished():
+	$DrinkAnimation.hide()
+	
