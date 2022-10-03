@@ -135,7 +135,7 @@ func set_time_on_heat(t:int):
 
 func drink():
 	if current_recipe == RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions.GIANTIV]:
-		emit_signal("win_potion_drink", RECIPEGENERATOR.potions.GIANTIV)
+		emit_signal("win_potion_drink")
 		return true
 	
 	if current_recipe == RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions.HEALTH]:
