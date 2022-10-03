@@ -25,9 +25,9 @@ var first_released = false
 func _ready():
 	# stay awake for better collision detection
 	can_sleep = false
-	for child in get_children():
-		if (child.has_method("set_scale")):
-			child.scale *= rescale_factor
+#	for child in get_children():
+#		if (child.has_method("set_scale")):
+#			child.scale *= rescale_factor
 
 func _physics_process(delta):
 	if held:

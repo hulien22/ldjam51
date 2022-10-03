@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/mortar.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://src/objects/delivery.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/objects/Request.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/objects/garbage.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/objects/cassette.tscn" type="PackedScene" id=22]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 8 )
@@ -98,6 +99,9 @@ rescale_factor = 0.2
 
 [node name="Garbage" parent="." instance=ExtResource( 21 )]
 position = Vector2( 1816, 964 )
+
+[node name="Cassette" parent="." instance=ExtResource( 22 )]
+position = Vector2( 524, 190 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
