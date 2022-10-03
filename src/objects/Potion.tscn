@@ -89,7 +89,7 @@ frames = SubResource( 5 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collider" type="CollisionShape2D" parent="."]
 rotation = 1.60239
 shape = SubResource( 1 )
 

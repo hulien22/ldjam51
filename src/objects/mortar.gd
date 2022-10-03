@@ -35,6 +35,7 @@ func add_item(new_item):
 	# The order is based off the RECIPEGENERATOR.op enum
 	$Mortar/IngredientSprite.frame = new_item.get_type()-9
 	start_wait($Timer)
+	return true
 
 func process_item():
 	# The ground version is 10 ahead in the enum
