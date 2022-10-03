@@ -14,7 +14,8 @@ var tips:Array = [
 	"Drop items into bottles to make potions",   
 	"Give both  order and potion to goblin to deliver",
 	"Throw unwanted items (like   this!) in the trash",
-	"Complete orders before they turn red and expire!"
+	"Complete orders before they turn red and expire!",
+	"Right click a health potion if injured!"
 	]
 #	"Drag bottles under cloud   to fill with water", ]
 var tips_scene = preload("res://src/objects/tip.tscn")
