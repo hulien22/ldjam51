@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/mortar.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/art/filleable_potion_TOP.png" type="Texture" id=18]
 [ext_resource path="res://src/objects/delivery.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/objects/Request.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/objects/garbage.tscn" type="PackedScene" id=21]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 8 )
@@ -94,6 +95,9 @@ position = Vector2( 1000, 100 )
 
 [node name="Request" parent="." instance=ExtResource( 20 )]
 rescale_factor = 0.2
+
+[node name="Garbage" parent="." instance=ExtResource( 21 )]
+position = Vector2( 1816, 964 )
 
 [connection signal="on_damage" from="DrinkManager" to="HealthBar" method="_on_take_damage"]
 [connection signal="on_heal" from="DrinkManager" to="HealthBar" method="_on_heal"]
