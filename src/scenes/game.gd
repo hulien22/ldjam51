@@ -86,7 +86,8 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	potion_recipes= RECIPEGENERATOR.generate_recipe_template()
 	potions = RECIPEGENERATOR.potions.keys()
-	#$OrderChute.modulate(1,0,0)
+	$RecipeSpawner/Sprite.modulate = Color(1,0,0)
+	$RequestSpawner/Sprite.modulate = Color(0,1,0)
 	pass # Replace with function body.
 
 
@@ -101,10 +102,9 @@ func _on_RecipeTimer_timeout():
 	add_child(instance)
 	pass # Replace with function body.
 
-
-func _on_OrderTimer_timeout():
+func _on_RequestTimer_timeout():
 	var rnd_potion = rng.randi()  % potions.size()
-	var instance = get_node("OrderSpawner").spawn_obj()
-	instance.set_potion_order(potions[rnd_potion])
+	var instance = get_node("RequestSpawner").spawn_obj()
+	instance.set_potion_request(potions[rnd_potion])
 	add_child(instance)
 	pass # Replace with function body.
