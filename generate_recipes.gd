@@ -191,6 +191,21 @@ func generate_recipes_random(num_easy, num_med, num_hard):
 	#should return an
 	return potions_recipes
 	
+
+func get_max_potion_for_time(t:int):
+#	return min((t / 30) + 1, potions.size() - 1)
+	if t < 30: return 1
+	if t < 60: return 2
+	if t < 120: return 3
+	if t < 180: return 4
+	if t < 240: return 5
+	if t < 300: return 6
+	if t < 360: return 7
+	if t < 420: return 8
+	return 9
+	
+	
+
 # take num amount of random non unqiue items from the given arr
 # returns the new randomized array with size num.
 func get_random_array(num: int,arr: Array):
