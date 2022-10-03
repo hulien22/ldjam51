@@ -40,3 +40,9 @@ func can_delete():
 func _on_TextTimer_timeout():
 	$Area2D/FailLabel.visible=true
 	$Area2D/TextTimer.stop()
+
+func pause_text_timer():
+	$Area2D/TextTimer.set_paused(true)
+	
+func unpause_text_timer():
+	$Area2D/TextTimer.set_paused(false)

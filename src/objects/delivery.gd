@@ -28,7 +28,7 @@ func can_add_item(new_item):
 				_: return false
 		elif item.get_type() == RECIPEGENERATOR.op.POTION:
 			match new_item.get_type():
-				RECIPEGENERATOR.op.REQUEST: return true
+				RECIPEGENERATOR.op.REQUEST: return new_item.can_delete()  # don't accept failed requests
 				_: return false
 	else:
 		match new_item.get_type():
@@ -59,12 +59,16 @@ func disable_item(new_item, new_parent):
 	new_item.movement_mode = MODE_STATIC
 	new_item.regular_mode = MODE_STATIC
 	new_item.get_node("Collider").disabled = true
+	if new_item.has_method("pause_text_timer"):
+		new_item.pause_text_timer()
 	
 func enable_item():
 	item.get_parent().remove_child(item)
 	item.movement_mode = MODE_RIGID
 	item.regular_mode = MODE_RIGID
 	item.get_node("Collider").disabled = false
+	if item.has_method("unpause_text_timer"):
+		item.unpause_text_timer()
 
 func process_item():
 	item = null
