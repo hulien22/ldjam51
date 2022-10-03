@@ -19,7 +19,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 51.8161
+radius = 61.8111
 height = 8.43824
 
 [sub_resource type="Curve" id=2]
@@ -54,11 +54,11 @@ regular_collision_layer = 7
 movement_collision_layer = 4100
 
 [node name="FilleablePotionBottom" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 3 )
 
 [node name="PotionFilling" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -86,7 +86,7 @@ scale = Vector2( 0.0421849, 0.0316305 )
 frames = SubResource( 5 )
 
 [node name="FilleablePotionTop" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 2 )
 
 [node name="Collider" type="CollisionShape2D" parent="."]

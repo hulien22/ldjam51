@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/objects/DrinkManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/objects/mortar.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://src/spawners/recipespawner.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/objects/garbage.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/objects/cassette.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/art/potions_spawn.png" type="Texture" id=23]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4151.5, 1469.38 )
@@ -49,10 +50,15 @@ position = Vector2( 956.25, 540.25 )
 scale = Vector2( 0.754863, 0.757586 )
 texture = ExtResource( 7 )
 
+[node name="PotionsSpawn" type="Sprite" parent="."]
+position = Vector2( 1215, 905 )
+scale = Vector2( 0.793713, 0.792123 )
+texture = ExtResource( 23 )
+
 [node name="FilleablePotionTop" type="Sprite" parent="."]
 visible = false
-position = Vector2( 1071, 632 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 1211, 755 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 18 )
 
 [node name="BottleSpawner" parent="." instance=ExtResource( 3 )]
@@ -112,8 +118,7 @@ position = Vector2( 1804, 187 )
 rotation = 0.443522
 
 [node name="RequestSpawner" parent="." instance=ExtResource( 20 )]
-modulate = Color( 0.282353, 1, 0.129412, 1 )
-position = Vector2( 298, 39 )
+position = Vector2( 353, 37 )
 scene_path_to_spawn = "res://src/objects/Request.tscn"
 
 [node name="RequestTimer" type="Timer" parent="RequestSpawner"]
@@ -121,8 +126,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="RecipeSpawner" parent="." instance=ExtResource( 20 )]
-modulate = Color( 1, 0.337255, 0.337255, 1 )
-position = Vector2( 549, 41 )
+position = Vector2( 1518, 41 )
 scene_path_to_spawn = "res://src/objects/recipe.tscn"
 
 [node name="RecipeTimer" type="Timer" parent="RecipeSpawner"]
@@ -130,7 +134,6 @@ wait_time = 30.0
 autostart = true
 
 [node name="TopWall" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
 position = Vector2( 1208, -1372 )

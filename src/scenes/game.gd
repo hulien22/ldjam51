@@ -108,7 +108,7 @@ func _on_RecipeTimer_timeout():
 
 var current_potion = 0
 var time_passed = 0
-var time_multiplier = 1.5
+var time_multiplier = 10.0
 
 func _on_RequestTimer_timeout():
 	time_passed += 10
@@ -120,7 +120,7 @@ func _on_RequestTimer_timeout():
 		var recipe_instance = get_node("RecipeSpawner").spawn_obj()
 		recipe_instance.set_potion(potions[rnd_potion], rnd_potion)
 		recipe_instance.set_recipe(potion_recipes[rnd_potion])
-		recipe_instance.angular_velocity = rand_range(-8,8)
+		recipe_instance.angular_velocity = rng.randf_range(-8,8)
 		cur_click_order += 1
 		recipe_instance.set_click_order(cur_click_order)
 		add_child(recipe_instance)
@@ -129,7 +129,7 @@ func _on_RequestTimer_timeout():
 	var instance = get_node("RequestSpawner").spawn_obj()
 	instance.set_potion_request(potions[rnd_potion])
 	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion) * time_multiplier)
-	instance.angular_velocity = rand_range(-8,8)
+	instance.angular_velocity = rng.randf_range(-8,8)
 	cur_click_order += 1
 	instance.set_click_order(cur_click_order)
 	add_child(instance)

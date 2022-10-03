@@ -51,14 +51,15 @@ scale_random = 0.38
 color_ramp = SubResource( 6 )
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 73.0
-height = 0.0
+radius = 65.0
+height = 14.0
 
 [node name="Heater" type="RigidBody2D"]
 collision_mask = 4097
 script = ExtResource( 3 )
 
 [node name="Sprites" type="Node2D" parent="."]
+scale = Vector2( 1.1, 1.1 )
 
 [node name="Empty" type="Node2D" parent="Sprites"]
 
@@ -116,7 +117,6 @@ explosiveness = 1.0
 process_material = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 rotation = 1.5708
 shape = SubResource( 1 )
 
