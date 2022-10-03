@@ -14,6 +14,7 @@ var tips:Array = [
 	"Drop items into bottles to make potions",   
 	"Give both  order and potion to goblin to deliver",
 	"Throw unwanted items (like   this!) in the trash",
+	"Complete orders before they turn red and expire!"
 	]
 #	"Drag bottles under cloud   to fill with water", ]
 var tips_scene = preload("res://src/objects/tip.tscn")
@@ -220,7 +221,8 @@ func spawn_tip(time):
 		instance.global_position.x += rng.randf_range(-10,10)
 		cur_click_order += 1
 		instance.set_click_order(cur_click_order)
-		instance.rotation_degrees = rng.randi_range(-20,20)
+		instance.angular_velocity = rng.randf_range(-8,8)
+#		instance.rotation_degrees = rng.randi_range(-20,20)
 		add_child_in_x_secs(instance, time)
 
 func add_child_in_x_secs(instance, time):
