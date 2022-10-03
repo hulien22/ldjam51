@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ldjam51"
-run/main_scene="res://src/scenes/game.tscn"
+run/main_scene="res://src/scenes/MainMenu.tscn"
 config/icon="res://src/art/icon.png"
 
 [autoload]
