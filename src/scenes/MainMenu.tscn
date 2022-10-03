@@ -348,11 +348,6 @@ margin_bottom = 491.0
 rect_scale = Vector2( 3, 3 )
 script = ExtResource( 18 )
 
-[node name="Fade" parent="." instance=ExtResource( 17 )]
-visible = false
-color = Color( 0.886275, 0.847059, 0.733333, 1 )
-text = ""
-
 [node name="Label" type="Label" parent="."]
 margin_left = 701.0
 margin_top = -10.0
@@ -362,6 +357,10 @@ custom_colors/font_color = Color( 0.262745, 0.768627, 0.521569, 1 )
 custom_colors/font_outline_modulate = Color( 0.12549, 0.219608, 0.152941, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Potion Commotion"
+
+[node name="Fade" parent="." instance=ExtResource( 17 )]
+color = Color( 0.886275, 0.847059, 0.733333, 1 )
+text = ""
 
 [connection signal="mouse_entered" from="TextureButton" to="TextureButton" method="_on_enter_hover"]
 [connection signal="mouse_exited" from="TextureButton" to="TextureButton" method="_on_exit_hover"]
