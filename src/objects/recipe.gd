@@ -15,3 +15,4 @@ func set_recipe(recipe_seq: Array):
 
 func set_potion(potion_name: String):
 	potion = potion_name
+	$Node2D/Label.text = potion
