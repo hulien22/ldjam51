@@ -34,6 +34,14 @@ func can_add_item(new_item):
 	match new_item.get_type():
 		RECIPEGENERATOR.op.MUSHROOM: return true
 		RECIPEGENERATOR.op.GROUND_MUSHROOM: return true
+		RECIPEGENERATOR.op.PLANT: return true
+		RECIPEGENERATOR.op.GROUND_PLANT: return true
+		RECIPEGENERATOR.op.EYEBALL: return true
+		RECIPEGENERATOR.op.GROUND_EYEBALL: return true
+		RECIPEGENERATOR.op.LIZARD: return true
+		RECIPEGENERATOR.op.GROUND_LIZARD: return true
+		RECIPEGENERATOR.op.CRYSTAL: return true
+		RECIPEGENERATOR.op.GROUND_CRYSTAL: return true
 		_: return false
 
 func add_item(new_item):
@@ -54,8 +62,15 @@ func update_sprite():
 			$PotionFilling.modulate = Color8(0,0,0,0)
 		RECIPEGENERATOR.op.WATER:
 			$PotionFilling.modulate = Color('01c6cb')
-		RECIPEGENERATOR.op.MUSHROOM:
-			$PotionFilling.modulate = Color('daec03')
+		_:
+			# Create a random has out of the contents of the string
+			# Ensure alpha channel is opaque
+			var recipe_string = ""
+			for i in current_recipe:
+				recipe_string += str(i)
+			var my_hash_int = recipe_string.sha256_text().hash() | 0x000000ff
+			$PotionFilling.modulate = Color(my_hash_int)
+
 	# TODO play poof effect
 	# TODO change alpha
 #	TODO other stuffs
