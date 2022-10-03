@@ -267,12 +267,23 @@ func _start_player_dead():
 func _end_player_dead():
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")
 
-func _on_drink_potion(recipe):
-	
+func _on_drink_potion(potion:int):
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", self, "process_potion_drink_in_x", [timer, potion])
+	timer.one_shot = true
+	timer.wait_time = 1.1
+	timer.start()
 #	print("DRINKING", recipe)
 	$DrinkAnimation.show()
 	$DrinkAnimation/AnimationPlayer.play("drink potion")
 
 func _on_AnimationPlayer_animation_finished():
 	$DrinkAnimation.hide()
+	
+func process_potion_drink_in_x(timer, potion):
+	match potion:
+		RECIPEGENERATOR.potions.HEALTH:
+			$HealthBar._on_heal()
+	timer.queue_free()
 	
