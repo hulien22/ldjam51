@@ -5,12 +5,15 @@ var time = 20.0
 var time_remain=0
 var color 
 
+signal request_expired
+
 func _init(request: String =""):
 	potion_request = request
 #	current_recipe.push_back(RECIPEGENERATOR.op.WATER)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	connect("request_expired", get_parent().get_node("HealthBar"), "_on_take_damage")
 	$Area2D/FailLabel.visible=false
 	$Area2D/TextTimer.wait_time = time 
 	$Area2D/TextTimer.one_shot = true
@@ -43,6 +46,8 @@ func can_delete():
 func _on_TextTimer_timeout():
 	$Area2D/FailLabel.visible=true
 	$Area2D/TextTimer.stop()
+	print("TIMEEEEEEEEEEEEEEEEEEEER")
+	emit_signal("request_expired")
 
 func pause_text_timer():
 	$Area2D/TextTimer.set_paused(true)

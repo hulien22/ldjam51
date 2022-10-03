@@ -111,7 +111,7 @@ func _on_RecipeTimer_timeout():
 
 var current_potion = 0
 var time_passed = 0
-var time_multiplier = 10.0
+var time_multiplier = 1.0
 var time_to_spawn_next_order1 = 0.0
 var time_to_spawn_next_order2 = 20.0
 var garbage_items:Array = []
