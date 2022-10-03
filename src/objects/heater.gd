@@ -59,7 +59,7 @@ func get_spawn_obj():
 	return {"spawn_obj": instance, "parent": get_parent()}
 
 func update_potion():
-	$Sprites/WithPotion/PotionWhiteVersion.modulate = Color(0,0,0,0)
+	$Sprites/WithPotion/PotionWhiteVersion.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(potion_recipe))
 
 func animate_obj_start():
 	pass

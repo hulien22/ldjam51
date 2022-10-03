@@ -56,20 +56,17 @@ func get_first_ingredient():
 
 func update_sprite():
 	#color based on first ingredient mostly, then other things will just affect slightly
-	var f_ing = get_first_ingredient()
-	match f_ing:
-		RECIPEGENERATOR.op.EMPTY_BOTTLE:
-			$PotionFilling.modulate = Color8(0,0,0,0)
-		RECIPEGENERATOR.op.WATER:
-			$PotionFilling.modulate = Color('01c6cb')
-		_:
-			# Create a random has out of the contents of the string
-			# Ensure alpha channel is opaque
-			var recipe_string = ""
-			for i in current_recipe:
-				recipe_string += str(i)
-			var my_hash_int = recipe_string.sha256_text().hash() | 0x000000ff
-			$PotionFilling.modulate = Color(my_hash_int)
+	$PotionFilling.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(current_recipe))
+#	var f_ing = get_first_ingredient()
+#	match f_ing:
+#		RECIPEGENERATOR.op.EMPTY_BOTTLE:
+#			$PotionFilling.modulate = Color8(0,0,0,0)
+#		RECIPEGENERATOR.op.WATER:
+#			$PotionFilling.modulate = Color('01c6cb')
+#		_:
+#			# Create a random has out of the contents of the string
+#			# Ensure alpha channel is opaque
+#			$PotionFilling.modulate = Color(RECIPEGENERATOR.get_color_from_recipe(current_recipe))
 
 	# TODO play poof effect
 	# TODO change alpha
