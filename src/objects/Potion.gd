@@ -3,7 +3,7 @@ extends "res://src/objects/draggable_rigid.gd"
 var current_recipe: Array = []
 var time_on_heat: int = 0
 
-const NUM_SHAKES_REQ = 15
+const NUM_SHAKES_REQ = 8
 const MAX_TIME_BETWEEN_SHAKES = 0.2
 
 var last_direction:int = 1

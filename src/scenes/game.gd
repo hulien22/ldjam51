@@ -93,20 +93,44 @@ func _ready():
 func _on_RecipeTimer_timeout():
 	#ship out new recipe
 	#pick random recipe
-	var rnd_potion = rng.randi() % potions.size()
-	
-	var instance = get_node("RecipeSpawner").spawn_obj()
-	instance.set_potion(potions[rnd_potion], rnd_potion)
-	instance.set_recipe(potion_recipes[rnd_potion])
-	instance.angular_velocity = rand_range(-8,8)
-	add_child(instance)
+#	var rnd_potion = rng.randi() % potions.size()
+#
+#	var instance = get_node("RecipeSpawner").spawn_obj()
+#	instance.set_potion(potions[rnd_potion], rnd_potion)
+#	instance.set_recipe(potion_recipes[rnd_potion])
+#	instance.angular_velocity = rand_range(-8,8)
+#	add_child(instance)
+
+#TODO spawn in special recipes
+
 	pass # Replace with function body.
 
+
+var current_potion = 0
+var time_passed = 0
+var time_multiplier = 1.5
+
 func _on_RequestTimer_timeout():
-	var rnd_potion = rng.randi()  % potions.size()
+	time_passed += 10
+	var rnd_potion
+	var max_pot = RECIPEGENERATOR.get_max_potion_for_time(time_passed)
+	if max_pot > current_potion:
+		current_potion = max_pot
+		rnd_potion = max_pot - 1
+		var recipe_instance = get_node("RecipeSpawner").spawn_obj()
+		recipe_instance.set_potion(potions[rnd_potion], rnd_potion)
+		recipe_instance.set_recipe(potion_recipes[rnd_potion])
+		recipe_instance.angular_velocity = rand_range(-8,8)
+		cur_click_order += 1
+		recipe_instance.set_click_order(cur_click_order)
+		add_child(recipe_instance)
+	else:
+		rnd_potion = rng.randi() % max_pot  #potions.size()
 	var instance = get_node("RequestSpawner").spawn_obj()
 	instance.set_potion_request(potions[rnd_potion])
-	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion))
+	instance.set_time(RECIPEGENERATOR.get_recipe_time(rnd_potion) * time_multiplier)
 	instance.angular_velocity = rand_range(-8,8)
+	cur_click_order += 1
+	instance.set_click_order(cur_click_order)
 	add_child(instance)
 	pass # Replace with function body.

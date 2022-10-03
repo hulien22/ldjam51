@@ -28,11 +28,11 @@ func can_add_item(new_item):
 				_: return false
 		elif item.get_type() == RECIPEGENERATOR.op.POTION:
 			match new_item.get_type():
-				RECIPEGENERATOR.op.REQUEST: return new_item.can_delete()  # don't accept failed requests
+				RECIPEGENERATOR.op.REQUEST: return not new_item.can_delete()  # don't accept failed requests
 				_: return false
 	else:
 		match new_item.get_type():
-			RECIPEGENERATOR.op.REQUEST: return true
+			RECIPEGENERATOR.op.REQUEST: return not new_item.can_delete()  # don't accept failed requests
 			RECIPEGENERATOR.op.POTION: return true
 			_: return false
 	
