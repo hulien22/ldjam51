@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/objects/draggable_rigid.gd"
 }, {
-"base": "RigidBody2D",
-"class": "Recipe",
-"language": "GDScript",
-"path": "res://src/objects/recipe.gd"
-}, {
 "base": "Node2D",
 "class": "RecipeGenerator",
 "language": "GDScript",
@@ -31,7 +26,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "DraggableBody2D": "",
-"Recipe": "",
 "RecipeGenerator": "",
 "Station": ""
 }
