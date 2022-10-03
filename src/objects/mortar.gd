@@ -63,3 +63,5 @@ func animate_obj_stop():
 	$Mortar/Pestle/Particles2D.emitting = false
 	$Mortar/AnimationPlayer.stop(true)
 
+func get_class():
+	return "Mortar"

@@ -10,6 +10,8 @@ func _ready():
 	allow_rotation = false
 
 func can_add_item(new_item):
+	if new_item.get_class() == "Mortar" or new_item.get_class() == "Heater":
+		return false
 	return true
 
 func add_item(new_item):
