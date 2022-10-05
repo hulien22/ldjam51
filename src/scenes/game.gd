@@ -239,7 +239,7 @@ func spawn_tip(time):
 		instance.set_text(tips[tip_index])
 		tip_index += 1
 		instance.global_position = $RequestSpawner.global_position
-		instance.global_position.x += rng.randf_range(-10,10)
+#		instance.global_position.x += rng.randf_range(-10,10)
 		cur_click_order += 1
 		instance.set_click_order(cur_click_order)
 		instance.angular_velocity = rng.randf_range(-8,8)
