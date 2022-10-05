@@ -138,6 +138,7 @@ func set_time_on_heat(t:int):
 
 func drink():
 	if current_recipe == RECIPEGENERATOR.potions_recipes[RECIPEGENERATOR.potions.GIANTIV]:
+		Music.pause_on_scene_transition()
 		emit_signal("win_potion_drink")
 		return true
 	

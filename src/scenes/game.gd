@@ -120,6 +120,42 @@ func _ready():
 	garbage_items.append(preload("res://src/ingredients/Crystal.tscn"))
 	garbage_items.append(preload("res://src/ingredients/GroundLizard.tscn"))
 #	garbage_items.append(preload("res://src/objects/tip.tscn"))
+	for t in tips:
+		var inst = tips_scene.instance()
+		inst.global_position = Vector2(-10000,-10000)
+		inst.collision_layer = 0
+		inst.collision_mask = 0
+		inst.set_text(t)
+		add_child(inst)
+		inst.queue_free()
+	for i in range(3):
+		var recip = RECIPEGENERATOR.potions.XASIO + i
+		var inst2 = special_recip_scene.instance()
+		inst2.global_position = Vector2(-10000,-10000)
+		inst2.set_potion(potions[recip], recip)
+		inst2.set_recipe(potion_recipes[recip])
+		inst2.collision_layer = 0
+		inst2.collision_mask = 0
+		add_child(inst2)
+		inst2.queue_free()
+	for i in range(10):
+		var inst2 = get_node("RecipeSpawner").spawn_obj()
+		inst2.set_potion(potions[i], i)
+		inst2.set_recipe(potion_recipes[i])
+		inst2.global_position = Vector2(-10000,-10000)
+		inst2.collision_layer = 0
+		inst2.collision_mask = 0
+		add_child(inst2)
+		inst2.queue_free()
+		var inst = get_node("RequestSpawner").spawn_obj()
+		inst.set_potion_request(potions[i])
+		inst.set_time(0)
+		inst.global_position = Vector2(-10000,-10000)
+		inst.collision_layer = 0
+		inst.collision_mask = 0
+		add_child(inst)
+		inst.queue_free()
+	
 	
 	
 #	Summon tips on load
@@ -134,7 +170,7 @@ func _ready():
 #		instance.set_click_order(cur_click_order)
 #		instance.rotation_degrees = rng.randi_range(-20,20)
 #		add_child_in_x_secs(instance, 1 + i * 0.2)
-		
+	Music.unpause_on_scene_transition()
 	pass # Replace with function body.
 
 var special_count = 0
@@ -268,6 +304,7 @@ func _start_player_dead():
 	timer.one_shot = true
 	timer.wait_time = 3
 	timer.start()
+	Music.pause_on_scene_transition()
 
 func _end_player_dead():
 	get_tree().change_scene("res://src/scenes/MainMenu.tscn")

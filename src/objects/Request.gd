@@ -14,10 +14,12 @@ func _init(request: String =""):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	connect("request_expired", get_parent().get_node("HealthBar"), "_on_take_damage")
-	$Area2D/FailLabel.visible=false
-	$Area2D/TextTimer.wait_time = time 
-	$Area2D/TextTimer.one_shot = true
-	$Area2D/TextTimer.start()
+	if (time > 0):
+		$Area2D/FailLabel.visible=false
+		$Area2D/TextTimer.wait_time = time
+		$Area2D/TextTimer.one_shot = true
+		$Area2D/TextTimer.start()
+
 	z_index = 0
 	time_remain = time
 	collision_mask = 1<<12

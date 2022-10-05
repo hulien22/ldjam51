@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/art/comic_1.png" type="Texture" id=1]
 [ext_resource path="res://src/art/comic_3.png" type="Texture" id=2]
@@ -8,13 +8,14 @@
 [ext_resource path="res://src/scenes/Intro.gd" type="Script" id=6]
 [ext_resource path="res://src/scenes/FadeOut.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/scenes/CutsceneSkip.gd" type="Script" id=8]
+[ext_resource path="res://src/art/loading.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 959, 537.5 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "default",
 "speed": 0.25
@@ -36,13 +37,15 @@ frames = SubResource( 1 )
 script = ExtResource( 6 )
 
 [node name="FadeIn" parent="." instance=ExtResource( 7 )]
+z_index = 100
 color = Color( 0.886275, 0.847059, 0.733333, 1 )
 text = ""
 
 [node name="FadeOut" parent="." instance=ExtResource( 7 )]
 text = ""
 
-[connection signal="animation_finished" from="Area2D/AnimatedSprite" to="FadeOut" method="_on_fade_out"]
+[connection signal="animation_finished" from="Area2D/AnimatedSprite" to="Area2D/AnimatedSprite" method="_on_animation_finished"]
+[connection signal="frame_changed" from="Area2D/AnimatedSprite" to="Area2D/AnimatedSprite" method="_on_frame_changed"]
 [connection signal="on_animation_finished" from="FadeIn" to="Area2D/AnimatedSprite" method="_on_start_intro"]
 [connection signal="ready" from="FadeIn" to="FadeIn" method="_on_fade_in"]
 [connection signal="on_animation_finished" from="FadeOut" to="Area2D/AnimatedSprite" method="_on_animation_finished"]
