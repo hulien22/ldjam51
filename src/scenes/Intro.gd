@@ -11,6 +11,7 @@ func _ready():
 # Called when the node enters the scene tree for the first time.
 
 func _on_animation_finished():
+	print("-")
 	get_tree().change_scene("res://src/scenes/game.tscn")
 	
 func _on_start_intro():
@@ -19,3 +20,7 @@ func _on_start_intro():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func _on_frame_changed():
+	if frame >= 5:
+		speed_scale = 100

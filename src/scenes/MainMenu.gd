@@ -8,6 +8,7 @@ onready var animation = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Music.unpause_on_scene_transition()
 	pass # Replace with function body.
 	
 func _on_options():
@@ -17,6 +18,7 @@ func _on_back():
 	animation.play_backwards("GotoOptions")
 
 func _on_start():
+	Music.pause_on_scene_transition()
 	get_tree().change_scene("res://src/scenes/IntroCutscene.tscn")
 
 
