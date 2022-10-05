@@ -94,6 +94,9 @@ func add_item(new_item):
 	if (not RECIPEGENERATOR.is_heat_op(new_item.get_type())):
 		set_time_on_heat(0)
 	update_sprite()
+	if (new_item.get_type() == RECIPEGENERATOR.op.WATER):
+		mass = 5
+		throw_force_multiplier = 5
 	return true
 
 func get_first_ingredient():
